@@ -33,7 +33,12 @@ const scrollbarBase = {
   '--scrollbar-track': 'initial',
   '--scrollbar-thumb': 'initial',
   'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
-
+  
+  // Make sure the scrollbars are calculated in the elements width
+  // NOTE: only has effect in webkit-based browsers, but is only really needed
+  // in webkit-based browsers in the first place.
+  'overflow': 'overlay',
+  
   '&::-webkit-scrollbar-track': {
     'background-color': 'var(--scrollbar-track)'
   },
