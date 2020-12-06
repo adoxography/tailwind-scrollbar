@@ -19,7 +19,7 @@ Add it to the plugins array of your Tailwind config.
 ```
 plugins: [
     // ...
-    require('tailwind-scrollbar')(),
+    require('tailwind-scrollbar'),
 ],
 ```
 
