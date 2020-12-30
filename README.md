@@ -27,7 +27,7 @@ For every element that you want to style, add either the `.scrollbar` or `.scrol
 
 ## Configuration
 
-If you'd like to add varients for the scrollbar utilities (e.g. [dark mode](https://tailwindcss.com/docs/dark-mode)), add them to the `variants` object in your Tailwind config:
+If you'd like to add variants for the scrollbar utilities (e.g. [dark mode](https://tailwindcss.com/docs/dark-mode)), add them to the `variants` object in your Tailwind config:
 
 ```
 variants: {
