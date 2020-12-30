@@ -12,8 +12,6 @@ or
 npm install --save-dev tailwind-scrollbar
 ```
 
-## Usage
-
 Add it to the plugins array of your Tailwind config.
 
 ```
@@ -23,7 +21,20 @@ plugins: [
 ],
 ```
 
+## Usage
+
 For every element that you want to style, add either the `.scrollbar` or `.scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.
+
+## Configuration
+
+If you'd like to add varients for the scrollbar utilities (e.g. [dark mode](https://tailwindcss.com/docs/dark-mode)), add them to the `variants` object in your Tailwind config:
+
+```
+variants: {
+    // ...
+    scrollbar: ['dark']
+}
+```
 
 ## License
 

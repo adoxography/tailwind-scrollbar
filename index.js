@@ -48,7 +48,7 @@ const scrollbarBase = {
   }
 };
 
-module.exports = plugin(function ({ e, addUtilities, theme, addBase }) {
+module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants }) {
   const generateScrollbarColorUtilities = (colors, prefix = '') => Object.entries(colors)
     .reduce((memo, [key, value]) => ({
       ...memo,
@@ -88,5 +88,5 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase }) {
     },
 
     ...generateScrollbarColorUtilities(theme('colors', {}))
-  });
+  }, variants('scrollbar'));
 });
