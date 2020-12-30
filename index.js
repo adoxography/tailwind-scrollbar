@@ -88,5 +88,5 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
     },
 
     ...generateScrollbarColorUtilities(theme('colors', {}))
-  }, variants('scrollbar'));
+  }, [variants('scrollbar')]);
 });
