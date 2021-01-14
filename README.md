@@ -35,7 +35,7 @@ Here's a minimal example (keeping in mind that the `h-32` and `h-64` classes are
 </div>
 ```
 
-A live version of this demo [can be found here](https://repl.it/@adoxography/tailwind-scrollbar-example#public/index.html).
+A live version of this demo [can be found here](https://tailwind-scrollbar-example.adoxography.repl.co/).
 
 ## Configuration
 
