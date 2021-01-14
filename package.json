@@ -2,7 +2,7 @@
   "name": "tailwind-scrollbar",
   "version": "1.1.0",
   "description": "Tailwind plugin for styling scrollbars",
-  "author": "Graham Still <gstill92@gmail.com>",
+  "author": "Graham Still <graham@gstill.dev>",
   "main": "index.js",
   "repository": "https://github.com/adoxography/tailwind-scrollbar",
   "homepage": "https://github.com/adoxography/tailwind-scrollbar",
