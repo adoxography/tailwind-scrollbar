@@ -8,7 +8,13 @@
   "homepage": "https://github.com/adoxography/tailwind-scrollbar",
   "license": "MIT",
   "private": false,
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
+    "jest": "^26.6.3",
+    "lodash": "^4.17.20",
+    "postcss": "^7.0.32",
     "tailwindcss": "^1.7.6"
   }
 }
