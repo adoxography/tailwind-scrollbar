@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const postcss = require('postcss');
+const snapshotDiff = require('snapshot-diff');
 const tailwindcss = require('tailwindcss');
 
 const scrollbarPlugin = require('.');
@@ -27,6 +28,37 @@ const generatePluginCss = async (config = {}) => {
 
   return result.css;
 };
+
+/**
+ * Generates a diff between a default tailwind run and one customized with a
+ * config
+ *
+ * From https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/index.test.js
+ *
+ * @param config The config to diff against
+ *
+ * @return The diff between the configured tailwind run and the default
+ */
+async function diffOnly(config = {}) {
+  const [before, after] = await Promise.all([
+    generatePluginCss(),
+    generatePluginCss(config)
+  ]);
+
+  return `\n\n${snapshotDiff(before, after, {
+    aAnnotation: '__REMOVE_ME__',
+    bAnnotation: '__REMOVE_ME__',
+    contextLines: 0
+  })
+    .replace(/\n\n@@([^@@]*)@@/g, '') // Top level @@ signs
+    .replace(/@@([^@@]*)@@/g, '\n---\n') // In between @@ signs
+    .replace(/[-+] __REMOVE_ME__\n/g, '')
+    .replace(/Snapshot Diff:\n/g, '')
+    .replace(/"/g, '\'')
+    .split('\n')
+    .map(line => `  ${line}`.trimEnd())
+    .join('\n')}\n\n`;
+}
 
 test('it generates scrollbar utilities', async () => {
   const css = await generatePluginCss();
@@ -91,5 +123,83 @@ test('it generates scrollbar utilities', async () => {
     .hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #000000;
     }"
+`);
+});
+
+test('it generates dark utilities', async () => {
+  const css = await diffOnly({
+    darkMode: 'media',
+    variants: {
+      scrollbar: ['dark']
+    }
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    "
+
+      +
+      + @media (prefers-color-scheme: dark) {
+      +   .dark\\\\:scrollbar {
+      +     --scrollbar-track: initial;
+      +     --scrollbar-thumb: initial;
+      +     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      +     overflow: overlay;
+      +   }
+      +
+      +   .dark\\\\:scrollbar::-webkit-scrollbar-track {
+      +     background-color: var(--scrollbar-track);
+      +   }
+      +
+      +   .dark\\\\:scrollbar::-webkit-scrollbar-thumb {
+      +     background-color: var(--scrollbar-thumb);
+      +   }
+      +
+      +   .dark\\\\:scrollbar {
+      +     scrollbar-width: auto;
+      +   }
+      +
+      +   .dark\\\\:scrollbar::-webkit-scrollbar {
+      +     width: 16px;
+      +     height: 16px;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thin {
+      +     --scrollbar-track: initial;
+      +     --scrollbar-thumb: initial;
+      +     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      +     overflow: overlay;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar-track {
+      +     background-color: var(--scrollbar-track);
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar-thumb {
+      +     background-color: var(--scrollbar-thumb);
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thin {
+      +     scrollbar-width: thin;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar {
+      +     width: 8px;
+      +     height: 8px;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-track-black {
+      +     --scrollbar-track: #000000;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thumb-black {
+      +     --scrollbar-thumb: #000000;
+      +   }
+      +
+      +   .dark\\\\:hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
+      +     --scrollbar-thumb: #000000;
+      +   }
+      + }
+
+    "
 `);
 });
