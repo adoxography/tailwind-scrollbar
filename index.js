@@ -119,7 +119,7 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
       ...(
         typeof value === 'object'
           ? generateAllScrollbarColorUtilities(value, `${e(key)}-`)
-          : generateScrollbarColorUtilities(`${prefix}${e(key)}`, value)
+          : generateScrollbarColorUtilities(key === 'DEFAULT' ? prefix.replace(/-$/, '') : `${prefix}${e(key)}`, value)
       )
     }), {});
 

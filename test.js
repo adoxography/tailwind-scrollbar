@@ -19,8 +19,9 @@ const generatePluginCss = async (config = {}) => {
     theme: {
       colors: {
         black: '#000000',
-        red: {
-          900: '#ff0000'
+        indigo: {
+          DEFAULT: '#5c6ac4',
+          dark: '#202e78'
         }
       }
     },
@@ -129,16 +130,28 @@ test('it generates scrollbar utilities', async () => {
       --scrollbar-thumb: #000000;
     }
 
-    .scrollbar-track-red-900 {
-      --scrollbar-track: #ff0000;
+    .scrollbar-track-indigo {
+      --scrollbar-track: #5c6ac4;
+    }
+
+    .scrollbar-thumb-indigo {
+      --scrollbar-thumb: #5c6ac4;
+    }
+
+    .hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
+      --scrollbar-thumb: #5c6ac4;
+    }
+
+    .scrollbar-track-indigo-dark {
+      --scrollbar-track: #202e78;
     }
     
-    .scrollbar-thumb-red-900 {
-      --scrollbar-thumb: #ff0000;
+    .scrollbar-thumb-indigo-dark {
+      --scrollbar-thumb: #202e78;
     }
     
-    .hover\\\\:scrollbar-thumb-red-900::-webkit-scrollbar-thumb:hover {
-      --scrollbar-thumb: #ff0000;
+    .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+      --scrollbar-thumb: #202e78;
     }"
 `);
 });
@@ -216,16 +229,28 @@ test('it generates dark utilities', async () => {
       +     --scrollbar-thumb: #000000;
       +   }
       +
-      +   .dark\\\\:scrollbar-track-red-900 {
-      +     --scrollbar-track: #ff0000;
+      +   .dark\\\\:scrollbar-track-indigo {
+      +     --scrollbar-track: #5c6ac4;
       +   }
       +
-      +   .dark\\\\:scrollbar-thumb-red-900 {
-      +     --scrollbar-thumb: #ff0000;
+      +   .dark\\\\:scrollbar-thumb-indigo {
+      +     --scrollbar-thumb: #5c6ac4;
       +   }
       +
-      +   .dark\\\\:hover\\\\:scrollbar-thumb-red-900::-webkit-scrollbar-thumb:hover {
-      +     --scrollbar-thumb: #ff0000;
+      +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
+      +     --scrollbar-thumb: #5c6ac4;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-track-indigo-dark {
+      +     --scrollbar-track: #202e78;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thumb-indigo-dark {
+      +     --scrollbar-thumb: #202e78;
+      +   }
+      +
+      +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+      +     --scrollbar-thumb: #202e78;
       +   }
       + }
 
