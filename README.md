@@ -1,4 +1,5 @@
 # Scrollbar Plugin for Tailwind CSS
+![Tests](https://github.com/adoxography/tailwind-scrollbar/workflows/Tests/badge.svg)
 
 Adds styling utilities for scrollbars in Firefox and webkit-based browsers.
 
