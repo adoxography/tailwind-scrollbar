@@ -94,13 +94,21 @@ const generateScrollbarColorUtilities = (key, value) => ({
  *
  * @return an object containing the generated utility
  */
-const generateScrollbarRadiusUtilities = (key, value) => ({
-  [`.scrollbar-thumb-rounded-${key}`]: {
-    '&::-webkit-scrollbar-thumb': {
-      'border-radius': value
-    }
+const generateScrollbarRadiusUtilities = (key, value) => {
+  let className = '.scrollbar-thumb-rounded';
+
+  if (key !== 'DEFAULT') {
+    className += `-${key}`;
   }
-});
+
+  return {
+    [className]: {
+      '&::-webkit-scrollbar-thumb': {
+        'border-radius': value
+      }
+    }
+  };
+};
 
 module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants }) {
   const scrollbarVariants = variants('scrollbar', []);
