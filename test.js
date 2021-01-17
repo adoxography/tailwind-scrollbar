@@ -208,6 +208,7 @@ test('it generates rounded states', async () => {
   const css = await diffOnly({
     theme: {
       borderRadius: {
+        DEFAULT: '0.25rem',
         md: '0.375rem'
       }
     },
@@ -219,6 +220,10 @@ test('it generates rounded states', async () => {
   expect(css).toMatchInlineSnapshot(`
     "
 
+      + .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+      +   border-radius: 0.25rem;
+      + }
+      +
       + .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
       +   border-radius: 0.375rem;
       + }
