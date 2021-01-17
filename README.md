@@ -6,11 +6,11 @@ Adds styling utilities for scrollbars in Firefox and webkit-based browsers.
 
 ## Installation
 
-```
+```bash
 yarn add -D tailwind-scrollbar
 ```
 or
-```
+```bash
 npm install --save-dev tailwind-scrollbar
 ```
 
