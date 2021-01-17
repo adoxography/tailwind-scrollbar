@@ -203,3 +203,27 @@ test('it generates dark utilities', async () => {
     "
 `);
 });
+
+test('it generates rounded states', async () => {
+  const css = await diffOnly({
+    theme: {
+      borderRadius: {
+        md: '0.375rem'
+      }
+    },
+    variants: {
+      scrollbar: ['rounded']
+    }
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    "
+
+      + .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
+      +   border-radius: 0.375rem;
+      + }
+      +
+
+    "
+`);
+});

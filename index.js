@@ -1,5 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 
+const CUSTOM_VARIANTS = ['rounded'];
+
 /**
  * Generates a track style, a thumb style, and a thumb hover style for a given
  * name/color pair
@@ -21,6 +23,14 @@ const generateScrollbarClasses = (key, value) => ({
   [`.hover\\:scrollbar-thumb-${key}`]: {
     '&::-webkit-scrollbar-thumb:hover': {
       '--scrollbar-thumb': value
+    }
+  }
+});
+
+const generateScrollbarRadiusUtilities = (key, value) => ({
+  [`.scrollbar-thumb-rounded-${key}`]: {
+    '&::-webkit-scrollbar-thumb': {
+      'border-radius': value
     }
   }
 });
@@ -49,6 +59,8 @@ const scrollbarBase = {
 };
 
 module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants }) {
+  const scrollbarVariants = variants('scrollbar', []);
+
   const generateScrollbarColorUtilities = (colors, prefix = '') => Object.entries(colors)
     .reduce((memo, [key, value]) => ({
       ...memo,
@@ -59,12 +71,23 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
       )
     }), {});
 
+  const generateAllScrollbarRadiusUtilities = radii => Object.entries(radii)
+    .reduce((memo, [key, value]) => ({
+      ...memo,
+      ...generateScrollbarRadiusUtilities(e(key), value)
+    }), {});
+
   addBase({
     '*': {
       'scrollbar-color': 'initial',
       'scrollbar-width': 'initial'
     }
   });
+
+  if (scrollbarVariants.includes('rounded')) {
+    const scrollbarRadiusUtilities = generateAllScrollbarRadiusUtilities(theme('borderRadius', {}));
+    addUtilities(scrollbarRadiusUtilities);
+  }
 
   addUtilities({
     '.scrollbar': {
@@ -88,5 +111,5 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
     },
 
     ...generateScrollbarColorUtilities(theme('colors', {}))
-  }, [variants('scrollbar')]);
+  }, [scrollbarVariants.filter(variant => !CUSTOM_VARIANTS.includes(variant))]);
 });
