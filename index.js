@@ -54,8 +54,8 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
       ...memo,
       ...(
         typeof value === 'object'
-        ? generateScrollbarColorUtilities(value, `${e(key)}-`)
-        : generateScrollbarClasses(`${prefix}${e(key)}`, value)
+          ? generateScrollbarColorUtilities(value, `${e(key)}-`)
+          : generateScrollbarClasses(`${prefix}${e(key)}`, value)
       )
     }), {});
 
