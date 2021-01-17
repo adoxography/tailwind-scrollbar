@@ -17,7 +17,12 @@ const scrollbarPlugin = require('.');
 const generatePluginCss = async (config = {}) => {
   const tailwindConfig = _.merge({
     theme: {
-      colors: { black: '#000000' }
+      colors: {
+        black: '#000000',
+        red: {
+          900: '#ff0000'
+        }
+      }
     },
     corePlugins: [],
     plugins: [scrollbarPlugin]
@@ -122,6 +127,18 @@ test('it generates scrollbar utilities', async () => {
 
     .hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #000000;
+    }
+
+    .scrollbar-track-red-900 {
+      --scrollbar-track: #ff0000;
+    }
+    
+    .scrollbar-thumb-red-900 {
+      --scrollbar-thumb: #ff0000;
+    }
+    
+    .hover\\\\:scrollbar-thumb-red-900::-webkit-scrollbar-thumb:hover {
+      --scrollbar-thumb: #ff0000;
     }"
 `);
 });
@@ -197,6 +214,18 @@ test('it generates dark utilities', async () => {
       +
       +   .dark\\\\:hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
       +     --scrollbar-thumb: #000000;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-track-red-900 {
+      +     --scrollbar-track: #ff0000;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-thumb-red-900 {
+      +     --scrollbar-thumb: #ff0000;
+      +   }
+      +
+      +   .dark\\\\:hover\\\\:scrollbar-thumb-red-900::-webkit-scrollbar-thumb:hover {
+      +     --scrollbar-thumb: #ff0000;
       +   }
       + }
 
