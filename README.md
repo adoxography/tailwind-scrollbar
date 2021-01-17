@@ -25,7 +25,7 @@ plugins: [
 
 **NB:** This plugin *styles* scrollbars; it does not force them to appear. Use typical CSS techniques to force content to overflow and trigger a scrollbar.
 
-For every element that you want to style, add either the `.scrollbar` or `.scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.
+For every element that you want to style, add either the `.scrollbar` or `.scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.)
 
 Here's a minimal example (keeping in mind that the `h-32` and `h-64` classes are just there to force the scrollbar to appear):
 
@@ -47,6 +47,8 @@ variants: {
     scrollbar: ['dark']
 }
 ```
+
+This plugin also capable of adding utilties for creating rounded scrollbars (by referencing your configured [border radius](https://tailwindcss.com/docs/border-radius#customizing) settings). However, as they are only supported in Webkit-based browsers, their usage is inadvisable in cross-browser applications. To enable rounded scrollbar utilities, add `'rounded'` to the list of scrollbar variants in your config file. This will add utilities such as `scrollbar-thumb-rounded-md`.
 
 ## License
 
