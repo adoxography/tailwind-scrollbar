@@ -3,43 +3,20 @@ const plugin = require('tailwindcss/plugin');
 const CUSTOM_VARIANTS = ['rounded'];
 
 /**
- * Generates a track style, a thumb style, and a thumb hover style for a given
- * name/color pair
- *
- * @param name  The text to use in the class name
- * @param color The color to set the element to
- *
- * @return An object containing the generated classes
+ * Base resets to make the plugin's utilities work
  */
-const generateScrollbarClasses = (key, value) => ({
-  [`.scrollbar-track-${key}`]: {
-    '--scrollbar-track': value
-  },
-
-  [`.scrollbar-thumb-${key}`]: {
-    '--scrollbar-thumb': value
-  },
-
-  [`.hover\\:scrollbar-thumb-${key}`]: {
-    '&::-webkit-scrollbar-thumb:hover': {
-      '--scrollbar-thumb': value
-    }
+const BASE_STYLES = {
+  '*': {
+    'scrollbar-color': 'initial',
+    'scrollbar-width': 'initial'
   }
-});
-
-const generateScrollbarRadiusUtilities = (key, value) => ({
-  [`.scrollbar-thumb-rounded-${key}`]: {
-    '&::-webkit-scrollbar-thumb': {
-      'border-radius': value
-    }
-  }
-});
+};
 
 /**
  * Tells an element what to do with --scrollbar-track and --scrollbar-thumb
  * variables
  */
-const scrollbarBase = {
+const SCROLLBAR_SIZE_BASE = {
   '--scrollbar-track': 'initial',
   '--scrollbar-thumb': 'initial',
   'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
@@ -58,16 +35,83 @@ const scrollbarBase = {
   }
 };
 
+/**
+ * Utilities for initializing a custom styled scrollbar, which implicitly set
+ * the scrollbar's size
+ */
+const SCROLLBAR_SIZE_UTILITIES = {
+  '.scrollbar': {
+    ...SCROLLBAR_SIZE_BASE,
+    'scrollbar-width': 'auto',
+
+    '&::-webkit-scrollbar': {
+      width: '16px',
+      height: '16px'
+    }
+  },
+
+  '.scrollbar-thin': {
+    ...SCROLLBAR_SIZE_BASE,
+    'scrollbar-width': 'thin',
+
+    '&::-webkit-scrollbar': {
+      width: '8px',
+      height: '8px'
+    }
+  }
+};
+
+/**
+ * Generates a track style, a thumb style, and a thumb hover style for a given
+ * name/color pair
+ *
+ * @param key   The text to use in the class name
+ * @param value The color to set the element to
+ *
+ * @return An object containing the generated utilities
+ */
+const generateScrollbarColorUtilities = (key, value) => ({
+  [`.scrollbar-track-${key}`]: {
+    '--scrollbar-track': value
+  },
+
+  [`.scrollbar-thumb-${key}`]: {
+    '--scrollbar-thumb': value
+  },
+
+  [`.hover\\:scrollbar-thumb-${key}`]: {
+    '&::-webkit-scrollbar-thumb:hover': {
+      '--scrollbar-thumb': value
+    }
+  }
+});
+
+/**
+ * Generates a rounded style for a given name/value pair
+ *
+ * @param key   The text to use in the class name
+ * @param value The CSS value to use as the border-radius
+ *
+ * @return an object containing the generated utility
+ */
+const generateScrollbarRadiusUtilities = (key, value) => ({
+  [`.scrollbar-thumb-rounded-${key}`]: {
+    '&::-webkit-scrollbar-thumb': {
+      'border-radius': value
+    }
+  }
+});
+
 module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants }) {
   const scrollbarVariants = variants('scrollbar', []);
 
-  const generateScrollbarColorUtilities = (colors, prefix = '') => Object.entries(colors)
+  const generateAllScrollbarColorUtilities = (colors, prefix = '') => Object.entries(colors)
     .reduce((memo, [key, value]) => ({
       ...memo,
       ...(
         typeof value === 'object'
-          ? generateScrollbarColorUtilities(value, `${e(key)}-`)
-          : generateScrollbarClasses(`${prefix}${e(key)}`, value)
+          ? generateAllScrollbarColorUtilities(value, `${e(key)}-`)
+          : generateScrollbarColorUtilities(`${prefix}${e(key)}`, value)
       )
     }), {});
 
@@ -77,39 +121,18 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
       ...generateScrollbarRadiusUtilities(e(key), value)
     }), {});
 
-  addBase({
-    '*': {
-      'scrollbar-color': 'initial',
-      'scrollbar-width': 'initial'
-    }
-  });
+  let scrollbarRadiusUtilities = {};
+  const scrollbarColorUtilities = generateAllScrollbarColorUtilities(theme('colors', {}));
 
   if (scrollbarVariants.includes('rounded')) {
-    const scrollbarRadiusUtilities = generateAllScrollbarRadiusUtilities(theme('borderRadius', {}));
-    addUtilities(scrollbarRadiusUtilities);
+    scrollbarRadiusUtilities = generateAllScrollbarRadiusUtilities(theme('borderRadius', {}));
   }
 
+  addBase(BASE_STYLES);
+
   addUtilities({
-    '.scrollbar': {
-      ...scrollbarBase,
-      'scrollbar-width': 'auto',
-
-      '&::-webkit-scrollbar': {
-        width: '16px',
-        height: '16px'
-      }
-    },
-
-    '.scrollbar-thin': {
-      ...scrollbarBase,
-      'scrollbar-width': 'thin',
-
-      '&::-webkit-scrollbar': {
-        width: '8px',
-        height: '8px'
-      }
-    },
-
-    ...generateScrollbarColorUtilities(theme('colors', {}))
+    ...SCROLLBAR_SIZE_UTILITIES,
+    ...scrollbarRadiusUtilities,
+    ...scrollbarColorUtilities
   }, [scrollbarVariants.filter(variant => !CUSTOM_VARIANTS.includes(variant))]);
 });
