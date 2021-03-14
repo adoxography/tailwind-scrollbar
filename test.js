@@ -77,6 +77,14 @@ test('it generates scrollbar utilities', async () => {
       overflow: overlay;
     }
 
+    .scrollbar.overflow-x-hidden {
+      overflow-x: hidden;
+    }
+
+    .scrollbar.overflow-y-hidden {
+      overflow-y: hidden;
+    }
+
     .scrollbar::-webkit-scrollbar-track {
       background-color: var(--scrollbar-track);
     }
@@ -99,6 +107,14 @@ test('it generates scrollbar utilities', async () => {
       --scrollbar-thumb: initial;
       scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       overflow: overlay;
+    }
+
+    .scrollbar-thin.overflow-x-hidden {
+      overflow-x: hidden;
+    }
+
+    .scrollbar-thin.overflow-y-hidden {
+      overflow-y: hidden;
     }
 
     .scrollbar-thin::-webkit-scrollbar-track {
@@ -145,11 +161,11 @@ test('it generates scrollbar utilities', async () => {
     .scrollbar-track-indigo-dark {
       --scrollbar-track: #202e78;
     }
-    
+
     .scrollbar-thumb-indigo-dark {
       --scrollbar-thumb: #202e78;
     }
-    
+
     .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #202e78;
     }"
@@ -176,6 +192,14 @@ test('it generates dark utilities', async () => {
       +     overflow: overlay;
       +   }
       +
+      +   .scrollbar.dark\\\\:overflow-x-hidden {
+      +     overflow-x: hidden;
+      +   }
+      +
+      +   .scrollbar.dark\\\\:overflow-y-hidden {
+      +     overflow-y: hidden;
+      +   }
+      +
       +   .dark\\\\:scrollbar::-webkit-scrollbar-track {
       +     background-color: var(--scrollbar-track);
       +   }
@@ -198,6 +222,14 @@ test('it generates dark utilities', async () => {
       +     --scrollbar-thumb: initial;
       +     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       +     overflow: overlay;
+      +   }
+      +
+      +   .scrollbar-thin.dark\\\\:overflow-x-hidden {
+      +     overflow-x: hidden;
+      +   }
+      +
+      +   .scrollbar-thin.dark\\\\:overflow-y-hidden {
+      +     overflow-y: hidden;
       +   }
       +
       +   .dark\\\\:scrollbar-thin::-webkit-scrollbar-track {

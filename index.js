@@ -26,6 +26,15 @@ const SCROLLBAR_SIZE_BASE = {
   // in webkit-based browsers in the first place.
   'overflow': 'overlay',
   
+  // Prevent the plugin from overriding overflow-hidden
+  '&.overflow-x-hidden': {
+    'overflow-x': 'hidden'
+  },
+
+  '&.overflow-y-hidden': {
+    'overflow-y': 'hidden'
+  },
+
   '&::-webkit-scrollbar-track': {
     'background-color': 'var(--scrollbar-track)'
   },
