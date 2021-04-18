@@ -134,6 +134,14 @@ test('it generates scrollbar utilities', async () => {
       height: 8px;
     }
 
+    .scrollbar-none {
+      scrollbar-width: none;
+    }
+
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+
     .scrollbar-track-black {
       --scrollbar-track: #000000;
     }
@@ -247,6 +255,14 @@ test('it generates dark utilities', async () => {
       +   .dark\\\\:scrollbar-thin::-webkit-scrollbar {
       +     width: 8px;
       +     height: 8px;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-none {
+      +     scrollbar-width: none;
+      +   }
+      +
+      +   .dark\\\\:scrollbar-none::-webkit-scrollbar {
+      +     display: none;
       +   }
       +
       +   .dark\\\\:scrollbar-track-black {

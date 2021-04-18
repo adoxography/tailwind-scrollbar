@@ -67,6 +67,14 @@ const SCROLLBAR_SIZE_UTILITIES = {
       width: '8px',
       height: '8px'
     }
+  },
+
+  '.scrollbar-none': {
+    'scrollbar-width': 'none',
+
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
   }
 };
 
