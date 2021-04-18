@@ -310,7 +310,15 @@ test('it generates rounded states', async () => {
       +   border-radius: 0.25rem;
       + }
       +
+      + .scrollbar-track-rounded::-webkit-scrollbar-track {
+      +   border-radius: 0.25rem;
+      + }
+      +
       + .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
+      +   border-radius: 0.375rem;
+      + }
+      +
+      + .scrollbar-track-rounded-md::-webkit-scrollbar-track {
       +   border-radius: 0.375rem;
       + }
       +

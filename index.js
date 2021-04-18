@@ -101,18 +101,19 @@ const generateScrollbarColorUtilities = (key, value) => ({
  * @param key   The text to use in the class name
  * @param value The CSS value to use as the border-radius
  *
- * @return an object containing the generated utility
+ * @return an object containing the generated rounded track and thumb utilities
  */
 const generateScrollbarRadiusUtilities = (key, value) => {
-  let className = '.scrollbar-thumb-rounded';
-
-  if (key !== 'DEFAULT') {
-    className += `-${key}`;
-  }
+  const suffix = key === 'DEFAULT' ? '' : `-${key}`;
 
   return {
-    [className]: {
+    [`.scrollbar-thumb-rounded${suffix}`]: {
       '&::-webkit-scrollbar-thumb': {
+        'border-radius': value
+      }
+    },
+    [`.scrollbar-track-rounded${suffix}`]: {
+      '&::-webkit-scrollbar-track': {
         'border-radius': value
       }
     }
