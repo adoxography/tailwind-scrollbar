@@ -5,18 +5,16 @@
  * version of the hover variant. It's super brittle, but hopefully the JIT
  * engine will expose more options as it matures.
  */
-const scrollbarAwareHover = e => {
-  return ({ modifySelectors, separator }) => {
-    modifySelectors(({ className }) => {
-      let pseudoEl = '';
+const scrollbarAwareHover = e => ({ modifySelectors, separator }) => {
+  modifySelectors(({ className }) => {
+    let pseudoEl = '';
 
-      if (className.match(/^scrollbar-thumb-/)) {
-        pseudoEl = '::-webkit-scrollbar-thumb';
-      }
+    if (className.match(/^scrollbar-thumb-/)) {
+      pseudoEl = '::-webkit-scrollbar-thumb';
+    }
 
-      return `.${e(`hover${separator}${className}`)}${pseudoEl}:hover`;
-    });
-  };
+    return `.${e(`hover${separator}${className}`)}${pseudoEl}:hover`;
+  });
 };
 
 module.exports = {
