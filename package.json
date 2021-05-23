@@ -19,6 +19,6 @@
     "lodash": "^4.17.20",
     "postcss": "^8.2.4",
     "snapshot-diff": "^0.8.1",
-    "tailwindcss": "^2.0.0"
+    "tailwindcss": "^2.1.2"
   }
 }
