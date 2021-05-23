@@ -2,8 +2,15 @@ const _ = require('lodash');
 const postcss = require('postcss');
 const snapshotDiff = require('snapshot-diff');
 const tailwindcss = require('tailwindcss');
+const path = require('path');
 
-const scrollbarPlugin = require('.');
+const scrollbarPlugin = require('..');
+
+const run = (input, config = {}) => {
+  return postcss(tailwindcss(config)).process(input, {
+    from: path.resolve(__filename)
+  });
+};
 
 /**
  * Generates the CSS for the plugin
@@ -15,6 +22,9 @@ const scrollbarPlugin = require('.');
  * @return The CSS generated from the plugin using the provided config
  */
 const generatePluginCss = async (config = {}) => {
+  const _warn = console.warn;
+  console.warn = () => {};
+
   const tailwindConfig = _.merge({
     theme: {
       colors: {
@@ -31,6 +41,8 @@ const generatePluginCss = async (config = {}) => {
 
   const result = await postcss(tailwindcss(tailwindConfig))
     .process('@tailwind utilities;', { from: undefined });
+
+  console.warn = _warn;
 
   return result.css;
 };
@@ -176,6 +188,52 @@ test('it generates scrollbar utilities', async () => {
 
     .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #202e78;
+    }"
+`);
+});
+
+test('it works in jit mode', async () => {
+  const css = await generatePluginCss({
+    mode: 'jit',
+    purge: [path.resolve(__dirname, './jit-mode.html')],
+    corePlugins: ['textColor']
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar {
+        --scrollbar-track: initial;
+        --scrollbar-thumb: initial;
+        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        overflow: overlay;
+    }
+    .scrollbar.overflow-x-hidden {
+        overflow-x: hidden;
+    }
+    .scrollbar.overflow-y-hidden {
+        overflow-y: hidden;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-track);
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+    }
+    .scrollbar {
+        scrollbar-width: auto;
+    }
+    .scrollbar::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+    .scrollbar-thumb-indigo {
+        --scrollbar-thumb: #5c6ac4;
+    }
+    .hover\\\\:text-black:hover {
+        --tw-text-opacity: 1;
+        color: rgba(0, 0, 0, var(--tw-text-opacity));
+    }
+    .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+        --scrollbar-thumb: #202e78;
     }"
 `);
 });

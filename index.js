@@ -128,7 +128,7 @@ const generateScrollbarRadiusUtilities = (key, value) => {
   };
 };
 
-module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants }) {
+module.exports = plugin(function ({ addBase, addUtilities, addVariant, config, e, theme, variants }) {
   const scrollbarVariants = variants('scrollbar', []);
 
   const generateAllScrollbarColorUtilities = (colors, prefix = '') => Object.entries(colors)
@@ -161,4 +161,23 @@ module.exports = plugin(function ({ e, addUtilities, theme, addBase, variants })
     ...scrollbarRadiusUtilities,
     ...scrollbarColorUtilities
   }, [scrollbarVariants.filter(variant => !CUSTOM_VARIANTS.includes(variant))]);
+
+  // Tailwind's JIT engine assumes that hover variants always mean the element's
+  // :hover selector should be targeted, but that's not the case when it comes
+  // to webkit scrollbars. The remedy here is to inject our own scrollbar-aware
+  // version of the hover variant. It's super brittle, but hopefully the JIT
+  // engine will expose more options as it matures.
+  if (config('mode') === 'jit') {
+    addVariant('hover', ({ modifySelectors, separator }) => {
+      modifySelectors(({ className }) => {
+        let pseudoEl = '';
+
+        if (className.match(/^scrollbar-thumb-/)) {
+          pseudoEl = '::-webkit-scrollbar-thumb';
+        }
+
+        return `.${e(`hover${separator}${className}`)}${pseudoEl}:hover`;
+      });
+    });
+  }
 });
