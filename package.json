@@ -9,12 +9,17 @@
   "license": "MIT",
   "private": false,
   "scripts": {
+    "lint": "eslint src",
     "test": "jest"
   },
   "files": [
     "src/*"
   ],
   "devDependencies": {
+    "eslint": "^7.27.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.3",
+    "eslint-plugin-jest": "^24.3.6",
     "jest": "^26.6.3",
     "lodash": "^4.17.20",
     "postcss": "^8.2.4",

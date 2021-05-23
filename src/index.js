@@ -1,17 +1,17 @@
-const plugin = require('tailwindcss/plugin');
+const plugin = require('tailwindcss/plugin'); // eslint-disable-line import/no-extraneous-dependencies
 const {
   BASE_STYLES,
   SCROLLBAR_SIZE_UTILITIES,
   buildSuffixMap,
   generateColorUtilities,
   generateRadiusUtilities,
-  generateUtilitiesFromSuffixes,
+  generateUtilitiesFromSuffixes
 } = require('./utilities');
 const { scrollbarAwareHover } = require('./variants');
 
 const CUSTOM_VARIANTS = ['rounded'];
 
-module.exports = plugin(function (tailwind) {
+module.exports = plugin(tailwind => {
   const scrollbarVariants = tailwind.variants('scrollbar', []);
 
   const scrollbarColorUtilities = generateUtilitiesFromSuffixes(

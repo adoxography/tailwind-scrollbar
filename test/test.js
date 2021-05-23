@@ -6,24 +6,18 @@ const path = require('path');
 
 const scrollbarPlugin = require('..');
 
-const run = (input, config = {}) => {
-  return postcss(tailwindcss(config)).process(input, {
-    from: path.resolve(__filename)
-  });
-};
-
 /**
  * Generates the CSS for the plugin
  *
  * From https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
  *
  * @param config Tailwind config options to pass to tailwind
- * 
+ *
  * @return The CSS generated from the plugin using the provided config
  */
 const generatePluginCss = async (config = {}) => {
-  const _warn = console.warn;
-  console.warn = () => {};
+  const { warn } = console;
+  console.warn = () => {}; // eslint-disable-line no-console
 
   const tailwindConfig = _.merge({
     theme: {
@@ -42,7 +36,7 @@ const generatePluginCss = async (config = {}) => {
   const result = await postcss(tailwindcss(tailwindConfig))
     .process('@tailwind utilities;', { from: undefined });
 
-  console.warn = _warn;
+  console.warn = warn; // eslint-disable-line no-console
 
   return result.css;
 };

@@ -1,13 +1,13 @@
 /**
  * Collapses a nested object into a flat object of suffix/value pairs.
  *
- * @param obj  The object to collapse
- * @param e    A function that escapes special characters from keys
- * @param sep  A string to use as the separator between key segments
+ * @param configObj  The object to collapse
+ * @param e          A function that escapes special characters from keys
+ * @param sep        A string to use as the separator between key segments
  *
  * @return A flat object that maps suffixes to their values
  */
-const buildSuffixMap = (obj, e, sep = '-') => {
+const buildSuffixMap = (configObj, e, sep = '-') => {
   const build = (obj, prefix = '') => Object.entries(obj)
     .reduce((memo, [key, value]) => {
       const suffix = `${sep}${e(key)}`;
@@ -17,13 +17,13 @@ const buildSuffixMap = (obj, e, sep = '-') => {
         result = build(value, suffix);
       } else {
         const compoundKey = key === 'DEFAULT' ? prefix : `${prefix}${suffix}`;
-        result = { [compoundKey]: value }
+        result = { [compoundKey]: value };
       }
 
       return { ...memo, ...result };
     }, {});
 
-  return build(obj);
+  return build(configObj);
 };
 
 /**
@@ -38,7 +38,7 @@ const buildSuffixMap = (obj, e, sep = '-') => {
  *         each suffix/value pair
  */
 const generateUtilitiesFromSuffixes = (suffixMap, func) => Object.entries(suffixMap)
-  .reduce((memo, [ key, value ]) => ({ ...memo, ...func(key, value) }), {});
+  .reduce((memo, [key, value]) => ({ ...memo, ...func(key, value) }), {});
 
 /**
  * Base resets to make the plugin's utilities work
@@ -58,12 +58,12 @@ const SCROLLBAR_SIZE_BASE = {
   '--scrollbar-track': 'initial',
   '--scrollbar-thumb': 'initial',
   'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
-  
+
   // Make sure the scrollbars are calculated in the elements width
   // NOTE: only has effect in webkit-based browsers, but is only really needed
   // in webkit-based browsers in the first place.
-  'overflow': 'overlay',
-  
+  overflow: 'overlay',
+
   // Prevent the plugin from overriding overflow-hidden
   '&.overflow-x-hidden': {
     'overflow-x': 'hidden'
