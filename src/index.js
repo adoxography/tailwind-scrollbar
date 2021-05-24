@@ -40,14 +40,14 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
           'background-size': '10px',
 
           '&:vertical': {
-            height: '12px',
+            height: '16px',
 
             '&:increment': {
-              'background-position': 'center 2px'
+              'background-position': 'center 5px'
             },
 
             '&:decrement': {
-              'background-position': 'center 4px'
+              'background-position': 'center 6px'
             }
           }
         },

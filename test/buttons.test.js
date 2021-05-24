@@ -16,15 +16,15 @@ test('it generates button utilities', async () => {
     + }
     +
     + .scrollbar-buttons.scrollbar::-webkit-scrollbar-button:vertical {
-    +   height: 12px;
+    +   height: 16px;
     + }
     +
     + .scrollbar-buttons.scrollbar::-webkit-scrollbar-button:vertical:increment {
-    +   background-position: center 2px;
+    +   background-position: center 5px;
     + }
     +
     + .scrollbar-buttons.scrollbar::-webkit-scrollbar-button:vertical:decrement {
-    +   background-position: center 4px;
+    +   background-position: center 6px;
     + }
     +
     + .scrollbar-buttons.scrollbar-thin::-webkit-scrollbar-button {
