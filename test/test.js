@@ -426,3 +426,38 @@ test('it generates custom utilities', async () => {
     "
 `);
 });
+
+test('it allows components to be specified in custom utilities', async () => {
+  const css = await diffOnly({
+    theme: {
+      scrollbar: [
+        ['foo', 'height', { DEFAULT: 0 }, 'thumb'],
+        ['bar', 'width', { DEFAULT: '1px' }, 'track'],
+        ['baz', 'margin', { DEFAULT: '2px' }, 'all']
+      ]
+    }
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    "
+
+      + .scrollbar-thumb-foo::-webkit-scrollbar-thumb {
+      +   height: 0;
+      + }
+      +
+      + .scrollbar-track-bar::-webkit-scrollbar-track {
+      +   width: 1px;
+      + }
+      +
+      + .scrollbar-thumb-baz::-webkit-scrollbar-thumb {
+      +   margin: 2px;
+      + }
+      +
+      + .scrollbar-track-baz::-webkit-scrollbar-track {
+      +   margin: 2px;
+      + }
+      +
+
+    "
+`);
+});

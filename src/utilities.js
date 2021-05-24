@@ -39,24 +39,34 @@ const generateUtilitiesFromSuffixes = (suffixMap, func) => Object.entries(suffix
   .reduce((memo, [key, value]) => ({ ...memo, ...func(key, value) }), {});
 
 /**
- * @param {string} key      The key to use in the utility name
- * @param {string} property The CSS property to assign
- * @param {string} value    The CSS value to assign to the property
+ * @param {string} key        The key to use in the utility name
+ * @param {string} property   The CSS property to assign
+ * @param {string} value      The CSS value to assign to the property
+ * @param {string} components The components to generate
  * @returns {object} A CSS-in-JS object assigning the property and value to
  *                   scrollbar thumbs and tracks
  */
-const generateScrollbarUtilities = (key, property, value) => ({
-  [`.scrollbar-thumb-${key}`]: {
-    '&::-webkit-scrollbar-thumb': {
-      [property]: value
-    }
-  },
-  [`.scrollbar-track-${key}`]: {
-    '&::-webkit-scrollbar-track': {
-      [property]: value
-    }
+const generateScrollbarUtilities = (key, property, value, components) => {
+  const utilities = {};
+
+  if (components === 'thumb' || components === 'all') {
+    utilities[`.scrollbar-thumb-${key}`] = {
+      '&::-webkit-scrollbar-thumb': {
+        [property]: value
+      }
+    };
   }
-});
+
+  if (components === 'track' || components === 'all') {
+    utilities[`.scrollbar-track-${key}`] = {
+      '&::-webkit-scrollbar-track': {
+        [property]: value
+      }
+    };
+  }
+
+  return utilities;
+};
 
 /**
  * Generates a mapping of arbitrary scrollbar utility classes
@@ -80,13 +90,15 @@ const generateScrollbarUtilities = (key, property, value) => ({
  * @param {string} utilityName The keyword to use in the utility name
  * @param {string} property    The CSS property to assign
  * @param {object} values      A Tailwind configuration object (may be nested)
+ * @param {string} components  Which components to generate ('thumb', 'track',
+ *                             or 'all')
  * @param {Function} e         A function for escaping class names
  * @returns {object} A CSS-in-JS object with the generated utilities
  */
-const generateCustomUtilities = (utilityName, property, values, e) => {
+const generateCustomUtilities = (utilityName, property, values, components, e) => {
   const utilities = generateUtilitiesFromSuffixes(
     buildSuffixMap(values, e),
-    (suffix, value) => generateScrollbarUtilities(`${utilityName}${suffix}`, property, value)
+    (suffix, value) => generateScrollbarUtilities(`${utilityName}${suffix}`, property, value, components)
   );
 
   return utilities;

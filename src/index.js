@@ -16,9 +16,9 @@ module.exports = plugin(tailwind => {
   );
 
   const customUtilities = tailwind.theme('scrollbar', [])
-    .reduce((memo, [utilityName, property, values]) => ({
+    .reduce((memo, [utilityName, property, values, components = 'all']) => ({
       ...memo,
-      ...generateCustomUtilities(utilityName, property, values, tailwind.e)
+      ...generateCustomUtilities(utilityName, property, values, components, tailwind.e)
     }), {});
 
   tailwind.addBase(BASE_STYLES);
