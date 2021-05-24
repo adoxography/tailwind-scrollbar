@@ -5,17 +5,25 @@ module.exports = {
     'jest/globals': true
   },
   plugins: [
-    'jest'
+    'jest',
+    'jsdoc'
   ],
   extends: [
     'airbnb-base',
-    'plugin:jest/recommended'
+    'plugin:jest/recommended',
+    'plugin:jsdoc/recommended'
   ],
   parserOptions: {
     ecmaVersion: 12
   },
   rules: {
     'arrow-parens': ['error', 'as-needed'],
-    'comma-dangle': ['error', 'never']
+    'comma-dangle': ['error', 'never'],
+    'jsdoc/require-jsdoc': ['error', {
+      publicOnly: true,
+      require: {
+        ArrowFunctionExpression: true
+      }
+    }]
   }
 };

@@ -9,11 +9,9 @@ const scrollbarPlugin = require('..');
 /**
  * Generates the CSS for the plugin
  *
- * From https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
- *
- * @param config Tailwind config options to pass to tailwind
- *
- * @return The CSS generated from the plugin using the provided config
+ * @see https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
+ * @param {object} config Tailwind config options to pass to tailwind
+ * @returns {string} The CSS generated from the plugin using the provided config
  */
 const generatePluginCss = async (config = {}) => {
   const { warn } = console;
@@ -45,11 +43,9 @@ const generatePluginCss = async (config = {}) => {
  * Generates a diff between a default tailwind run and one customized with a
  * config
  *
- * From https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/index.test.js
- *
- * @param config The config to diff against
- *
- * @return The diff between the configured tailwind run and the default
+ * @see https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/index.test.js
+ * @param {object} config The config to diff against
+ * @returns {string} The diff between the configured tailwind run and the default
  */
 async function diffOnly(config = {}) {
   const [before, after] = await Promise.all([
