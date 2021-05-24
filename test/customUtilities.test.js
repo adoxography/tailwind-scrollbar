@@ -7,9 +7,9 @@ test('it generates rounded states', async () => {
         DEFAULT: '0.25rem',
         md: '0.375rem'
       },
-      scrollbar: theme => ([
-        ['rounded', 'border-radius', theme('borderRadius')]
-      ])
+      scrollbar: theme => ({
+        rounded: ['border-radius', theme('borderRadius')]
+      })
     }
   });
 
@@ -40,9 +40,9 @@ test('it generates rounded states', async () => {
 test('it generates custom utilities', async () => {
   const css = await diffOnly({
     theme: {
-      scrollbar: [
-        ['foo', 'height', { DEFAULT: 0, 1: '1px' }]
-      ]
+      scrollbar: {
+        foo: ['height', { DEFAULT: 0, 1: '1px' }]
+      }
     }
   });
 
@@ -73,11 +73,11 @@ test('it generates custom utilities', async () => {
 test('it allows components to be specified in custom utilities', async () => {
   const css = await diffOnly({
     theme: {
-      scrollbar: [
-        ['foo', 'height', { DEFAULT: 0 }, 'thumb'],
-        ['bar', 'width', { DEFAULT: '1px' }, 'track'],
-        ['baz', 'margin', { DEFAULT: '2px' }, 'all']
-      ]
+      scrollbar: {
+        foo: ['height', { DEFAULT: 0 }, 'thumb'],
+        bar: ['width', { DEFAULT: '1px' }, 'track'],
+        baz: ['margin', { DEFAULT: '2px' }, 'all']
+      }
     }
   });
 

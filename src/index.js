@@ -15,8 +15,8 @@ module.exports = plugin(tailwind => {
     generateColorUtilities
   );
 
-  const customUtilities = tailwind.theme('scrollbar', [])
-    .reduce((memo, [utilityName, property, values, components = 'all']) => ({
+  const customUtilities = Object.entries(tailwind.theme('scrollbar', {}))
+    .reduce((memo, [utilityName, [property, values, components = 'all']]) => ({
       ...memo,
       ...generateCustomUtilities(utilityName, property, values, components, tailwind.e)
     }), {});
