@@ -9,10 +9,11 @@ const scrollbarPlugin = require('..');
  * Generates the CSS for the plugin
  *
  * @see https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
- * @param {object} config Tailwind config options to pass to tailwind
+ * @param {object} config  Tailwind config options to pass to tailwind
+ * @param {object} options Options to pass in to the plugin
  * @returns {string} The CSS generated from the plugin using the provided config
  */
-const generatePluginCss = async (config = {}) => {
+const generatePluginCss = async (config = {}, options = {}) => {
   const { warn } = console;
   console.warn = () => {}; // eslint-disable-line no-console
 
@@ -27,7 +28,7 @@ const generatePluginCss = async (config = {}) => {
       }
     },
     corePlugins: [],
-    plugins: [scrollbarPlugin]
+    plugins: [scrollbarPlugin(options)]
   }, config);
 
   const result = await postcss(tailwindcss(tailwindConfig))
@@ -44,12 +45,13 @@ const generatePluginCss = async (config = {}) => {
  *
  * @see https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/index.test.js
  * @param {object} config The config to diff against
+ * @param {object} options Options to pass in to the plugin
  * @returns {string} The diff between the configured tailwind run and the default
  */
-async function diffOnly(config = {}) {
+async function diffOnly(config = {}, options = {}) {
   const [before, after] = await Promise.all([
     generatePluginCss(),
-    generatePluginCss(config)
+    generatePluginCss(config, options)
   ]);
 
   return `\n\n${snapshotDiff(before, after, {
