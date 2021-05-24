@@ -11,9 +11,10 @@
 const scrollbarAwareHover = e => ({ modifySelectors, separator }) => {
   modifySelectors(({ className }) => {
     let pseudoEl = '';
+    const match = className.match(/^scrollbar-(thumb|track)-/);
 
-    if (className.match(/^scrollbar-thumb-/)) {
-      pseudoEl = '::-webkit-scrollbar-thumb';
+    if (match) {
+      pseudoEl = `::-webkit-scrollbar-${match[1]}`;
     }
 
     return `.${e(`hover${separator}${className}`)}${pseudoEl}:hover`;
