@@ -363,10 +363,10 @@ test('it generates rounded states', async () => {
       borderRadius: {
         DEFAULT: '0.25rem',
         md: '0.375rem'
-      }
-    },
-    variants: {
-      scrollbar: ['rounded']
+      },
+      scrollbar: theme => ([
+        ['rounded', 'border-radius', theme('borderRadius')]
+      ])
     }
   });
 
@@ -387,6 +387,39 @@ test('it generates rounded states', async () => {
       +
       + .scrollbar-track-rounded-md::-webkit-scrollbar-track {
       +   border-radius: 0.375rem;
+      + }
+      +
+
+    "
+`);
+});
+
+test('it generates custom utilities', async () => {
+  const css = await diffOnly({
+    theme: {
+      scrollbar: [
+        ['foo', 'height', { DEFAULT: 0, 1: '1px' }]
+      ]
+    }
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    "
+
+      + .scrollbar-thumb-foo-1::-webkit-scrollbar-thumb {
+      +   height: 1px;
+      + }
+      +
+      + .scrollbar-track-foo-1::-webkit-scrollbar-track {
+      +   height: 1px;
+      + }
+      +
+      + .scrollbar-thumb-foo::-webkit-scrollbar-thumb {
+      +   height: 0;
+      + }
+      +
+      + .scrollbar-track-foo::-webkit-scrollbar-track {
+      +   height: 0;
       + }
       +
 

@@ -39,7 +39,64 @@ const generateUtilitiesFromSuffixes = (suffixMap, func) => Object.entries(suffix
   .reduce((memo, [key, value]) => ({ ...memo, ...func(key, value) }), {});
 
 /**
+ * @param {string} key      The key to use in the utility name
+ * @param {string} property The CSS property to assign
+ * @param {string} value    The CSS value to assign to the property
+ * @returns {object} A CSS-in-JS object assigning the property and value to
+ *                   scrollbar thumbs and tracks
+ */
+const generateScrollbarUtilities = (key, property, value) => ({
+  [`.scrollbar-thumb-${key}`]: {
+    '&::-webkit-scrollbar-thumb': {
+      [property]: value
+    }
+  },
+  [`.scrollbar-track-${key}`]: {
+    '&::-webkit-scrollbar-track': {
+      [property]: value
+    }
+  }
+});
+
+/**
+ * Generates a mapping of arbitrary scrollbar utility classes
+ *
+ * @example
+ * // returns {
+ * //   'scrollbar-thumb-foo': {
+ * //     '&::-webkit-scrollbar-thumb': { height: '0' }
+ * //   },
+ * //   'scrollbar-track-foo': {
+ * //     '&::-webkit-scrollbar-track': { height: '0' }
+ * //   },
+ * //   'scrollbar-thumb-foo-bar': {
+ * //     '&::-webkit-scrollbar-thumb': { height: '1px' }
+ * //   },
+ * //   'scrollbar-track-foo-bar': {
+ * //     '&::-webkit-scrollbar-track': { height: '1px' }
+ * //   }
+ * // }
+ * generateCustomUtilities('foo', 'height', { DEFAULT: '0', bar: '1px' })
+ * @param {string} utilityName The keyword to use in the utility name
+ * @param {string} property    The CSS property to assign
+ * @param {object} values      A Tailwind configuration object (may be nested)
+ * @param {Function} e         A function for escaping class names
+ * @returns {object} A CSS-in-JS object with the generated utilities
+ */
+const generateCustomUtilities = (utilityName, property, values, e) => {
+  const utilities = generateUtilitiesFromSuffixes(
+    buildSuffixMap(values, e),
+    (suffix, value) => generateScrollbarUtilities(`${utilityName}${suffix}`, property, value)
+  );
+
+  return utilities;
+};
+
+/**
  * Base resets to make the plugin's utilities work
+ *
+ * @constant
+ * @default
  */
 const BASE_STYLES = {
   '*': {
@@ -51,6 +108,9 @@ const BASE_STYLES = {
 /**
  * Tells an element what to do with --scrollbar-track and --scrollbar-thumb
  * variables
+ *
+ * @constant
+ * @default
  */
 const SCROLLBAR_SIZE_BASE = {
   '--scrollbar-track': 'initial',
@@ -83,6 +143,9 @@ const SCROLLBAR_SIZE_BASE = {
 /**
  * Utilities for initializing a custom styled scrollbar, which implicitly set
  * the scrollbar's size
+ *
+ * @constant
+ * @default
  */
 const SCROLLBAR_SIZE_UTILITIES = {
   '.scrollbar': {
@@ -138,31 +201,11 @@ const generateColorUtilities = (key, value) => ({
   }
 });
 
-/**
- * Generates a rounded style for a given name/value pair
- *
- * @param {string} key   The text to use in the class name
- * @param {string} value The CSS value to use as the border-radius
- * @returns {object} The generated rounded track and thumb utilities
- */
-const generateRadiusUtilities = (key, value) => ({
-  [`.scrollbar-thumb-rounded${key}`]: {
-    '&::-webkit-scrollbar-thumb': {
-      'border-radius': value
-    }
-  },
-  [`.scrollbar-track-rounded${key}`]: {
-    '&::-webkit-scrollbar-track': {
-      'border-radius': value
-    }
-  }
-});
-
 module.exports = {
   BASE_STYLES,
   SCROLLBAR_SIZE_UTILITIES,
   buildSuffixMap,
   generateColorUtilities,
-  generateRadiusUtilities,
-  generateUtilitiesFromSuffixes
+  generateUtilitiesFromSuffixes,
+  generateCustomUtilities
 };
