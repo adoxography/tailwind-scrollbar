@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin'); // eslint-disable-line import/no-extraneous-dependencies
+const plugin = require('tailwindcss/plugin');
 const {
   BASE_STYLES,
   SCROLLBAR_SIZE_UTILITIES,
