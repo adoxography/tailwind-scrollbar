@@ -1,11 +1,10 @@
 /**
  * Collapses a nested object into a flat object of suffix/value pairs.
  *
- * @param configObj  The object to collapse
- * @param e          A function that escapes special characters from keys
- * @param sep        A string to use as the separator between key segments
- *
- * @return A flat object that maps suffixes to their values
+ * @param {object} configObj The object to collapse
+ * @param {Function} e       A function that escapes special characters from keys
+ * @param {string} sep       The separator between key segments
+ * @returns {object} A flat object that maps suffixes to their values
  */
 const buildSuffixMap = (configObj, e, sep = '-') => {
   const build = (obj, prefix = '') => Object.entries(obj)
@@ -30,12 +29,11 @@ const buildSuffixMap = (configObj, e, sep = '-') => {
  * Builds a CSS-in-JS object by passing a map of suffixes and values into a
  * function.
  *
- * @param suffixMap A map of string suffixes to CSS values
- * @param func      A function that consumes class suffixes and CSS values to
- *                  produce a CSS-in-JS object
- *
- * @return A CSS-in-JS object consisting of all of the objects generated for
- *         each suffix/value pair
+ * @param {object} suffixMap A map of string suffixes to CSS values
+ * @param {Function} func    A function that consumes class suffixes and CSS
+ *                           values to produce a CSS-in-JS object
+ * @returns {object} A CSS-in-JS object consisting of all of the objects
+ *                   generated for each suffix/value pair
  */
 const generateUtilitiesFromSuffixes = (suffixMap, func) => Object.entries(suffixMap)
   .reduce((memo, [key, value]) => ({ ...memo, ...func(key, value) }), {});
@@ -120,10 +118,9 @@ const SCROLLBAR_SIZE_UTILITIES = {
  * Generates a track style, a thumb style, and a thumb hover style for a given
  * name/color pair
  *
- * @param key   The text to use in the class name
- * @param value The color to set the element to
- *
- * @return An object containing the generated utilities
+ * @param {string} key   The text to use in the class name
+ * @param {string} value The color to set the element to
+ * @returns {object} The generated utilities
  */
 const generateColorUtilities = (key, value) => ({
   [`.scrollbar-track${key}`]: {
@@ -144,10 +141,9 @@ const generateColorUtilities = (key, value) => ({
 /**
  * Generates a rounded style for a given name/value pair
  *
- * @param key   The text to use in the class name
- * @param value The CSS value to use as the border-radius
- *
- * @return an object containing the generated rounded track and thumb utilities
+ * @param {string} key   The text to use in the class name
+ * @param {string} value The CSS value to use as the border-radius
+ * @returns {object} The generated rounded track and thumb utilities
  */
 const generateRadiusUtilities = (key, value) => ({
   [`.scrollbar-thumb-rounded${key}`]: {
