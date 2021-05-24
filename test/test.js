@@ -222,6 +222,9 @@ test('it works in jit mode', async () => {
         --tw-text-opacity: 1;
         color: rgba(0, 0, 0, var(--tw-text-opacity));
     }
+    .hover\\\\:scrollbar-track-black::-webkit-scrollbar-track:hover {
+        --scrollbar-track: #000000;
+    }
     .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
         --scrollbar-thumb: #202e78;
     }"
