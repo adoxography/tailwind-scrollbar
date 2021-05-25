@@ -49,6 +49,18 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
             '&:decrement': {
               'background-position': 'center 6px'
             }
+          },
+
+          '&:horizontal': {
+            width: '16px',
+
+            '&:increment': {
+              'background-position': '6px center'
+            },
+
+            '&:decrement': {
+              'background-position': '0 center'
+            }
           }
         },
 
@@ -75,6 +87,16 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
 
           '&:decrement': {
             'background-image': 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'rgb(73, 73, 73)\'><polygon points=\'50,00 0,50 100,50\'/></svg>")'
+          }
+        },
+
+        '&::-webkit-scrollbar-button:horizontal': {
+          '&:increment': {
+            'background-image': 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'rgb(73, 73, 73)\'><polygon points=\'0,0 0,100 50,50\'/></svg>")'
+          },
+
+          '&:decrement': {
+            'background-image': 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'100\' fill=\'rgb(73, 73, 73)\'><polygon points=\'100,100 100,0 50,50\'/></svg>")'
           }
         }
       }
