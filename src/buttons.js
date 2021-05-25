@@ -106,7 +106,22 @@ const generateButtonColors = suffixMap => Object.entries(suffixMap)
     [`.scrollbar-arrows${suffix}`]: generateArrowSVGs(value)
   }), {});
 
+/**
+ * @param {object} suffixMap A mapping of class suffixes to CSS values
+ * @returns {object} A CSS-in-JS object containing gap utilities
+ */
+const generateGaps = suffixMap => Object.entries(suffixMap)
+  .reduce((memo, [suffix, value]) => ({
+    ...memo,
+    [`.scrollbar-gap${suffix}::-webkit-scrollbar-button`]: {
+      'background-color': 'transparent',
+      height: value,
+      width: value
+    }
+  }), {});
+
 module.exports = {
   BASE_BUTTON_UTILITIES,
-  generateButtonColors
+  generateButtonColors,
+  generateGaps
 };

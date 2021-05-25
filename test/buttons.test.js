@@ -1,7 +1,16 @@
 const { diffOnly } = require('./util');
 
 test('it generates button utilities', async () => {
-  const css = await diffOnly({}, { webkitButtons: true });
+  const css = await diffOnly({
+    theme: {
+      spacing: {
+        DEFAULT: '1rem',
+        sm: '0.25rem'
+      }
+    }
+  }, {
+    webkitButtons: true
+  });
 
   expect(css).toMatchInlineSnapshot(`
   "
@@ -110,6 +119,18 @@ test('it generates button utilities', async () => {
     +   --scrollbar-arrow-down: url('data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#202e78'><polygon points='0,0 100,0 50,50'/></svg>');
     +   --scrollbar-arrow-right: url('data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#202e78'><polygon points='0,0 0,100 50,50'/></svg>');
     +   --scrollbar-arrow-left: url('data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' fill='#202e78'><polygon points='100,100 100,0 50,50'/></svg>');
+    + }
+    +
+    + .scrollbar-gap::-webkit-scrollbar-button {
+    +   background-color: transparent;
+    +   height: 1rem;
+    +   width: 1rem;
+    + }
+    +
+    + .scrollbar-gap-sm::-webkit-scrollbar-button {
+    +   background-color: transparent;
+    +   height: 0.25rem;
+    +   width: 0.25rem;
     + }
     +
 

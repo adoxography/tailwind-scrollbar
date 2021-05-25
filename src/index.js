@@ -8,7 +8,11 @@ const {
   generateUtilitiesFromSuffixes
 } = require('./utilities');
 const { scrollbarAwareHover } = require('./variants');
-const { BASE_BUTTON_UTILITIES, generateButtonColors } = require('./buttons');
+const {
+  BASE_BUTTON_UTILITIES,
+  generateButtonColors,
+  generateGaps
+} = require('./buttons');
 
 const CUSTOM_VARIANTS = ['rounded'];
 
@@ -33,7 +37,8 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
   if (options.webkitButtons) {
     scrollbarButtonUtilities = {
       ...BASE_BUTTON_UTILITIES,
-      ...generateButtonColors(colorSuffixMap)
+      ...generateButtonColors(colorSuffixMap),
+      ...generateGaps(buildSuffixMap(tailwind.theme('spacing', {}), tailwind.e))
     };
   }
 
