@@ -2,7 +2,7 @@ name: Tests
 
 on:
   push:
-    branches: [ dev, main ]
+    branches: [ develop, main ]
   pull_request:
     branches: [ main ]
 
@@ -12,7 +12,7 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        node: [10.x, 12.x, 14.x, 15.x]
+        node: [12.x, 14.x, 15.x, 16.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -24,6 +24,10 @@ jobs:
 
       - name: Install npm dependencies
         run: npm ci
+
+      - name: Lint code
+        if: ${{ matrix.node == '16.x' }}
+        run: npm run lint
 
       - name: Run tests
         run: npm run test
