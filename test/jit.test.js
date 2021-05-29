@@ -35,17 +35,17 @@ test('it works in jit mode', async () => {
         height: 16px;
     }
     .scrollbar-thumb-indigo {
-        --scrollbar-thumb: #5c6ac4;
+        --scrollbar-thumb: #5c6ac4 !important;
     }
     .hover\\\\:text-black:hover {
         --tw-text-opacity: 1;
         color: rgba(0, 0, 0, var(--tw-text-opacity));
     }
     .hover\\\\:scrollbar-track-black::-webkit-scrollbar-track:hover {
-        --scrollbar-track: #000000;
+        --scrollbar-track: #000000 !important;
     }
     .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
-        --scrollbar-thumb: #202e78;
+        --scrollbar-thumb: #202e78 !important;
     }"
 `);
 });

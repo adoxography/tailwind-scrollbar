@@ -125,25 +125,26 @@ const SCROLLBAR_SIZE_UTILITIES = {
  */
 const generateColorUtilities = (key, value, generateTrackHover = false) => {
   const utilities = {};
+  const cssValue = `${value} !important`;
 
   utilities[`.scrollbar-track${key}`] = {
-    '--scrollbar-track': value
+    '--scrollbar-track': cssValue
   };
 
   utilities[`.scrollbar-thumb${key}`] = {
-    '--scrollbar-thumb': value
+    '--scrollbar-thumb': cssValue
   };
 
   utilities[`.hover\\:scrollbar-thumb${key}`] = {
     '&::-webkit-scrollbar-thumb:hover': {
-      '--scrollbar-thumb': value
+      '--scrollbar-thumb': cssValue
     }
   };
 
   if (generateTrackHover) {
     utilities[`.hover\\:scrollbar-track${key}`] = {
       '&::-webkit-scrollbar-thumb:track': {
-        '--scrollbar-track': value
+        '--scrollbar-track': cssValue
       }
     };
   }
