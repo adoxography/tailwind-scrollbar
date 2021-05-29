@@ -118,25 +118,38 @@ const SCROLLBAR_SIZE_UTILITIES = {
  * Generates a track style, a thumb style, and a thumb hover style for a given
  * name/color pair
  *
- * @param {string} key   The text to use in the class name
- * @param {string} value The color to set the element to
+ * @param {string} key                 The text to use in the class name
+ * @param {string} value               The color to set the element to
+ * @param {boolean} generateTrackHover Whether to generate track hover styles
  * @returns {object} The generated utilities
  */
-const generateColorUtilities = (key, value) => ({
-  [`.scrollbar-track${key}`]: {
+const generateColorUtilities = (key, value, generateTrackHover = false) => {
+  const utilities = {};
+
+  utilities[`.scrollbar-track${key}`] = {
     '--scrollbar-track': value
-  },
+  };
 
-  [`.scrollbar-thumb${key}`]: {
+  utilities[`.scrollbar-thumb${key}`] = {
     '--scrollbar-thumb': value
-  },
+  };
 
-  [`.hover\\:scrollbar-thumb${key}`]: {
+  utilities[`.hover\\:scrollbar-thumb${key}`] = {
     '&::-webkit-scrollbar-thumb:hover': {
       '--scrollbar-thumb': value
     }
+  };
+
+  if (generateTrackHover) {
+    utilities[`.hover\\:scrollbar-track${key}`] = {
+      '&::-webkit-scrollbar-thumb:track': {
+        '--scrollbar-track': value
+      }
+    };
   }
-});
+
+  return utilities;
+};
 
 /**
  * Generates a rounded style for a given name/value pair
