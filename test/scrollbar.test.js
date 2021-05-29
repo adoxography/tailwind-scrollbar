@@ -77,39 +77,39 @@ test('it generates scrollbar utilities', async () => {
     }
 
     .scrollbar-track-black {
-      --scrollbar-track: #000000;
+      --scrollbar-track: #000000 !important;
     }
 
     .scrollbar-thumb-black {
-      --scrollbar-thumb: #000000;
+      --scrollbar-thumb: #000000 !important;
     }
 
     .hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
-      --scrollbar-thumb: #000000;
+      --scrollbar-thumb: #000000 !important;
     }
 
     .scrollbar-track-indigo {
-      --scrollbar-track: #5c6ac4;
+      --scrollbar-track: #5c6ac4 !important;
     }
 
     .scrollbar-thumb-indigo {
-      --scrollbar-thumb: #5c6ac4;
+      --scrollbar-thumb: #5c6ac4 !important;
     }
 
     .hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
-      --scrollbar-thumb: #5c6ac4;
+      --scrollbar-thumb: #5c6ac4 !important;
     }
 
     .scrollbar-track-indigo-dark {
-      --scrollbar-track: #202e78;
+      --scrollbar-track: #202e78 !important;
     }
 
     .scrollbar-thumb-indigo-dark {
-      --scrollbar-thumb: #202e78;
+      --scrollbar-thumb: #202e78 !important;
     }
 
     .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
-      --scrollbar-thumb: #202e78;
+      --scrollbar-thumb: #202e78 !important;
     }"
 `);
 });
@@ -206,39 +206,39 @@ test('it generates dark utilities', async () => {
       +
       + @media (prefers-color-scheme: dark) {
       +   .dark\\\\:scrollbar-track-black {
-      +     --scrollbar-track: #000000;
+      +     --scrollbar-track: #000000 !important;
       +   }
       +
       +   .dark\\\\:scrollbar-thumb-black {
-      +     --scrollbar-thumb: #000000;
+      +     --scrollbar-thumb: #000000 !important;
       +   }
       +
       +   .dark\\\\:hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
-      +     --scrollbar-thumb: #000000;
+      +     --scrollbar-thumb: #000000 !important;
       +   }
       +
       +   .dark\\\\:scrollbar-track-indigo {
-      +     --scrollbar-track: #5c6ac4;
+      +     --scrollbar-track: #5c6ac4 !important;
       +   }
       +
       +   .dark\\\\:scrollbar-thumb-indigo {
-      +     --scrollbar-thumb: #5c6ac4;
+      +     --scrollbar-thumb: #5c6ac4 !important;
       +   }
       +
       +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
-      +     --scrollbar-thumb: #5c6ac4;
+      +     --scrollbar-thumb: #5c6ac4 !important;
       +   }
       +
       +   .dark\\\\:scrollbar-track-indigo-dark {
-      +     --scrollbar-track: #202e78;
+      +     --scrollbar-track: #202e78 !important;
       +   }
       +
       +   .dark\\\\:scrollbar-thumb-indigo-dark {
-      +     --scrollbar-thumb: #202e78;
+      +     --scrollbar-thumb: #202e78 !important;
       +   }
       +
       +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
-      +     --scrollbar-thumb: #202e78;
+      +     --scrollbar-thumb: #202e78 !important;
       +   }
 
     "
@@ -333,12 +333,12 @@ test('it generates hover states correctly', async () => {
       + }
       +
       + .hover\\\\:scrollbar-track-black::-webkit-scrollbar-thumb:track {
-      +   --scrollbar-track: #000000;
+      +   --scrollbar-track: #000000 !important;
 
       ---
 
       + .hover\\\\:scrollbar-track-indigo::-webkit-scrollbar-thumb:track {
-      +   --scrollbar-track: #5c6ac4;
+      +   --scrollbar-track: #5c6ac4 !important;
       + }
       +
 
@@ -347,7 +347,7 @@ test('it generates hover states correctly', async () => {
       + }
       +
       + .hover\\\\:scrollbar-track-indigo-dark::-webkit-scrollbar-thumb:track {
-      +   --scrollbar-track: #202e78;
+      +   --scrollbar-track: #202e78 !important;
     
     "
 `);
