@@ -1,9 +1,30 @@
 const _ = require('lodash');
 const postcss = require('postcss');
 const snapshotDiff = require('snapshot-diff');
-const tailwindcss = require('tailwindcss');
+
+/* eslint-disable import/no-dynamic-require */
+const tailwindcss = require(
+  process.env.TAILWINDCSS_VERSION
+    ? `tailwindcss-${process.env.TAILWINDCSS_VERSION}`
+    : 'tailwindcss'
+);
+/* eslint-enable import/no-dynamic-require */
 
 const scrollbarPlugin = require('..');
+
+/**
+ * Runs a test unless the tailwind version matches one of the arguments
+ *
+ * @param {Array} versions The versions the test should NOT be runned for
+ * @returns {Function} The test function to use (test or test.skip)
+ */
+const testUnlessVersion = (...versions) => {
+  if (versions.includes(process.env.TAILWINDCSS_VERSION)) {
+    return test.skip;
+  }
+
+  return test;
+};
 
 /**
  * Generates the CSS for the plugin
@@ -68,6 +89,7 @@ async function diffOnly(config = {}) {
 }
 
 module.exports = {
+  testUnlessVersion,
   generatePluginCss,
   diffOnly
 };
