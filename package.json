@@ -15,7 +15,7 @@
   "files": [
     "src/*"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "tailwindcss": ">1.9.6"
   },
   "devDependencies": {
