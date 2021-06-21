@@ -19,6 +19,10 @@ module.exports = {
   rules: {
     'arrow-parens': ['error', 'as-needed'],
     'comma-dangle': ['error', 'never'],
+    'jest/no-standalone-expect': [
+      'error',
+      { additionalTestBlockFunctions: ['testUnlessVersion'] }
+    ],
     'jsdoc/require-jsdoc': ['error', {
       publicOnly: true,
       require: {

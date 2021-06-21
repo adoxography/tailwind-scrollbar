@@ -10,15 +10,17 @@
   "private": false,
   "scripts": {
     "lint": "eslint src",
+    "test:1.9": "cross-env TAILWINDCSS_VERSION=1.9 jest",
     "test": "jest"
   },
   "files": [
     "src/*"
   ],
   "peerDependencies": {
-    "tailwindcss": ">1.9.6"
+    "tailwindcss": "^2.2.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.27.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.3",
@@ -27,7 +29,10 @@
     "jest": "^26.6.3",
     "lodash": "^4.17.20",
     "postcss": "^8.2.4",
-    "snapshot-diff": "^0.8.1"
+    "snapshot-diff": "^0.8.1",
+    "tailwindcss-1.9": "npm:tailwindcss@1.9.x",
+    "tailwindcss-2.1": "npm:tailwindcss@2.1.x",
+    "tailwindcss-2.2": "npm:tailwindcss@2.2.x"
   },
   "engines": {
     "node": ">=12.13.0"

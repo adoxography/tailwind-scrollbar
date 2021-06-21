@@ -1,4 +1,4 @@
-const { generatePluginCss, diffOnly } = require('./util');
+const { generatePluginCss, diffOnly, testUnlessVersion } = require('./util');
 
 test('it generates scrollbar utilities', async () => {
   const css = await generatePluginCss();
@@ -114,7 +114,7 @@ test('it generates scrollbar utilities', async () => {
 `);
 });
 
-test('it generates dark utilities', async () => {
+testUnlessVersion('1.9')('it generates dark utilities', async () => {
   const css = await diffOnly({
     darkMode: 'media',
     variants: {
