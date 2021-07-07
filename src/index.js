@@ -14,8 +14,12 @@ const CUSTOM_VARIANTS = ['rounded'];
 module.exports = plugin(tailwind => {
   const scrollbarVariants = tailwind.variants('scrollbar', []);
 
+  const colors = tailwind.theme('colors', {});
+  Object.keys(colors).forEach(c => {
+    if (typeof colors[c] === 'function') delete colors[c];
+  });
   const scrollbarColorUtilities = generateUtilitiesFromSuffixes(
-    buildSuffixMap(tailwind.theme('colors', {}), tailwind.e),
+    buildSuffixMap(colors, tailwind.e),
     (k, v) => generateColorUtilities(k, v, scrollbarVariants.includes('hover'))
   );
 
