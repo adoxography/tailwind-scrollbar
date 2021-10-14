@@ -1,3 +1,4 @@
+const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 /**
  * Collapses a nested object into a flat object of suffix/value pairs.
  *
@@ -21,8 +22,9 @@ const buildSuffixMap = (configObj, e, sep = '-') => {
 
       return { ...memo, ...result };
     }, {});
+  const flattenObj = flattenColorPalette.default(configObj);
 
-  return build(configObj);
+  return build(flattenObj);
 };
 
 /**
