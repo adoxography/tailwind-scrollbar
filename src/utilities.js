@@ -9,14 +9,14 @@
 const buildSuffixMap = (configObj, e, sep = '-') => {
   const build = (obj, prefix = '') => Object.entries(obj)
     .reduce((memo, [key, value]) => {
-      const suffix = `${sep}${e(key)}`;
+      const suffix = `${sep}${key}`;
       let result;
 
       if (typeof value === 'object') {
         result = build(value, suffix);
       } else {
         const compoundKey = key === 'DEFAULT' ? prefix : `${prefix}${suffix}`;
-        result = { [compoundKey]: value };
+        result = { [e(compoundKey)]: value };
       }
 
       return { ...memo, ...result };
