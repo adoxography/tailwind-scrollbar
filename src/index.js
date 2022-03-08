@@ -12,7 +12,7 @@ const { scrollbarAwareHover } = require('./variants');
 const CUSTOM_VARIANTS = ['rounded'];
 
 module.exports = plugin(tailwind => {
-  const scrollbarVariants = tailwind.variants('scrollbar', []);
+  const scrollbarVariants = tailwind.config('variants.scrollbar', []);
 
   const scrollbarColorUtilities = generateUtilitiesFromSuffixes(
     buildSuffixMap(tailwind.theme('colors', {}), tailwind.e),
