@@ -36,10 +36,10 @@ testUnlessVersion('1.9')('it works in jit mode', async () => {
     .scrollbar-thumb-indigo {
         --scrollbar-thumb: #5c6ac4 !important;
     }
-    .hover\\\\:scrollbar-track-black::-webkit-scrollbar-track:hover {
+    .hover\\:scrollbar-track-black::-webkit-scrollbar-track:hover {
         --scrollbar-track: #000000 !important;
     }
-    .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+    .hover\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
         --scrollbar-thumb: #202e78 !important;
     }"
 `);
