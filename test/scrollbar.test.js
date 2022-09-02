@@ -84,7 +84,7 @@ test('it generates scrollbar utilities', async () => {
       --scrollbar-thumb: #000000 !important;
     }
 
-    .hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
+    .hover\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #000000 !important;
     }
 
@@ -96,7 +96,7 @@ test('it generates scrollbar utilities', async () => {
       --scrollbar-thumb: #5c6ac4 !important;
     }
 
-    .hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
+    .hover\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #5c6ac4 !important;
     }
 
@@ -108,7 +108,7 @@ test('it generates scrollbar utilities', async () => {
       --scrollbar-thumb: #202e78 !important;
     }
 
-    .hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+    .hover\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
       --scrollbar-thumb: #202e78 !important;
     }"
 `);
@@ -126,75 +126,75 @@ testUnlessVersion('1.9')('it generates dark utilities', async () => {
     "
 
       + @media (prefers-color-scheme: dark) {
-      +   .dark\\\\:scrollbar {
+      +   .dark\\:scrollbar {
       +     --scrollbar-track: initial;
       +     --scrollbar-thumb: initial;
       +     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       +     overflow: overlay;
       +   }
       +
-      +   .scrollbar.dark\\\\:overflow-x-hidden {
+      +   .scrollbar.dark\\:overflow-x-hidden {
       +     overflow-x: hidden;
       +   }
       +
-      +   .scrollbar.dark\\\\:overflow-y-hidden {
+      +   .scrollbar.dark\\:overflow-y-hidden {
       +     overflow-y: hidden;
       +   }
       +
-      +   .dark\\\\:scrollbar::-webkit-scrollbar-track {
+      +   .dark\\:scrollbar::-webkit-scrollbar-track {
       +     background-color: var(--scrollbar-track);
       +   }
       +
-      +   .dark\\\\:scrollbar::-webkit-scrollbar-thumb {
+      +   .dark\\:scrollbar::-webkit-scrollbar-thumb {
       +     background-color: var(--scrollbar-thumb);
       +   }
       +
-      +   .dark\\\\:scrollbar {
+      +   .dark\\:scrollbar {
       +     scrollbar-width: auto;
       +   }
       +
-      +   .dark\\\\:scrollbar::-webkit-scrollbar {
+      +   .dark\\:scrollbar::-webkit-scrollbar {
       +     width: 16px;
       +     height: 16px;
       +   }
       +
-      +   .dark\\\\:scrollbar-thin {
+      +   .dark\\:scrollbar-thin {
       +     --scrollbar-track: initial;
       +     --scrollbar-thumb: initial;
       +     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       +     overflow: overlay;
       +   }
       +
-      +   .scrollbar-thin.dark\\\\:overflow-x-hidden {
+      +   .scrollbar-thin.dark\\:overflow-x-hidden {
       +     overflow-x: hidden;
       +   }
       +
-      +   .scrollbar-thin.dark\\\\:overflow-y-hidden {
+      +   .scrollbar-thin.dark\\:overflow-y-hidden {
       +     overflow-y: hidden;
       +   }
       +
-      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar-track {
+      +   .dark\\:scrollbar-thin::-webkit-scrollbar-track {
       +     background-color: var(--scrollbar-track);
       +   }
       +
-      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar-thumb {
+      +   .dark\\:scrollbar-thin::-webkit-scrollbar-thumb {
       +     background-color: var(--scrollbar-thumb);
       +   }
       +
-      +   .dark\\\\:scrollbar-thin {
+      +   .dark\\:scrollbar-thin {
       +     scrollbar-width: thin;
       +   }
       +
-      +   .dark\\\\:scrollbar-thin::-webkit-scrollbar {
+      +   .dark\\:scrollbar-thin::-webkit-scrollbar {
       +     width: 8px;
       +     height: 8px;
       +   }
       +
-      +   .dark\\\\:scrollbar-none {
+      +   .dark\\:scrollbar-none {
       +     scrollbar-width: none;
       +   }
       +
-      +   .dark\\\\:scrollbar-none::-webkit-scrollbar {
+      +   .dark\\:scrollbar-none::-webkit-scrollbar {
       +     display: none;
       +   }
       + }
@@ -205,39 +205,39 @@ testUnlessVersion('1.9')('it generates dark utilities', async () => {
       + }
       +
       + @media (prefers-color-scheme: dark) {
-      +   .dark\\\\:scrollbar-track-black {
+      +   .dark\\:scrollbar-track-black {
       +     --scrollbar-track: #000000 !important;
       +   }
       +
-      +   .dark\\\\:scrollbar-thumb-black {
+      +   .dark\\:scrollbar-thumb-black {
       +     --scrollbar-thumb: #000000 !important;
       +   }
       +
-      +   .dark\\\\:hover\\\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
+      +   .dark\\:hover\\:scrollbar-thumb-black::-webkit-scrollbar-thumb:hover {
       +     --scrollbar-thumb: #000000 !important;
       +   }
       +
-      +   .dark\\\\:scrollbar-track-indigo {
+      +   .dark\\:scrollbar-track-indigo {
       +     --scrollbar-track: #5c6ac4 !important;
       +   }
       +
-      +   .dark\\\\:scrollbar-thumb-indigo {
+      +   .dark\\:scrollbar-thumb-indigo {
       +     --scrollbar-thumb: #5c6ac4 !important;
       +   }
       +
-      +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
+      +   .dark\\:hover\\:scrollbar-thumb-indigo::-webkit-scrollbar-thumb:hover {
       +     --scrollbar-thumb: #5c6ac4 !important;
       +   }
       +
-      +   .dark\\\\:scrollbar-track-indigo-dark {
+      +   .dark\\:scrollbar-track-indigo-dark {
       +     --scrollbar-track: #202e78 !important;
       +   }
       +
-      +   .dark\\\\:scrollbar-thumb-indigo-dark {
+      +   .dark\\:scrollbar-thumb-indigo-dark {
       +     --scrollbar-thumb: #202e78 !important;
       +   }
       +
-      +   .dark\\\\:hover\\\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
+      +   .dark\\:hover\\:scrollbar-thumb-indigo-dark::-webkit-scrollbar-thumb:hover {
       +     --scrollbar-thumb: #202e78 !important;
       +   }
 
@@ -255,75 +255,75 @@ test('it generates hover states correctly', async () => {
   expect(css).toMatchInlineSnapshot(`
     "
     
-      + .hover\\\\:scrollbar:hover {
+      + .hover\\:scrollbar:hover {
       +   --scrollbar-track: initial;
       +   --scrollbar-thumb: initial;
       +   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       +   overflow: overlay;
       + }
       +
-      + .hover\\\\:scrollbar:hover.hover\\\\:overflow-x-hidden:hover {
+      + .hover\\:scrollbar:hover.hover\\:overflow-x-hidden:hover {
       +   overflow-x: hidden;
       + }
       +
-      + .hover\\\\:scrollbar:hover.hover\\\\:overflow-y-hidden:hover {
+      + .hover\\:scrollbar:hover.hover\\:overflow-y-hidden:hover {
       +   overflow-y: hidden;
       + }
       +
-      + .hover\\\\:scrollbar:hover::-webkit-scrollbar-track {
+      + .hover\\:scrollbar:hover::-webkit-scrollbar-track {
       +   background-color: var(--scrollbar-track);
       + }
       +
-      + .hover\\\\:scrollbar:hover::-webkit-scrollbar-thumb {
+      + .hover\\:scrollbar:hover::-webkit-scrollbar-thumb {
       +   background-color: var(--scrollbar-thumb);
       + }
       +
-      + .hover\\\\:scrollbar:hover {
+      + .hover\\:scrollbar:hover {
       +   scrollbar-width: auto;
       + }
       +
-      + .hover\\\\:scrollbar:hover::-webkit-scrollbar {
+      + .hover\\:scrollbar:hover::-webkit-scrollbar {
       +   width: 16px;
       +   height: 16px;
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover {
+      + .hover\\:scrollbar-thin:hover {
       +   --scrollbar-track: initial;
       +   --scrollbar-thumb: initial;
       +   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
       +   overflow: overlay;
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover.hover\\\\:overflow-x-hidden:hover {
+      + .hover\\:scrollbar-thin:hover.hover\\:overflow-x-hidden:hover {
       +   overflow-x: hidden;
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover.hover\\\\:overflow-y-hidden:hover {
+      + .hover\\:scrollbar-thin:hover.hover\\:overflow-y-hidden:hover {
       +   overflow-y: hidden;
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover::-webkit-scrollbar-track {
+      + .hover\\:scrollbar-thin:hover::-webkit-scrollbar-track {
       +   background-color: var(--scrollbar-track);
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover::-webkit-scrollbar-thumb {
+      + .hover\\:scrollbar-thin:hover::-webkit-scrollbar-thumb {
       +   background-color: var(--scrollbar-thumb);
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover {
+      + .hover\\:scrollbar-thin:hover {
       +   scrollbar-width: thin;
       + }
       +
-      + .hover\\\\:scrollbar-thin:hover::-webkit-scrollbar {
+      + .hover\\:scrollbar-thin:hover::-webkit-scrollbar {
       +   width: 8px;
       +   height: 8px;
       + }
       +
-      + .hover\\\\:scrollbar-none:hover {
+      + .hover\\:scrollbar-none:hover {
       +   scrollbar-width: none;
       + }
       +
-      + .hover\\\\:scrollbar-none:hover::-webkit-scrollbar {
+      + .hover\\:scrollbar-none:hover::-webkit-scrollbar {
       +   display: none;
       + }
       +
@@ -332,12 +332,12 @@ test('it generates hover states correctly', async () => {
 
       + }
       +
-      + .hover\\\\:scrollbar-track-black::-webkit-scrollbar-thumb:track {
+      + .hover\\:scrollbar-track-black::-webkit-scrollbar-thumb:track {
       +   --scrollbar-track: #000000 !important;
 
       ---
 
-      + .hover\\\\:scrollbar-track-indigo::-webkit-scrollbar-thumb:track {
+      + .hover\\:scrollbar-track-indigo::-webkit-scrollbar-thumb:track {
       +   --scrollbar-track: #5c6ac4 !important;
       + }
       +
@@ -346,7 +346,7 @@ test('it generates hover states correctly', async () => {
 
       + }
       +
-      + .hover\\\\:scrollbar-track-indigo-dark::-webkit-scrollbar-thumb:track {
+      + .hover\\:scrollbar-track-indigo-dark::-webkit-scrollbar-thumb:track {
       +   --scrollbar-track: #202e78 !important;
     
     "
