@@ -1,11 +1,11 @@
 const plugin = require('tailwindcss/plugin');
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
-const {
-  BASE_STYLES,
-  SCROLLBAR_SIZE_UTILITIES
-} = require('./utilities');
+
+const { BASE_STYLES, SCROLLBAR_SIZE_UTILITIES } = require('./utilities');
 const { scrollbarAwareVariant } = require('./variants');
+
+const scrollbarComponents = ['track', 'thumb', 'corner'];
 
 module.exports = plugin.withOptions((options = {}) => (tailwind => {
   const areRoundedVariantsSpecified = () => {
@@ -18,16 +18,15 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     return false;
   };
 
-  tailwind.addBase(BASE_STYLES);
-
-  tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
-
   const themeColors = flattenColorPalette.default(tailwind.theme('colors'));
   const colors = Object.fromEntries(
     Object.entries(themeColors).map(([k, v]) => [k, toColorValue.default(v)])
   );
 
-  ['track', 'thumb', 'corner'].forEach(component => {
+  tailwind.addBase(BASE_STYLES);
+  tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
+
+  scrollbarComponents.forEach(component => {
     tailwind.matchUtilities(
       {
         [`scrollbar-${component}`]: value => ({
@@ -42,7 +41,7 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   });
 
   if (options.nocompatible || areRoundedVariantsSpecified()) {
-    ['track', 'thumb', 'corner'].forEach(component => {
+    scrollbarComponents.forEach(component => {
       tailwind.matchUtilities(
         {
           [`scrollbar-${component}-rounded`]: value => ({
