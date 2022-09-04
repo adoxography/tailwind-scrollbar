@@ -23,7 +23,11 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install npm dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # npm < 7 doesn't automatically install peers
+          npm install -g npm-install-peers
+          npm-install-peers
 
       - name: Lint code
         if: ${{ matrix.node == '18.x' }}
