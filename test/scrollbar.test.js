@@ -260,9 +260,6 @@ test('it generates dark utilities', async () => {
       }
     },
     darkMode: 'media',
-    variants: {
-      scrollbar: ['dark']
-    },
     content: [{
       raw: `
         <div class="dark:scrollbar-thumb-black" />
@@ -286,9 +283,6 @@ test('it generates rounded states in nocompatible mode', async () => {
         DEFAULT: '0.25rem',
         md: '0.375rem'
       }
-    },
-    variants: {
-      scrollbar: ['rounded']
     },
     content: [{
       raw: `
@@ -324,9 +318,6 @@ test('it does not generate rounded states when not in nocompatible mode', async 
       borderRadius: {
         DEFAULT: '0.25rem'
       }
-    },
-    variants: {
-      scrollbar: ['rounded']
     },
     content: [{
       raw: `
