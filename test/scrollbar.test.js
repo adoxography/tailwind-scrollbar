@@ -143,6 +143,62 @@ test('it generates scrollbar thumb utilities', async () => {
   `);
 });
 
+test('it generates scrollbar thumb utilities', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="scrollbar-thumb-black" />
+        <div class="scrollbar-thumb-indigo" />
+        <div class="scrollbar-thumb-indigo-dark" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-thumb-black {
+        --scrollbar-thumb: #000000 !important
+    }
+    .scrollbar-thumb-indigo {
+        --scrollbar-thumb: #5c6ac4 !important
+    }
+    .scrollbar-thumb-indigo-dark {
+        --scrollbar-thumb: #202e78 !important
+    }"
+  `);
+});
+
+test('it ignores colors that are\'t strings', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        string: '#ffffff',
+        number: 100,
+        object: {
+          value: '#888888'
+        },
+        noop: () => {}
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-thumb-string" />
+        <div class="scrollbar-thumb-number" />
+        <div class="scrollbar-thumb-object-value" />
+        <div class="scrollbar-thumb-noop" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-thumb-string {
+        --scrollbar-thumb: #ffffff !important
+    }
+    .scrollbar-thumb-object-value {
+        --scrollbar-thumb: #888888 !important
+    }"
+`);
+});
+
 test('it generates thumb hover utilities', async () => {
   const css = await generatePluginCss({
     content: [{
