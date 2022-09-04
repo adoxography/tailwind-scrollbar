@@ -135,7 +135,8 @@ test('it generates scrollbar thumb utilities', async () => {
         black: '#000000',
         indigo: {
           DEFAULT: '#5c6ac4',
-          dark: '#202e78'
+          dark: '#202e78',
+          100: '#808080'
         }
       }
     },
@@ -144,6 +145,7 @@ test('it generates scrollbar thumb utilities', async () => {
         <div class="scrollbar-thumb-black" />
         <div class="scrollbar-thumb-indigo" />
         <div class="scrollbar-thumb-indigo-dark" />
+        <div class="scrollbar-thumb-indigo-100" />
       `
     }]
   });
@@ -151,6 +153,9 @@ test('it generates scrollbar thumb utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-black {
         --scrollbar-thumb: #000000 !important
+    }
+    .scrollbar-thumb-indigo-100 {
+        --scrollbar-thumb: #808080 !important
     }
     .scrollbar-thumb-indigo {
         --scrollbar-thumb: #5c6ac4 !important
