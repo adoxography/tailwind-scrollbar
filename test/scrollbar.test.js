@@ -191,6 +191,23 @@ test('it generates track hover utilities', async () => {
 `);
 });
 
+test('it does not insert scrollbar elements in other hover utilities', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="hover:px-1" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".hover\\:px-1:hover {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem
+    }"
+`);
+});
+
 test('it generates dark utilities', async () => {
   const css = await generatePluginCss({
     darkMode: 'media',
