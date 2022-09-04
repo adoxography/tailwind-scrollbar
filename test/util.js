@@ -31,7 +31,6 @@ const generatePluginCss = async (config = {}, options = {}) => {
         }
       }
     },
-    corePlugins: [],
     plugins: [scrollbarPlugin(options)]
   }, config);
 
