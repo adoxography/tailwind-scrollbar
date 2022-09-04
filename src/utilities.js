@@ -55,6 +55,7 @@ const BASE_STYLES = {
 const SCROLLBAR_SIZE_BASE = {
   '--scrollbar-track': 'initial',
   '--scrollbar-thumb': 'initial',
+  '--scrollbar-corner': 'initial',
   'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
 
   // Make sure the scrollbars are calculated in the elements width
@@ -77,6 +78,10 @@ const SCROLLBAR_SIZE_BASE = {
 
   '&::-webkit-scrollbar-thumb': {
     'background-color': 'var(--scrollbar-thumb)'
+  },
+
+  '&::-webkit-scrollbar-corner': {
+    'background-color': 'var(--scrollbar-corner)'
   }
 };
 
@@ -136,6 +141,10 @@ const generateColorUtilities = (key, value) => {
 
   utilities[`.scrollbar-thumb${key}`] = {
     '--scrollbar-thumb': cssValue
+  };
+
+  utilities[`.scrollbar-corner${key}`] = {
+    '--scrollbar-corner': cssValue
   };
 
   return utilities;

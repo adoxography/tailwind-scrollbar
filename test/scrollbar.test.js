@@ -13,6 +13,7 @@ test('it generates .scrollbar utilities', async () => {
     ".scrollbar {
         --scrollbar-track: initial;
         --scrollbar-thumb: initial;
+        --scrollbar-corner: initial;
         scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
         overflow: overlay;
     }
@@ -27,6 +28,9 @@ test('it generates .scrollbar utilities', async () => {
     }
     .scrollbar::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+    }
+    .scrollbar::-webkit-scrollbar-corner {
+        background-color: var(--scrollbar-corner);
     }
     .scrollbar {
         scrollbar-width: auto;
@@ -51,6 +55,7 @@ test('it generates .scrollbar-thin utilities', async () => {
     ".scrollbar-thin {
         --scrollbar-track: initial;
         --scrollbar-thumb: initial;
+        --scrollbar-corner: initial;
         scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
         overflow: overlay;
     }
@@ -65,6 +70,9 @@ test('it generates .scrollbar-thin utilities', async () => {
     }
     .scrollbar-thin::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner {
+        background-color: var(--scrollbar-corner);
     }
     .scrollbar-thin {
         scrollbar-width: thin;
@@ -162,6 +170,44 @@ test('it generates scrollbar thumb utilities', async () => {
     }
     .scrollbar-thumb-indigo-dark {
         --scrollbar-thumb: #202e78 !important
+    }"
+  `);
+});
+
+test('it generates scrollbar corner utilities', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000',
+        indigo: {
+          DEFAULT: '#5c6ac4',
+          dark: '#202e78',
+          100: '#808080'
+        }
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-corner-black" />
+        <div class="scrollbar-corner-indigo" />
+        <div class="scrollbar-corner-indigo-dark" />
+        <div class="scrollbar-corner-indigo-100" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-corner-black {
+        --scrollbar-corner: #000000 !important
+    }
+    .scrollbar-corner-indigo-100 {
+        --scrollbar-corner: #808080 !important
+    }
+    .scrollbar-corner-indigo {
+        --scrollbar-corner: #5c6ac4 !important
+    }
+    .scrollbar-corner-indigo-dark {
+        --scrollbar-corner: #202e78 !important
     }"
   `);
 });
