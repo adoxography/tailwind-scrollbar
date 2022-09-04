@@ -1,44 +1,4 @@
 /**
- * Collapses a nested object into a flat object of suffix/value pairs.
- *
- * @param {object} configObj The object to collapse
- * @param {Function} e       A function that escapes special characters from keys
- * @param {string} sep       The separator between key segments
- * @returns {object} A flat object that maps suffixes to their values
- */
-const buildSuffixMap = (configObj, e, sep = '-') => {
-  const build = (obj, prefix = '') => Object.entries(obj)
-    .reduce((memo, [key, value]) => {
-      const suffix = `${sep}${key}`;
-      let result;
-
-      if (typeof value === 'object') {
-        result = build(value, suffix);
-      } else {
-        const compoundKey = key === 'DEFAULT' ? prefix : `${prefix}${suffix}`;
-        result = { [e(compoundKey)]: value };
-      }
-
-      return { ...memo, ...result };
-    }, {});
-
-  return build(configObj);
-};
-
-/**
- * Builds a CSS-in-JS object by passing a map of suffixes and values into a
- * function.
- *
- * @param {object} suffixMap A map of string suffixes to CSS values
- * @param {Function} func    A function that consumes class suffixes and CSS
- *                           values to produce a CSS-in-JS object
- * @returns {object} A CSS-in-JS object consisting of all of the objects
- *                   generated for each suffix/value pair
- */
-const generateUtilitiesFromSuffixes = (suffixMap, func) => Object.entries(suffixMap)
-  .reduce((memo, [key, value]) => ({ ...memo, ...func(key, value) }), {});
-
-/**
  * Base resets to make the plugin's utilities work
  */
 const BASE_STYLES = {
@@ -119,30 +79,7 @@ const SCROLLBAR_SIZE_UTILITIES = {
   }
 };
 
-/**
- * Generates a rounded style for a given name/value pair
- *
- * @param {string} key   The text to use in the class name
- * @param {string} value The CSS value to use as the border-radius
- * @returns {object} The generated rounded track and thumb utilities
- */
-const generateRadiusUtilities = (key, value) => ({
-  [`.scrollbar-thumb-rounded${key}`]: {
-    '&::-webkit-scrollbar-thumb': {
-      'border-radius': value
-    }
-  },
-  [`.scrollbar-track-rounded${key}`]: {
-    '&::-webkit-scrollbar-track': {
-      'border-radius': value
-    }
-  }
-});
-
 module.exports = {
   BASE_STYLES,
   SCROLLBAR_SIZE_UTILITIES,
-  buildSuffixMap,
-  generateRadiusUtilities,
-  generateUtilitiesFromSuffixes
 };

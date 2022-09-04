@@ -3,10 +3,7 @@ const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
 const {
   BASE_STYLES,
-  SCROLLBAR_SIZE_UTILITIES,
-  buildSuffixMap,
-  generateRadiusUtilities,
-  generateUtilitiesFromSuffixes
+  SCROLLBAR_SIZE_UTILITIES
 } = require('./utilities');
 const { scrollbarAwareVariant } = require('./variants');
 
@@ -21,20 +18,9 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     return false;
   };
 
-  let scrollbarRadiusUtilities = {};
-  if (options.nocompatible || areRoundedVariantsSpecified()) {
-    scrollbarRadiusUtilities = generateUtilitiesFromSuffixes(
-      buildSuffixMap(tailwind.theme('borderRadius', {}), tailwind.e),
-      generateRadiusUtilities
-    );
-  }
-
   tailwind.addBase(BASE_STYLES);
 
-  tailwind.addUtilities({
-    ...SCROLLBAR_SIZE_UTILITIES,
-    ...scrollbarRadiusUtilities
-  });
+  tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
 
   const themeColors = flattenColorPalette.default(tailwind.theme('colors'));
   const colors = Object.fromEntries(
@@ -54,6 +40,23 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
       }
     );
   });
+
+  if (options.nocompatible || areRoundedVariantsSpecified()) {
+    ['track', 'thumb', 'corner'].forEach(component => {
+      tailwind.matchUtilities(
+        {
+          [`scrollbar-${component}-rounded`]: value => ({
+            [`&::-webkit-scrollbar-${component}`]: {
+              'border-radius': value
+            }
+          })
+        },
+        {
+          values: tailwind.theme('borderRadius')
+        }
+      );
+    });
+  }
 
   tailwind.addVariant('hover', scrollbarAwareVariant('hover', tailwind.e));
   tailwind.addVariant('active', scrollbarAwareVariant('active', tailwind.e));

@@ -389,6 +389,7 @@ test('it generates rounded states in nocompatible mode', async () => {
         <div class="scrollbar-track-rounded" />
         <div class="scrollbar-thumb-rounded-md" />
         <div class="scrollbar-track-rounded-md" />
+        <div class="scrollbar-track-rounded-[16px]" />
       `
     }]
   }, {
@@ -396,16 +397,19 @@ test('it generates rounded states in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    ".scrollbar-track-rounded::-webkit-scrollbar-track {
         border-radius: 0.25rem
     }
-    .scrollbar-track-rounded::-webkit-scrollbar-track {
+    .scrollbar-track-rounded-md::-webkit-scrollbar-track {
+        border-radius: 0.375rem
+    }
+    .scrollbar-track-rounded-\\[16px\\]::-webkit-scrollbar-track {
+        border-radius: 16px
+    }
+    .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
         border-radius: 0.25rem
     }
     .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
-        border-radius: 0.375rem
-    }
-    .scrollbar-track-rounded-md::-webkit-scrollbar-track {
         border-radius: 0.375rem
     }"
 `);
@@ -426,9 +430,6 @@ test('it generates rounded states when "rounded" is specified as a variant', asy
     content: [{
       raw: `
         <div class="scrollbar-thumb-rounded" />
-        <div class="scrollbar-track-rounded" />
-        <div class="scrollbar-thumb-rounded-md" />
-        <div class="scrollbar-track-rounded-md" />
       `
     }]
   });
@@ -436,15 +437,6 @@ test('it generates rounded states when "rounded" is specified as a variant', asy
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
         border-radius: 0.25rem
-    }
-    .scrollbar-track-rounded::-webkit-scrollbar-track {
-        border-radius: 0.25rem
-    }
-    .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
-        border-radius: 0.375rem
-    }
-    .scrollbar-track-rounded-md::-webkit-scrollbar-track {
-        border-radius: 0.375rem
     }"
 `);
 });
