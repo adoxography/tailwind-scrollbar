@@ -123,6 +123,10 @@ const SCROLLBAR_SIZE_UTILITIES = {
  * @returns {object} The generated utilities
  */
 const generateColorUtilities = (key, value) => {
+  if (typeof value !== 'string') {
+    return {};
+  }
+
   const utilities = {};
   const cssValue = `${value} !important`;
 
