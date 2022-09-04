@@ -9,7 +9,7 @@ const {
 } = require('./utilities');
 const { scrollbarAwareVariant } = require('./variants');
 
-module.exports = plugin.withOptions(options => (tailwind => {
+module.exports = plugin.withOptions((options = {}) => (tailwind => {
   const areRoundedVariantsSpecified = () => {
     if (tailwind.config('variants.scrollbar', []).includes('rounded')) {
       /* eslint-disable-next-line no-console */
@@ -26,7 +26,7 @@ module.exports = plugin.withOptions(options => (tailwind => {
   );
 
   let scrollbarRadiusUtilities = {};
-  if (options?.nocompatible || areRoundedVariantsSpecified()) {
+  if (options.nocompatible || areRoundedVariantsSpecified()) {
     scrollbarRadiusUtilities = generateUtilitiesFromSuffixes(
       buildSuffixMap(tailwind.theme('borderRadius', {}), tailwind.e),
       generateRadiusUtilities
