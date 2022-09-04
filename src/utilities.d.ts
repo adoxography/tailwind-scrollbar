@@ -83,15 +83,6 @@ export const SCROLLBAR_SIZE_UTILITIES: {
  */
 export function buildSuffixMap(configObj: object, e: Function, sep?: string): object;
 /**
- * Generates a track style, a thumb style, and a thumb hover style for a given
- * name/color pair
- *
- * @param {string} key                 The text to use in the class name
- * @param {string} value               The color to set the element to
- * @returns {object} The generated utilities
- */
-export function generateColorUtilities(key: string, value: string): object;
-/**
  * Generates a rounded style for a given name/value pair
  *
  * @param {string} key   The text to use in the class name

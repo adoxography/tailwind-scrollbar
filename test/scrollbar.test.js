@@ -162,14 +162,14 @@ test('it generates scrollbar thumb utilities', async () => {
     ".scrollbar-thumb-black {
         --scrollbar-thumb: #000000 !important
     }
-    .scrollbar-thumb-indigo-100 {
-        --scrollbar-thumb: #808080 !important
-    }
     .scrollbar-thumb-indigo {
         --scrollbar-thumb: #5c6ac4 !important
     }
     .scrollbar-thumb-indigo-dark {
         --scrollbar-thumb: #202e78 !important
+    }
+    .scrollbar-thumb-indigo-100 {
+        --scrollbar-thumb: #808080 !important
     }"
   `);
 });
@@ -200,46 +200,52 @@ test('it generates scrollbar corner utilities', async () => {
     ".scrollbar-corner-black {
         --scrollbar-corner: #000000 !important
     }
-    .scrollbar-corner-indigo-100 {
-        --scrollbar-corner: #808080 !important
-    }
     .scrollbar-corner-indigo {
         --scrollbar-corner: #5c6ac4 !important
     }
     .scrollbar-corner-indigo-dark {
         --scrollbar-corner: #202e78 !important
+    }
+    .scrollbar-corner-indigo-100 {
+        --scrollbar-corner: #808080 !important
     }"
   `);
 });
 
-test('it ignores colors that are\'t strings', async () => {
+test('it uses arbitrary color values', async () => {
   const css = await generatePluginCss({
-    theme: {
-      colors: {
-        string: '#ffffff',
-        number: 100,
-        object: {
-          value: '#888888'
-        },
-        noop: () => {}
-      }
-    },
+    theme: {},
     content: [{
       raw: `
-        <div class="scrollbar-thumb-string" />
-        <div class="scrollbar-thumb-number" />
-        <div class="scrollbar-thumb-object-value" />
-        <div class="scrollbar-thumb-noop" />
+        <div class="scrollbar-track-[#ff0000]" />
       `
     }]
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-string {
-        --scrollbar-thumb: #ffffff !important
-    }
-    .scrollbar-thumb-object-value {
-        --scrollbar-thumb: #888888 !important
+    ".scrollbar-track-\\[\\#ff0000\\] {
+        --scrollbar-track: #ff0000 !important
+    }"
+  `);
+});
+
+test('it handles color functions', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        func: () => 'red'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-thumb-func" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-thumb-func {
+        --scrollbar-thumb: red !important
     }"
 `);
 });
