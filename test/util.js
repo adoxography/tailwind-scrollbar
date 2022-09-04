@@ -45,36 +45,6 @@ const generatePluginCss = async (config = {}, options = {}) => {
   return result.css;
 };
 
-/**
- * Generates a diff between a default tailwind run and one customized with a
- * config
- *
- * @see https://github.com/tailwindlabs/tailwindcss-typography/blob/master/src/index.test.js
- * @param {object} config The config to diff against
- * @returns {string} The diff between the configured tailwind run and the default
- */
-async function diffOnly(config = {}) {
-  const [before, after] = await Promise.all([
-    generatePluginCss(),
-    generatePluginCss(config)
-  ]);
-
-  return `\n\n${snapshotDiff(before, after, {
-    aAnnotation: '__REMOVE_ME__',
-    bAnnotation: '__REMOVE_ME__',
-    contextLines: 0
-  })
-    .replace(/\n\n@@([^@@]*)@@/g, '') // Top level @@ signs
-    .replace(/@@([^@@]*)@@/g, '\n---\n') // In between @@ signs
-    .replace(/[-+] __REMOVE_ME__\n/g, '')
-    .replace(/Snapshot Diff:\n/g, '')
-    .replace(/"/g, '\'')
-    .split('\n')
-    .map(line => `  ${line}`.trimEnd())
-    .join('\n')}\n\n`;
-}
-
 module.exports = {
-  generatePluginCss,
-  diffOnly
+  generatePluginCss
 };
