@@ -10,7 +10,6 @@
   "private": false,
   "scripts": {
     "lint": "eslint src",
-    "test:1.9": "cross-env TAILWINDCSS_VERSION=1.9 jest",
     "test": "jest"
   },
   "files": [
@@ -28,10 +27,7 @@
     "eslint-plugin-jsdoc": "^39.3.6",
     "jest": "^29.0.1",
     "lodash": "^4.17.20",
-    "postcss": "^8.2.4",
-    "tailwindcss-1.9": "npm:tailwindcss@1.9.x",
-    "tailwindcss-2.1": "npm:tailwindcss@2.1.x",
-    "tailwindcss-2.2": "npm:tailwindcss@2.2.x"
+    "postcss": "^8.2.4"
   },
   "engines": {
     "node": ">=12.13.0"
