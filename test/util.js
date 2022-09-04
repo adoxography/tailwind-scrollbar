@@ -1,4 +1,5 @@
 const _ = require('lodash');
+const path = require('path');
 const postcss = require('postcss');
 
 /* eslint-disable import/no-dynamic-require */
@@ -20,9 +21,6 @@ const scrollbarPlugin = require('..');
  * @returns {string} The CSS generated from the plugin using the provided config
  */
 const generatePluginCss = async (config = {}, options = {}) => {
-  const { warn } = console;
-  console.warn = () => {}; // eslint-disable-line no-console
-
   const tailwindConfig = _.merge({
     theme: {
       colors: {
@@ -37,10 +35,12 @@ const generatePluginCss = async (config = {}, options = {}) => {
     plugins: [scrollbarPlugin(options)]
   }, config);
 
-  const result = await postcss(tailwindcss(tailwindConfig))
-    .process('@tailwind utilities;', { from: undefined });
+  const { currentTestName } = expect.getState();
 
-  console.warn = warn; // eslint-disable-line no-console
+  const result = await postcss(tailwindcss(tailwindConfig))
+    .process('@tailwind utilities;', {
+      from: `${path.resolve(__filename)}?test=${currentTestName}`
+    });
 
   return result.css;
 };
