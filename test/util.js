@@ -1,15 +1,7 @@
 const _ = require('lodash');
 const path = require('path');
 const postcss = require('postcss');
-
-/* eslint-disable import/no-dynamic-require */
-const tailwindcss = require(
-  process.env.TAILWINDCSS_VERSION
-    ? `tailwindcss-${process.env.TAILWINDCSS_VERSION}`
-    : 'tailwindcss'
-);
-/* eslint-enable import/no-dynamic-require */
-
+const tailwindcss = require('tailwindcss');
 const scrollbarPlugin = require('..');
 
 /**
