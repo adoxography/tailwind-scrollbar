@@ -120,37 +120,6 @@ const SCROLLBAR_SIZE_UTILITIES = {
 };
 
 /**
- * Generates a track style, a thumb style, and a thumb hover style for a given
- * name/color pair
- *
- * @param {string} key                 The text to use in the class name
- * @param {string} value               The color to set the element to
- * @returns {object} The generated utilities
- */
-const generateColorUtilities = (key, value) => {
-  if (typeof value !== 'string') {
-    return {};
-  }
-
-  const utilities = {};
-  const cssValue = `${value} !important`;
-
-  utilities[`.scrollbar-track${key}`] = {
-    '--scrollbar-track': cssValue
-  };
-
-  utilities[`.scrollbar-thumb${key}`] = {
-    '--scrollbar-thumb': cssValue
-  };
-
-  utilities[`.scrollbar-corner${key}`] = {
-    '--scrollbar-corner': cssValue
-  };
-
-  return utilities;
-};
-
-/**
  * Generates a rounded style for a given name/value pair
  *
  * @param {string} key   The text to use in the class name
@@ -174,7 +143,6 @@ module.exports = {
   BASE_STYLES,
   SCROLLBAR_SIZE_UTILITIES,
   buildSuffixMap,
-  generateColorUtilities,
   generateRadiusUtilities,
   generateUtilitiesFromSuffixes
 };
