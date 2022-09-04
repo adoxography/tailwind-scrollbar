@@ -286,6 +286,48 @@ test('it generates track hover utilities', async () => {
 `);
 });
 
+test('it generates thumb active utilities', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000'
+      }
+    },
+    content: [{
+      raw: `
+          <div class="active:scrollbar-thumb-black" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".active\\:scrollbar-thumb-black:active::-webkit-scrollbar-thumb {
+        --scrollbar-thumb: #000000 !important
+    }"
+`);
+});
+
+test('it generates track active utilities', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="active:scrollbar-track-black" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".active\\:scrollbar-track-black:active::-webkit-scrollbar-track {
+        --scrollbar-track: #000000 !important
+    }"
+`);
+});
+
 test('it does not insert scrollbar elements in other hover utilities', async () => {
   const css = await generatePluginCss({
     content: [{
