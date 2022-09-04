@@ -31,9 +31,10 @@ const testUnlessVersion = (...versions) => {
  *
  * @see https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
  * @param {object} config Tailwind config options to pass to tailwind
+ * @param {object} options Options to pass to the scrollbar plugin
  * @returns {string} The CSS generated from the plugin using the provided config
  */
-const generatePluginCss = async (config = {}) => {
+const generatePluginCss = async (config = {}, options = {}) => {
   const { warn } = console;
   console.warn = () => {}; // eslint-disable-line no-console
 
@@ -48,7 +49,7 @@ const generatePluginCss = async (config = {}) => {
       }
     },
     corePlugins: [],
-    plugins: [scrollbarPlugin]
+    plugins: [scrollbarPlugin(options)]
   }, config);
 
   const result = await postcss(tailwindcss(tailwindConfig))
