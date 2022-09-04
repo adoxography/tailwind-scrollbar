@@ -20,6 +20,7 @@ export const SCROLLBAR_SIZE_UTILITIES: {
         };
         '--scrollbar-track': string;
         '--scrollbar-thumb': string;
+        '--scrollbar-corner': string;
         'scrollbar-color': string;
         overflow: string;
         '&.overflow-x-hidden': {
@@ -32,6 +33,9 @@ export const SCROLLBAR_SIZE_UTILITIES: {
             'background-color': string;
         };
         '&::-webkit-scrollbar-thumb': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner': {
             'background-color': string;
         };
     };
@@ -43,6 +47,7 @@ export const SCROLLBAR_SIZE_UTILITIES: {
         };
         '--scrollbar-track': string;
         '--scrollbar-thumb': string;
+        '--scrollbar-corner': string;
         'scrollbar-color': string;
         overflow: string;
         '&.overflow-x-hidden': {
@@ -55,6 +60,9 @@ export const SCROLLBAR_SIZE_UTILITIES: {
             'background-color': string;
         };
         '&::-webkit-scrollbar-thumb': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner': {
             'background-color': string;
         };
     };

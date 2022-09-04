@@ -7,7 +7,7 @@ const {
   generateRadiusUtilities,
   generateUtilitiesFromSuffixes
 } = require('./utilities');
-const { scrollbarAwareHover } = require('./variants');
+const { scrollbarAwareVariant } = require('./variants');
 
 module.exports = plugin.withOptions(options => (tailwind => {
   const areRoundedVariantsSpecified = () => {
@@ -42,5 +42,6 @@ module.exports = plugin.withOptions(options => (tailwind => {
 
   tailwind.addUtilities(scrollbarColorUtilities);
 
-  tailwind.addVariant('hover', scrollbarAwareHover(tailwind.e));
+  tailwind.addVariant('hover', scrollbarAwareVariant('hover', tailwind.e));
+  tailwind.addVariant('active', scrollbarAwareVariant('active', tailwind.e));
 }));
