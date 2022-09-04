@@ -22,15 +22,6 @@ const scrollbarPlugin = require('..');
  */
 const generatePluginCss = async (config = {}, options = {}) => {
   const tailwindConfig = _.merge({
-    theme: {
-      colors: {
-        black: '#000000',
-        indigo: {
-          DEFAULT: '#5c6ac4',
-          dark: '#202e78'
-        }
-      }
-    },
     plugins: [scrollbarPlugin(options)]
   }, config);
 

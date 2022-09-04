@@ -97,6 +97,15 @@ test('it generates .scrollbar-none utilities', async () => {
 
 test('it generates scrollbar track utilities', async () => {
   const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000',
+        indigo: {
+          DEFAULT: '#5c6ac4',
+          dark: '#202e78'
+        }
+      }
+    },
     content: [{
       raw: `
         <div class="scrollbar-track-black" />
@@ -121,30 +130,15 @@ test('it generates scrollbar track utilities', async () => {
 
 test('it generates scrollbar thumb utilities', async () => {
   const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-black" />
-        <div class="scrollbar-thumb-indigo" />
-        <div class="scrollbar-thumb-indigo-dark" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-black {
-        --scrollbar-thumb: #000000 !important
-    }
-    .scrollbar-thumb-indigo {
-        --scrollbar-thumb: #5c6ac4 !important
-    }
-    .scrollbar-thumb-indigo-dark {
-        --scrollbar-thumb: #202e78 !important
-    }"
-  `);
-});
-
-test('it generates scrollbar thumb utilities', async () => {
-  const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000',
+        indigo: {
+          DEFAULT: '#5c6ac4',
+          dark: '#202e78'
+        }
+      }
+    },
     content: [{
       raw: `
         <div class="scrollbar-thumb-black" />
@@ -201,11 +195,14 @@ test('it ignores colors that are\'t strings', async () => {
 
 test('it generates thumb hover utilities', async () => {
   const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000'
+      }
+    },
     content: [{
       raw: `
         <div class="hover:scrollbar-thumb-black" />
-        <div class="hover:scrollbar-thumb-indigo" />
-        <div class="hover:scrollbar-thumb-indigo-dark" />
       `
     }]
   });
@@ -213,23 +210,20 @@ test('it generates thumb hover utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".hover\\:scrollbar-thumb-black:hover::-webkit-scrollbar-thumb {
         --scrollbar-thumb: #000000 !important
-    }
-    .hover\\:scrollbar-thumb-indigo:hover::-webkit-scrollbar-thumb {
-        --scrollbar-thumb: #5c6ac4 !important
-    }
-    .hover\\:scrollbar-thumb-indigo-dark:hover::-webkit-scrollbar-thumb {
-        --scrollbar-thumb: #202e78 !important
     }"
 `);
 });
 
 test('it generates track hover utilities', async () => {
   const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000'
+      }
+    },
     content: [{
       raw: `
         <div class="hover:scrollbar-track-black" />
-        <div class="hover:scrollbar-track-indigo" />
-        <div class="hover:scrollbar-track-indigo-dark" />
       `
     }]
   });
@@ -237,12 +231,6 @@ test('it generates track hover utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".hover\\:scrollbar-track-black:hover::-webkit-scrollbar-track {
         --scrollbar-track: #000000 !important
-    }
-    .hover\\:scrollbar-track-indigo:hover::-webkit-scrollbar-track {
-        --scrollbar-track: #5c6ac4 !important
-    }
-    .hover\\:scrollbar-track-indigo-dark:hover::-webkit-scrollbar-track {
-        --scrollbar-track: #202e78 !important
     }"
 `);
 });
@@ -266,6 +254,11 @@ test('it does not insert scrollbar elements in other hover utilities', async () 
 
 test('it generates dark utilities', async () => {
   const css = await generatePluginCss({
+    theme: {
+      colors: {
+        black: '#000000'
+      }
+    },
     darkMode: 'media',
     variants: {
       scrollbar: ['dark']
