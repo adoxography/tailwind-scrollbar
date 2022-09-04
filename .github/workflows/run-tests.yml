@@ -12,7 +12,7 @@ jobs:
     name: Run Tests
     strategy:
       matrix:
-        node: [14.x, 16.x, 18.x]
+        node: [18.x]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,9 +25,6 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm ci
-          # npm < 7 doesn't automatically install peers
-          npm install -g npm-install-peers
-          npm-install-peers
 
       - name: Lint code
         if: ${{ matrix.node == '18.x' }}
