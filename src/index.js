@@ -9,9 +9,7 @@ const {
 } = require('./utilities');
 const { scrollbarAwareHover } = require('./variants');
 
-const CUSTOM_VARIANTS = ['rounded'];
-
-module.exports = plugin(tailwind => {
+module.exports = plugin.withOptions(options => (tailwind => {
   const scrollbarVariants = tailwind.config('variants.scrollbar', []);
 
   const scrollbarColorUtilities = generateUtilitiesFromSuffixes(
@@ -20,7 +18,7 @@ module.exports = plugin(tailwind => {
   );
 
   let scrollbarRadiusUtilities = {};
-  if (scrollbarVariants.includes('rounded')) {
+  if (options?.nocompatible) {
     scrollbarRadiusUtilities = generateUtilitiesFromSuffixes(
       buildSuffixMap(tailwind.theme('borderRadius', {}), tailwind.e),
       generateRadiusUtilities
@@ -32,16 +30,11 @@ module.exports = plugin(tailwind => {
   tailwind.addUtilities({
     ...SCROLLBAR_SIZE_UTILITIES,
     ...scrollbarRadiusUtilities
-  }, scrollbarVariants.filter(variant => !CUSTOM_VARIANTS.includes(variant)));
+  }, scrollbarVariants);
 
-  tailwind.addUtilities(
-    scrollbarColorUtilities,
-    scrollbarVariants.filter(
-      variant => variant !== 'hover' && !CUSTOM_VARIANTS.includes(variant)
-    )
-  );
+  tailwind.addUtilities(scrollbarColorUtilities, scrollbarVariants);
 
   if (tailwind.config('mode') === 'jit') {
     tailwind.addVariant('hover', scrollbarAwareHover(tailwind.e));
   }
-});
+}));
