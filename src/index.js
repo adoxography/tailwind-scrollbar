@@ -14,7 +14,7 @@ module.exports = plugin.withOptions(options => (tailwind => {
 
   const scrollbarColorUtilities = generateUtilitiesFromSuffixes(
     buildSuffixMap(tailwind.theme('colors', {}), tailwind.e),
-    (k, v) => generateColorUtilities(k, v, scrollbarVariants.includes('hover'))
+    (k, v) => generateColorUtilities(k, v)
   );
 
   let scrollbarRadiusUtilities = {};
@@ -34,7 +34,5 @@ module.exports = plugin.withOptions(options => (tailwind => {
 
   tailwind.addUtilities(scrollbarColorUtilities, scrollbarVariants);
 
-  if (tailwind.config('mode') === 'jit') {
-    tailwind.addVariant('hover', scrollbarAwareHover(tailwind.e));
-  }
+  tailwind.addVariant('hover', scrollbarAwareHover(tailwind.e));
 }));

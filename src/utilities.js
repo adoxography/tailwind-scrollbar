@@ -120,10 +120,9 @@ const SCROLLBAR_SIZE_UTILITIES = {
  *
  * @param {string} key                 The text to use in the class name
  * @param {string} value               The color to set the element to
- * @param {boolean} generateTrackHover Whether to generate track hover styles
  * @returns {object} The generated utilities
  */
-const generateColorUtilities = (key, value, generateTrackHover = false) => {
+const generateColorUtilities = (key, value) => {
   const utilities = {};
   const cssValue = `${value} !important`;
 
@@ -134,20 +133,6 @@ const generateColorUtilities = (key, value, generateTrackHover = false) => {
   utilities[`.scrollbar-thumb${key}`] = {
     '--scrollbar-thumb': cssValue
   };
-
-  utilities[`.hover\\:scrollbar-thumb${key}`] = {
-    '&::-webkit-scrollbar-thumb:hover': {
-      '--scrollbar-thumb': cssValue
-    }
-  };
-
-  if (generateTrackHover) {
-    utilities[`.hover\\:scrollbar-track${key}`] = {
-      '&::-webkit-scrollbar-thumb:track': {
-        '--scrollbar-track': cssValue
-      }
-    };
-  }
 
   return utilities;
 };
