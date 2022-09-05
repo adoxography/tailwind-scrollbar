@@ -32,6 +32,24 @@ test('it generates .scrollbar utilities', async () => {
     .scrollbar::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
     }
+    .scrollbar::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover);
+    }
+    .scrollbar::-webkit-scrollbar-corner:hover {
+        background-color: var(--scrollbar-corner-hover);
+    }
+    .scrollbar::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active);
+    }
+    .scrollbar::-webkit-scrollbar-corner:active {
+        background-color: var(--scrollbar-corner-active);
+    }
     .scrollbar {
         scrollbar-width: auto;
     }
@@ -73,6 +91,24 @@ test('it generates .scrollbar-thin utilities', async () => {
     }
     .scrollbar-thin::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover);
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover);
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner:hover {
+        background-color: var(--scrollbar-corner-hover);
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active);
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active);
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner:active {
+        background-color: var(--scrollbar-corner-active);
     }
     .scrollbar-thin {
         scrollbar-width: thin;
@@ -268,31 +304,51 @@ test('it handles color functions', async () => {
 
 test('it generates thumb hover utilities', async () => {
   const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000'
-      }
-    },
     content: [{
       raw: `
-        <div class="hover:scrollbar-thumb-black" />
+        <div class="scrollbar-thumb-white hover:scrollbar-thumb-black" />
       `
     }]
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".hover\\:scrollbar-thumb-black:hover::-webkit-scrollbar-thumb {
-        --scrollbar-thumb: #000000 !important
+    ".scrollbar-thumb-white {
+        --scrollbar-thumb: #fff !important
+    }
+    .hover\\:scrollbar-thumb-black:hover {
+        --scrollbar-thumb-hover: #000 !important
     }"
 `);
 });
 
 test('it generates track hover utilities', async () => {
   const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="scrollbar-track-white hover:scrollbar-track-black" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-track-white {
+        --scrollbar-track: #fff !important
+    }
+    .hover\\:scrollbar-track-black:hover {
+        --scrollbar-track-hover: #000 !important
+    }"
+`);
+});
+
+test("it doesn't get in the way of the hoverOnlyWhenSupported flag", async () => {
+  const css = await generatePluginCss({
     theme: {
       colors: {
         black: '#000000'
       }
+    },
+    future: {
+      hoverOnlyWhenSupported: true
     },
     content: [{
       raw: `
@@ -302,50 +358,48 @@ test('it generates track hover utilities', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".hover\\:scrollbar-track-black:hover::-webkit-scrollbar-track {
-        --scrollbar-track: #000000 !important
+    "@media (hover: hover) and (pointer: fine) {
+        .hover\\:scrollbar-track-black:hover {
+            --scrollbar-track-hover: #000000 !important
+        }
     }"
 `);
 });
 
 test('it generates thumb active utilities', async () => {
   const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000'
-      }
-    },
     content: [{
       raw: `
-          <div class="active:scrollbar-thumb-black" />
+          <div class="scrollbar-thumb-white active:scrollbar-thumb-black" />
       `
     }]
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".active\\:scrollbar-thumb-black:active::-webkit-scrollbar-thumb {
-        --scrollbar-thumb: #000000 !important
+    ".scrollbar-thumb-white {
+        --scrollbar-thumb: #fff !important
+    }
+    .active\\:scrollbar-thumb-black:active {
+        --scrollbar-thumb-active: #000 !important
     }"
 `);
 });
 
 test('it generates track active utilities', async () => {
   const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000'
-      }
-    },
     content: [{
       raw: `
-        <div class="active:scrollbar-track-black" />
+        <div class="scrollbar-track-white active:scrollbar-track-black" />
       `
     }]
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".active\\:scrollbar-track-black:active::-webkit-scrollbar-track {
-        --scrollbar-track: #000000 !important
+    ".scrollbar-track-white {
+        --scrollbar-track: #fff !important
+    }
+    .active\\:scrollbar-track-black:active {
+        --scrollbar-track-active: #000 !important
     }"
 `);
 });

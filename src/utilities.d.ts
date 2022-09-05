@@ -38,6 +38,24 @@ export const SCROLLBAR_SIZE_UTILITIES: {
         '&::-webkit-scrollbar-corner': {
             'background-color': string;
         };
+        '&::-webkit-scrollbar-track:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-thumb:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-track:active': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-thumb:active': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner:active': {
+            'background-color': string;
+        };
     };
     '.scrollbar-thin': {
         'scrollbar-width': string;
@@ -63,6 +81,24 @@ export const SCROLLBAR_SIZE_UTILITIES: {
             'background-color': string;
         };
         '&::-webkit-scrollbar-corner': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-track:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-thumb:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner:hover': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-track:active': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-thumb:active': {
+            'background-color': string;
+        };
+        '&::-webkit-scrollbar-corner:active': {
             'background-color': string;
         };
     };

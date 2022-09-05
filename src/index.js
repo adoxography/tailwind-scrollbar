@@ -1,9 +1,9 @@
 const plugin = require('tailwindcss/plugin');
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
+const { flagEnabled } = require('tailwindcss/lib/featureFlags');
 
 const { BASE_STYLES, SCROLLBAR_SIZE_UTILITIES } = require('./utilities');
-const { scrollbarAwareVariant } = require('./variants');
 
 const scrollbarComponents = ['track', 'thumb', 'corner'];
 
@@ -57,6 +57,29 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     });
   }
 
-  tailwind.addVariant('hover', scrollbarAwareVariant('hover', tailwind.e));
-  tailwind.addVariant('active', scrollbarAwareVariant('active', tailwind.e));
+  const variantOverrides = {
+    // This is brittle and will need to be updated if/when this feature makes
+    // it into core. There doesn't appear to be a way around it, though.
+    hover: !flagEnabled(tailwind.config(), 'hoverOnlyWhenSupported')
+      ? '&:hover'
+      : '@media (hover: hover) and (pointer: fine) { &:hover }',
+    active: '&:active'
+  };
+
+  Object.entries(variantOverrides).forEach(([variant, format]) => {
+    tailwind.addVariant(variant, ({ container }) => {
+      const suffix = `-${variant}`;
+
+      container.walkRules(rule => {
+        rule.walkDecls(/^--scrollbar-/, decl => {
+          if (!decl.prop.endsWith(suffix)) {
+            /* eslint-disable-next-line no-param-reassign */
+            decl.prop += suffix;
+          }
+        });
+      });
+
+      return format;
+    });
+  });
 }));
