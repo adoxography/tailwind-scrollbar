@@ -327,7 +327,7 @@ test('it generates thumb hover utilities', async () => {
     ".scrollbar-thumb-white {
         --scrollbar-thumb: #fff !important
     }
-    .hover\\:scrollbar-thumb-black:hover {
+    .hover\\:scrollbar-thumb-black {
         --scrollbar-thumb-hover: #000 !important
     }"
 `);
@@ -346,7 +346,7 @@ test('it generates track hover utilities', async () => {
     ".scrollbar-track-white {
         --scrollbar-track: #fff !important
     }
-    .hover\\:scrollbar-track-black:hover {
+    .hover\\:scrollbar-track-black {
         --scrollbar-track-hover: #000 !important
     }"
 `);
@@ -371,7 +371,7 @@ test("it doesn't get in the way of the hoverOnlyWhenSupported flag", async () =>
 
   expect(css).toMatchInlineSnapshot(`
     "@media (hover: hover) and (pointer: fine) {
-        .hover\\:scrollbar-track-black:hover {
+        .hover\\:scrollbar-track-black {
             --scrollbar-track-hover: #000000 !important
         }
     }"
@@ -391,7 +391,7 @@ test('it generates thumb active utilities', async () => {
     ".scrollbar-thumb-white {
         --scrollbar-thumb: #fff !important
     }
-    .active\\:scrollbar-thumb-black:active {
+    .active\\:scrollbar-thumb-black {
         --scrollbar-thumb-active: #000 !important
     }"
 `);
@@ -410,7 +410,7 @@ test('it generates track active utilities', async () => {
     ".scrollbar-track-white {
         --scrollbar-track: #fff !important
     }
-    .active\\:scrollbar-track-black:active {
+    .active\\:scrollbar-track-black {
         --scrollbar-track-active: #000 !important
     }"
 `);
@@ -427,6 +427,23 @@ test('it does not insert scrollbar elements in other hover utilities', async () 
 
   expect(css).toMatchInlineSnapshot(`
     ".hover\\:px-1:hover {
+        padding-left: 0.25rem;
+        padding-right: 0.25rem
+    }"
+`);
+});
+
+test('it does not insert scrollbar elements in other active utilities', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="active:px-1" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".active\\:px-1:active {
         padding-left: 0.25rem;
         padding-right: 0.25rem
     }"
