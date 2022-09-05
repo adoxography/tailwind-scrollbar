@@ -27,7 +27,9 @@ plugins: [
 
 **NB:** This plugin *styles* scrollbars; it does not force them to appear. Use typical CSS techniques to force content to overflow and trigger a scrollbar.
 
-For every element that you want to style, add either the `.scrollbar` or `.scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.)
+For every element that you want to style, add either the `scrollbar` or `scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.)
+
+If you're using both vertical and horizontal scrollbars, you may notice a white square show up. You can change its colour with the `scrollbar-corner-{color}` utility.
 
 Here's a minimal example (keeping in mind that the `h-32` and `h-64` classes are just there to force the scrollbar to appear):
 
@@ -41,16 +43,16 @@ A live version of this demo [can be found here](https://tailwind-scrollbar-examp
 
 ## Configuration
 
-If you'd like to add variants for the scrollbar utilities (e.g. [dark mode](https://tailwindcss.com/docs/dark-mode)), add them to the `variants` object in your Tailwind config:
+This plugin is capable of adding utilties for creating rounded scrollbars by referencing your configured [border radius](https://tailwindcss.com/docs/border-radius#customizing) settings. However, as they are only supported in Webkit-based browsers, their usage is inadvisable in cross-browser applications. To enable rounded scrollbar utilities, pass `nocompatible: true` to the plugin during its declaration; e.g.:
 
 ```js
-variants: {
+plugins: [
     // ...
-    scrollbar: ['dark']
-}
+    require('tailwind-scrollbar')({ nocompatible: true }),
+],
 ```
 
-This plugin also capable of adding utilties for creating rounded scrollbars (by referencing your configured [border radius](https://tailwindcss.com/docs/border-radius#customizing) settings). However, as they are only supported in Webkit-based browsers, their usage is inadvisable in cross-browser applications. To enable rounded scrollbar utilities, add `'rounded'` to the list of scrollbar variants in your config file. This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
+This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
 
 ## License
 
