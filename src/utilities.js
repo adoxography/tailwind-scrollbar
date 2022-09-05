@@ -1,3 +1,6 @@
+const VARIANTS = ['hover', 'active'];
+const COMPONENTS = ['track', 'thumb', 'corner'];
+
 /**
  * Base resets to make the plugin's utilities work
  */
@@ -32,41 +35,17 @@ const SCROLLBAR_SIZE_BASE = {
     'overflow-y': 'hidden'
   },
 
-  '&::-webkit-scrollbar-track': {
-    'background-color': 'var(--scrollbar-track)'
-  },
+  ...Object.fromEntries(['', ...VARIANTS].map(variant => {
+    const classSep = variant ? ':' : '';
+    const valueSep = variant ? '-' : '';
 
-  '&::-webkit-scrollbar-thumb': {
-    'background-color': 'var(--scrollbar-thumb)'
-  },
-
-  '&::-webkit-scrollbar-corner': {
-    'background-color': 'var(--scrollbar-corner)'
-  },
-
-  '&::-webkit-scrollbar-track:hover': {
-    'background-color': 'var(--scrollbar-track-hover)'
-  },
-
-  '&::-webkit-scrollbar-thumb:hover': {
-    'background-color': 'var(--scrollbar-thumb-hover)'
-  },
-
-  '&::-webkit-scrollbar-corner:hover': {
-    'background-color': 'var(--scrollbar-corner-hover)'
-  },
-
-  '&::-webkit-scrollbar-track:active': {
-    'background-color': 'var(--scrollbar-track-active)'
-  },
-
-  '&::-webkit-scrollbar-thumb:active': {
-    'background-color': 'var(--scrollbar-thumb-active)'
-  },
-
-  '&::-webkit-scrollbar-corner:active': {
-    'background-color': 'var(--scrollbar-corner-active)'
-  }
+    return COMPONENTS.map(component => ([
+      `&::-webkit-scrollbar-${component}${classSep}${variant}`,
+      {
+        'background-color': `var(--scrollbar-${component}${valueSep}${variant})`
+      }
+    ]));
+  }).flat())
 };
 
 /**
@@ -105,5 +84,6 @@ const SCROLLBAR_SIZE_UTILITIES = {
 
 module.exports = {
   BASE_STYLES,
+  COMPONENTS,
   SCROLLBAR_SIZE_UTILITIES
 };
