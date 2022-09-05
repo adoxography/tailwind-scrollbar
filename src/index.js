@@ -59,21 +59,35 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     });
   }
 
-  const variantOverrides = {
-    // This is brittle and will need to be updated if/when this feature makes
-    // it into core. There doesn't appear to be a way around it, though.
-    hover: !flagEnabled(tailwind.config(), 'hoverOnlyWhenSupported')
-      ? '&:hover'
-      : '@media (hover: hover) and (pointer: fine) { &:hover }',
-    active: '&:active'
-  };
+  const variantOverrides = [
+    ...[
+      !flagEnabled(tailwind.config(), 'hoverOnlyWhenSupported')
+        ? {
+          variant: 'hover',
+          defaultFormat: '&:hover',
+          scrollbarFormat: '&'
+        }
+        : {
+          variant: 'hover',
+          defaultFormat: '@media (hover: hover) and (pointer: fine) { &:hover }',
+          scrollbarFormat: '@media (hover: hover) and (pointer: fine) { & }'
+        }
+    ],
+    {
+      variant: 'active',
+      defaultFormat: '&:active',
+      scrollbarFormat: '&'
+    }
+  ];
 
-  Object.entries(variantOverrides).forEach(([variant, format]) => {
+  variantOverrides.forEach(({ variant, defaultFormat, scrollbarFormat }) => {
     tailwind.addVariant(variant, ({ container }) => {
       const suffix = `-${variant}`;
+      let found = false;
 
       container.walkRules(rule => {
         rule.walkDecls(/^--scrollbar-/, decl => {
+          found = true;
           if (!decl.prop.endsWith(suffix)) {
             /* eslint-disable-next-line no-param-reassign */
             decl.prop += suffix;
@@ -81,7 +95,7 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
         });
       });
 
-      return format;
+      return found ? scrollbarFormat : defaultFormat;
     });
   });
 }));
