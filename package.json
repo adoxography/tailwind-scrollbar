@@ -9,8 +9,9 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build-types": "tsc",
+    "build-types": "rm src/*.d.ts && tsc",
     "lint": "eslint src",
+    "prepare": "husky install",
     "test": "jest"
   },
   "files": [
@@ -26,6 +27,7 @@
     "eslint-plugin-import": "^2.23.3",
     "eslint-plugin-jest": "^27.0.1",
     "eslint-plugin-jsdoc": "^39.3.6",
+    "husky": "^8.0.1",
     "jest": "^29.0.1",
     "lodash": "^4.17.20",
     "postcss": "^8.2.4",
