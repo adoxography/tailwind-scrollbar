@@ -229,6 +229,22 @@ test('it uses arbitrary color values', async () => {
   `);
 });
 
+test('it can use opacity modifiers', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="scrollbar-track-red-100/50" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-track-red-100\\/50 {
+        --scrollbar-track: rgb(254 226 226 / 0.5) !important
+    }"
+  `);
+});
+
 test('it handles color functions', async () => {
   const css = await generatePluginCss({
     theme: {
