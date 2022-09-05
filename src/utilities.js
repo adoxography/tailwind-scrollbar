@@ -42,6 +42,30 @@ const SCROLLBAR_SIZE_BASE = {
 
   '&::-webkit-scrollbar-corner': {
     'background-color': 'var(--scrollbar-corner)'
+  },
+
+  '&::-webkit-scrollbar-track:hover': {
+    'background-color': 'var(--scrollbar-track-hover)'
+  },
+
+  '&::-webkit-scrollbar-thumb:hover': {
+    'background-color': 'var(--scrollbar-thumb-hover)'
+  },
+
+  '&::-webkit-scrollbar-corner:hover': {
+    'background-color': 'var(--scrollbar-corner-hover)'
+  },
+
+  '&::-webkit-scrollbar-track:active': {
+    'background-color': 'var(--scrollbar-track-active)'
+  },
+
+  '&::-webkit-scrollbar-thumb:active': {
+    'background-color': 'var(--scrollbar-thumb-active)'
+  },
+
+  '&::-webkit-scrollbar-corner:active': {
+    'background-color': 'var(--scrollbar-corner-active)'
   }
 };
 
