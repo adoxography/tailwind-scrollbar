@@ -52,6 +52,8 @@ plugins: [
 ],
 ```
 
+This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
+
 And you can custom scrollbar width; e.g.:
 
 ```js
@@ -67,7 +69,6 @@ theme: [
 ]
 ```
 
-This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
 
 ## License
 
