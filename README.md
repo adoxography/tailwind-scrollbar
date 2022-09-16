@@ -52,6 +52,20 @@ plugins: [
 ],
 ```
 
+And you can custom scrollbar width; e.g.:
+
+```js
+plugins: [
+    // ...
+    require('tailwind-scrollbar')({ customwidth: true }),
+],
+theme: [
+    scrollbarWidth: {
+        DEFAULT: '10px',
+        thin: '5px',
+    },
+]
+
 This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
 
 ## License

@@ -26,6 +26,19 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   );
 
   tailwind.addBase(BASE_STYLES);
+  
+  /* custom scrollbar width */
+  if (options.customwidth) {
+    const SCROLL_WIDTH = tailwind.theme('scrollbarWidth');
+    SCROLLBAR_SIZE_UTILITIES['.scrollbar']['&::-webkit-scrollbar'] = {
+      width: SCROLL_WIDTH.DEFAULT,
+      height: SCROLL_WIDTH.DEFAULT,
+    };
+    SCROLLBAR_SIZE_UTILITIES['.scrollbar-thin']['&::-webkit-scrollbar'] = {
+      width: SCROLL_WIDTH.thin,
+      height: SCROLL_WIDTH.thin,
+    };
+  }
   tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
 
   COMPONENTS.forEach(component => {
