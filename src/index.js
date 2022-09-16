@@ -3,17 +3,15 @@ const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
 const { flagEnabled } = require('tailwindcss/lib/featureFlags');
 
-const {
-  COMPONENTS,
-  BASE_STYLES,
-  SCROLLBAR_SIZE_UTILITIES
-} = require('./utilities');
+const { COMPONENTS, BASE_STYLES, SCROLLBAR_SIZE_UTILITIES } = require('./utilities');
 
-module.exports = plugin.withOptions((options = {}) => (tailwind => {
+module.exports = plugin.withOptions((options = {}) => tailwind => {
   const areRoundedVariantsSpecified = () => {
     if (tailwind.config('variants.scrollbar', []).includes('rounded')) {
       /* eslint-disable-next-line no-console */
-      console.log('DEPRECATION: adding rounded classes via the variants array is deprecated. Use nocompatible mode instead (i.e. when adding the plugin, use `scrollbarPlugin({ nocompatible: true })`)');
+      console.log(
+        'DEPRECATION: adding rounded classes via the variants array is deprecated. Use nocompatible mode instead (i.e. when adding the plugin, use `scrollbarPlugin({ nocompatible: true })`)'
+      );
       return true;
     }
 
@@ -29,14 +27,18 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   /* custom scrollbar width */
   if (options.customwidth) {
     const SCROLL_WIDTH = tailwind.theme('scrollbarWidth');
-    SCROLLBAR_SIZE_UTILITIES['.scrollbar']['&::-webkit-scrollbar'] = {
-      width: SCROLL_WIDTH.DEFAULT,
-      height: SCROLL_WIDTH.DEFAULT
-    };
-    SCROLLBAR_SIZE_UTILITIES['.scrollbar-thin']['&::-webkit-scrollbar'] = {
-      width: SCROLL_WIDTH.thin,
-      height: SCROLL_WIDTH.thin
-    };
+    if (!SCROLL_WIDTH) {
+      console.log(`You must add the 'scrollbarWidth' property to tailwind.config.js.`);
+    } else {
+      SCROLLBAR_SIZE_UTILITIES['.scrollbar']['&::-webkit-scrollbar'] = {
+        width: SCROLL_WIDTH.DEFAULT,
+        height: SCROLL_WIDTH.DEFAULT
+      };
+      SCROLLBAR_SIZE_UTILITIES['.scrollbar-thin']['&::-webkit-scrollbar'] = {
+        width: SCROLL_WIDTH.thin,
+        height: SCROLL_WIDTH.thin
+      };
+    }
   }
   tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
 
@@ -44,12 +46,12 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     tailwind.matchUtilities(
       {
         [`scrollbar-${component}`]: value => ({
-          [`--scrollbar-${component}`]: `${value} !important`
-        })
+          [`--scrollbar-${component}`]: `${value} !important`,
+        }),
       },
       {
         values: colors,
-        type: 'color'
+        type: 'color',
       }
     );
   });
@@ -60,12 +62,12 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
         {
           [`scrollbar-${component}-rounded`]: value => ({
             [`&::-webkit-scrollbar-${component}`]: {
-              'border-radius': value
-            }
-          })
+              'border-radius': value,
+            },
+          }),
         },
         {
-          values: tailwind.theme('borderRadius')
+          values: tailwind.theme('borderRadius'),
         }
       );
     });
@@ -75,21 +77,21 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
     ...[
       !flagEnabled(tailwind.config(), 'hoverOnlyWhenSupported')
         ? {
-          variant: 'hover',
-          defaultFormat: '&:hover',
-          scrollbarFormat: '&'
-        }
+            variant: 'hover',
+            defaultFormat: '&:hover',
+            scrollbarFormat: '&',
+          }
         : {
-          variant: 'hover',
-          defaultFormat: '@media (hover: hover) and (pointer: fine) { &:hover }',
-          scrollbarFormat: '@media (hover: hover) and (pointer: fine) { & }'
-        }
+            variant: 'hover',
+            defaultFormat: '@media (hover: hover) and (pointer: fine) { &:hover }',
+            scrollbarFormat: '@media (hover: hover) and (pointer: fine) { & }',
+          },
     ],
     {
       variant: 'active',
       defaultFormat: '&:active',
-      scrollbarFormat: '&'
-    }
+      scrollbarFormat: '&',
+    },
   ];
 
   variantOverrides.forEach(({ variant, defaultFormat, scrollbarFormat }) => {
@@ -110,4 +112,4 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
       return found ? scrollbarFormat : defaultFormat;
     });
   });
-}));
+});
