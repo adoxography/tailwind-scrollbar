@@ -65,6 +65,7 @@ theme: [
         thin: '5px',
     },
 ]
+```
 
 This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
 
