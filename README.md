@@ -27,7 +27,7 @@ plugins: [
 
 **NB:** This plugin *styles* scrollbars; it does not force them to appear. Use typical CSS techniques to force content to overflow and trigger a scrollbar.
 
-For every element that you want to style, add either the `scrollbar` or `scrollbar-thin` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.)
+For every element that you want to style, add either the `scrollbar` or `scrollbar-thumb` class. You may then add any `scrollbar-track-{color}`, `scrollbar-thumb-{color}` or `hover:scrollbar-thumb-{color}` classes you like. (Note that `hover:scrollbar-thumb-{color}` classes only have effects in webkit-based browsers.)
 
 If you're using both vertical and horizontal scrollbars, you may notice a white square show up. You can change its colour with the `scrollbar-corner-{color}` utility.
 
