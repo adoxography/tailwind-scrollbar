@@ -55,6 +55,32 @@ plugins: [
 
 This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-rounded-md`.
 
+## Complete list of utilities
+All utilities are compatible with variants, unless otherwise specified.
+
+### Width utilities
+| Utility     | Effect | Notes |
+|-------------|--------|-------|
+| `scrollbar` | Enables custom scrollbar styling, using the default width | On Firefox, this is `scrollbar-width: auto`, which is `16px`. Chrome is hard coded to `16px` for consistency. |
+| `scrollbar-thin` | Enables custom scrollbar styling, using the thin width | On Firefox, this is `scrollbar-width: thin`, which is `8px`. Chrome is hard coded to `8px` for consistency. |
+| `scrollbar-none` | Hides the scrollbar completely | Because of browser quirks, this cannot be used to hide an existing styled scrollbar - i.e. `scrollbar hover:scrollbar-none` will not work. |
+
+### Colour utilities
+All of the asterisks can be replaced [with any tailwind colour](https://tailwindcss.com/docs/customizing-colors#using-custom-colors), including [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) and [opacity modifiers](https://tailwindcss.com/docs/background-color#changing-the-opacity).
+
+| Utility     | Effect | Notes |
+|-------------|--------|-------|
+| `scrollbar-thumb-*` | Sets the colour of the scrollbar thumb | |
+| `scrollbar-track-*` | Sets the colour of the scrollbar track | |
+| `scrollbar-corner-*` | Sets the colour of the scrollbar corner | The corner will only appear if you have both vertical and horizontal scrollbars. |
+
+### Noncompatible utilities
+These styles are only available in `noncompatible` mode. They won't have any effect in Firefox.
+
+| Utility     | Effect | Notes |
+|-------------|--------|-------|
+| `scrollbar-rounded-*` | Rounds a scrollbar thumb's corners | The asterisk can be replaced with any Tailwind [rounded setting](https://tailwindcss.com/docs/border-radius#using-custom-values), including arbitrary values. |
+
 ## License
 
 This project is licensed under the [MIT License](/LICENSE).
