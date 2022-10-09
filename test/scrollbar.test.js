@@ -474,6 +474,144 @@ test('it generates dark utilities', async () => {
   `);
 });
 
+test('it generates width utilties in nocompatible mode', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      width: {
+        1: '0.25rem',
+        full: '100%'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-w-1" />
+        <div class="scrollbar-w-full" />
+        <div class="scrollbar-w-[3px]" />
+      `
+    }]
+  }, {
+    nocompatible: true
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-w-1::-webkit-scrollbar {
+        width: 0.25rem
+    }
+    .scrollbar-w-full::-webkit-scrollbar {
+        width: 100%
+    }
+    .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
+        width: 3px
+    }"
+`);
+});
+
+test('it generates height utilties in nocompatible mode', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      height: {
+        1: '0.25rem',
+        full: '100%'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-h-1" />
+        <div class="scrollbar-h-full" />
+        <div class="scrollbar-h-[3px]" />
+      `
+    }]
+  }, {
+    nocompatible: true
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-h-1::-webkit-scrollbar {
+        height: 0.25rem
+    }
+    .scrollbar-h-full::-webkit-scrollbar {
+        height: 100%
+    }
+    .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
+        height: 3px
+    }"
+`);
+});
+
+test('scrollbar, width, and height utilities are generated in the correct order', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="scrollbar-h-[3px] scrollbar-w-[3px] scrollbar" />
+      `
+    }]
+  }, {
+    nocompatible: true
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar {
+        --scrollbar-track: initial;
+        --scrollbar-thumb: initial;
+        --scrollbar-corner: initial;
+        --scrollbar-track-hover: var(--scrollbar-track);
+        --scrollbar-thumb-hover: var(--scrollbar-thumb);
+        --scrollbar-corner-hover: var(--scrollbar-corner);
+        --scrollbar-track-active: var(--scrollbar-track-hover);
+        --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
+        --scrollbar-corner-active: var(--scrollbar-corner-hover);
+        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        overflow: overlay;
+    }
+    .scrollbar.overflow-x-hidden {
+        overflow-x: hidden;
+    }
+    .scrollbar.overflow-y-hidden {
+        overflow-y: hidden;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-track);
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+    }
+    .scrollbar::-webkit-scrollbar-corner {
+        background-color: var(--scrollbar-corner);
+    }
+    .scrollbar::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover);
+    }
+    .scrollbar::-webkit-scrollbar-corner:hover {
+        background-color: var(--scrollbar-corner-hover);
+    }
+    .scrollbar::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active);
+    }
+    .scrollbar::-webkit-scrollbar-corner:active {
+        background-color: var(--scrollbar-corner-active);
+    }
+    .scrollbar {
+        scrollbar-width: auto;
+    }
+    .scrollbar::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+    .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
+        width: 3px;
+    }
+    .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
+        height: 3px;
+    }"
+  `);
+});
+
 test('it generates rounded states in nocompatible mode', async () => {
   const css = await generatePluginCss({
     theme: {
@@ -538,6 +676,50 @@ test('it generates rounded states when "rounded" is specified as a variant', asy
         border-radius: 0.25rem
     }"
 `);
+});
+
+test('it does not generate width utilties in nocompatible mode', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      width: {
+        1: '0.25rem',
+        full: '100%'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-w-1" />
+        <div class="scrollbar-w-full" />
+        <div class="scrollbar-w-[3px]" />
+      `
+    }]
+  }, {
+    nocompatible: false
+  });
+
+  expect(css).toBe('');
+});
+
+test('it does not generate height utilties in nocompatible mode', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      height: {
+        1: '0.25rem',
+        full: '100%'
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-h-1" />
+        <div class="scrollbar-h-full" />
+        <div class="scrollbar-h-[3px]" />
+      `
+    }]
+  }, {
+    nocompatible: false
+  });
+
+  expect(css).toBe('');
 });
 
 test('it does not generate rounded states when not in nocompatible mode', async () => {
