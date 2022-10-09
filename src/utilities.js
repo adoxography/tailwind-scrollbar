@@ -1,5 +1,6 @@
 const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
+const typedefs = require('./typedefs');
 
 const VARIANTS = ['hover', 'active'];
 const COMPONENTS = ['track', 'thumb', 'corner'];
@@ -94,6 +95,8 @@ const SCROLLBAR_SIZE_UTILITIES = {
 
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addColorUtilities = ({ matchUtilities, theme }) => {
   const themeColors = flattenColorPalette.default(theme('colors'));
@@ -122,6 +125,8 @@ const addColorUtilities = ({ matchUtilities, theme }) => {
 /**
  * Adds scrollbar-COMPONENT-rounded-VALUE utilities for every scrollbar
  * component.
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addRoundedUtilities = ({ theme, matchUtilities }) => {
   COMPONENTS.forEach(component => {
@@ -142,6 +147,8 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
 
 /**
  * Adds scrollbar-w-* and scrollbar-h-* utilities
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addSizeUtilities = ({ matchUtilities, theme }) => {
   ['width', 'height'].forEach(dimension => {
@@ -159,7 +166,6 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
 
 module.exports = {
   BASE_STYLES,
-  COMPONENTS,
   SCROLLBAR_SIZE_UTILITIES,
   addColorUtilities,
   addRoundedUtilities,
