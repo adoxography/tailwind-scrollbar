@@ -9,7 +9,7 @@ const {
   SCROLLBAR_SIZE_UTILITIES
 } = require('./utilities');
 
-module.exports = plugin.withOptions((options = {}) => (tailwind => {
+module.exports = plugin.withOptions((options = {}) => tailwind => {
   const areRoundedVariantsSpecified = () => {
     if (tailwind.config('variants.scrollbar', []).includes('rounded')) {
       /* eslint-disable-next-line no-console */
@@ -98,4 +98,4 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
       return found ? scrollbarFormat : defaultFormat;
     });
   });
-}));
+});
