@@ -22,3 +22,25 @@ export const SCROLLBAR_SIZE_UTILITIES: {
         };
     };
 };
+/**
+ * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
+ */
+export function addColorUtilities({ matchUtilities, theme }: {
+    matchUtilities: any;
+    theme: any;
+}): void;
+/**
+ * Adds scrollbar-COMPONENT-rounded-VALUE utilities for every scrollbar
+ * component.
+ */
+export function addRoundedUtilities({ theme, matchUtilities }: {
+    theme: any;
+    matchUtilities: any;
+}): void;
+/**
+ * Adds scrollbar-w-* and scrollbar-h-* utilities
+ */
+export function addSizeUtilities({ matchUtilities, theme }: {
+    matchUtilities: any;
+    theme: any;
+}): void;
