@@ -62,6 +62,34 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
     });
   }
 
+  if (options.nocompatible) {
+    tailwind.matchUtilities(
+      {
+        'scrollbar-w': value => ({
+          '&::-webkit-scrollbar': {
+            width: value
+          }
+        })
+      },
+      {
+        values: tailwind.theme('width')
+      }
+    );
+
+    tailwind.matchUtilities(
+      {
+        'scrollbar-h': value => ({
+          '&::-webkit-scrollbar': {
+            height: value
+          }
+        })
+      },
+      {
+        values: tailwind.theme('height')
+      }
+    );
+  }
+
   const variantOverrides = [
     ...[
       !flagEnabled(tailwind.config(), 'hoverOnlyWhenSupported')
