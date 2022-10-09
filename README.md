@@ -59,6 +59,8 @@ This will add utilities such as `scrollbar-thumb-rounded` or `scrollbar-thumb-ro
 All utilities are compatible with variants, unless otherwise specified.
 
 ### Width utilities
+These utilities initialize scrollbar styling. You always need one of them, even if you're using custom widths. (See below.)
+
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
 | `scrollbar` | Enables custom scrollbar styling, using the default width | On Firefox, this is `scrollbar-width: auto`, which is `16px`. Chrome is hard coded to `16px` for consistency. |
@@ -79,6 +81,8 @@ These styles are only available in `noncompatible` mode. They won't have any eff
 
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
+|  scrollbar-w-*  | Sets the width of vertical scrollbars | The asterisk can be replaced with any Tailwind [width setting](https://tailwindcss.com/docs/width), including arbitrary values. |
+|  scrollbar-h-*  | Sets the height of horizontal scrollbars | The asterisk can be replaced with any Tailwind [height setting](https://tailwindcss.com/docs/height), including arbitrary values. |
 | `scrollbar-rounded-*` | Rounds a scrollbar thumb's corners | The asterisk can be replaced with any Tailwind [rounded setting](https://tailwindcss.com/docs/border-radius#using-custom-values), including arbitrary values. |
 
 ## License
