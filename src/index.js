@@ -31,9 +31,12 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   COMPONENTS.forEach(component => {
     tailwind.matchUtilities(
       {
-        [`scrollbar-${component}`]: value => ({
-          [`--scrollbar-${component}`]: `${value} !important`
-        })
+        [`scrollbar-${component}`]: value => {
+          const color = toColorValue.default(value);
+          return {
+            [`--scrollbar-${component}`]: `${color} !important`
+          };
+        }
       },
       {
         values: colors,
