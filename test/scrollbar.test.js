@@ -293,6 +293,33 @@ test('it can use opacity modifiers', async () => {
   `);
 });
 
+test('it can use opacity modifiers with custom properties', async () => {
+  const css = await generatePluginCss({
+    theme: {
+      extend: {
+        colors: {
+          surface: 'hsl(var(--color-surface) / <alpha-value>)'
+        }
+      }
+    },
+    content: [{
+      raw: `
+        <div class="scrollbar-track-surface" />
+        <div class="scrollbar-track-surface/100" />
+      `
+    }]
+  });
+
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-track-surface {
+        --scrollbar-track: hsl(var(--color-surface) / 1) !important
+    }
+    .scrollbar-track-surface\\/100 {
+        --scrollbar-track: hsl(var(--color-surface) / 1) !important
+    }"
+  `);
+});
+
 test('it handles color functions', async () => {
   const css = await generatePluginCss({
     theme: {
