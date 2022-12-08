@@ -1,5 +1,28 @@
 const { generatePluginCss } = require('./util');
 
+test('it generaste .scrollbar-horizontal spacing utilities', async () => {
+  const css = await generatePluginCss({
+    content: [{
+      raw: `
+        <div class="scrollbar-horizontal-1" />
+        <div class="scrollbar-horizontal-2" />
+        <div class="scrollbar-horizontal-3" />
+      `
+    }]
+  });
+  expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-horizontal-1 {
+        height: 0.25rem
+    }
+    .scrollbar-horizontal-2 {
+        height: 0.5rem
+    }
+    .scrollbar-horizontal-3 {
+        height: 0.75rem
+    }"
+  `);
+});
+
 test('it generates .scrollbar utilities', async () => {
   const css = await generatePluginCss({
     content: [{
