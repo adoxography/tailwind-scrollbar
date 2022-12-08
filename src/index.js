@@ -31,7 +31,9 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   tailwind.matchUtilities(
     {
       'scrollbar-horizontal': value => ({
-        height: value
+        '&::-webkit-scrollbar': {
+          height: value
+        }
       })
     },
     {

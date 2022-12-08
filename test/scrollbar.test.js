@@ -11,13 +11,13 @@ test('it generaste .scrollbar-horizontal spacing utilities', async () => {
     }]
   });
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-horizontal-1 {
+    ".scrollbar-horizontal-1::-webkit-scrollbar {
         height: 0.25rem
     }
-    .scrollbar-horizontal-2 {
+    .scrollbar-horizontal-2::-webkit-scrollbar {
         height: 0.5rem
     }
-    .scrollbar-horizontal-3 {
+    .scrollbar-horizontal-3::-webkit-scrollbar {
         height: 0.75rem
     }"
   `);
