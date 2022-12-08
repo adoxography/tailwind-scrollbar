@@ -28,6 +28,17 @@ module.exports = plugin.withOptions((options = {}) => (tailwind => {
   tailwind.addBase(BASE_STYLES);
   tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
 
+  tailwind.matchUtilities(
+    {
+      'scrollbar-horizontal': value => ({
+        height: value
+      })
+    },
+    {
+      values: tailwind.theme('spacing')
+    }
+  );
+
   COMPONENTS.forEach(component => {
     tailwind.matchUtilities(
       {
