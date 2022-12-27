@@ -44,7 +44,7 @@ A live version of this demo [can be found here](https://tailwind-scrollbar-examp
 
 ## Configuration
 
-This plugin is capable of adding utilties for creating rounded scrollbars by referencing your configured [border radius](https://tailwindcss.com/docs/border-radius#customizing) settings. However, as they are only supported in Webkit-based browsers, their usage is inadvisable in cross-browser applications. To enable rounded scrollbar utilities, pass `nocompatible: true` to the plugin during its declaration; e.g.:
+This plugin is capable of adding utilties for creating rounded scrollbars by referencing your configured [border radius](https://tailwindcss.com/docs/border-radius#customizing) settings. However, as they are only supported in chromium-based browsers, their usage is inadvisable in cross-browser applications. To enable rounded scrollbar utilities, pass `nocompatible: true` to the plugin during its declaration; e.g.:
 
 ```js
 plugins: [

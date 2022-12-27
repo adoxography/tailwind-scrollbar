@@ -33,8 +33,7 @@ const SCROLLBAR_SIZE_BASE = {
   'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
 
   // Make sure the scrollbars are calculated in the elements width
-  // NOTE: only has effect in webkit-based browsers, but is only really needed
-  // in webkit-based browsers in the first place.
+  // TODO: Retrace why this was included - firefox compatibility, maybe?
   overflow: 'overlay',
 
   // Prevent the plugin from overriding overflow-hidden
