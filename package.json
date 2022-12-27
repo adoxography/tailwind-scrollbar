@@ -1,6 +1,6 @@
 {
   "name": "tailwind-scrollbar",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Tailwind plugin for styling scrollbars",
   "author": "Graham Still <graham@gstill.dev>",
   "main": "src/index.js",
