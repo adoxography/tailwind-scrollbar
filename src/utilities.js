@@ -1,3 +1,7 @@
+const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
+const toColorValue = require('tailwindcss/lib/util/toColorValue');
+const typedefs = require('./typedefs');
+
 const VARIANTS = ['hover', 'active'];
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
@@ -89,8 +93,81 @@ const SCROLLBAR_SIZE_UTILITIES = {
   }
 };
 
+/**
+ * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ */
+const addColorUtilities = ({ matchUtilities, theme }) => {
+  const themeColors = flattenColorPalette.default(theme('colors'));
+  const colors = Object.fromEntries(
+    Object.entries(themeColors).map(([k, v]) => [k, toColorValue.default(v)])
+  );
+
+  COMPONENTS.forEach(component => {
+    matchUtilities(
+      {
+        [`scrollbar-${component}`]: value => {
+          const color = toColorValue.default(value);
+          return {
+            [`--scrollbar-${component}`]: `${color} !important`
+          };
+        }
+      },
+      {
+        values: colors,
+        type: 'color'
+      }
+    );
+  });
+};
+
+/**
+ * Adds scrollbar-COMPONENT-rounded-VALUE utilities for every scrollbar
+ * component.
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ */
+const addRoundedUtilities = ({ theme, matchUtilities }) => {
+  COMPONENTS.forEach(component => {
+    matchUtilities(
+      {
+        [`scrollbar-${component}-rounded`]: value => ({
+          [`&::-webkit-scrollbar-${component}`]: {
+            'border-radius': value
+          }
+        })
+      },
+      {
+        values: theme('borderRadius')
+      }
+    );
+  });
+};
+
+/**
+ * Adds scrollbar-w-* and scrollbar-h-* utilities
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ */
+const addSizeUtilities = ({ matchUtilities, theme }) => {
+  ['width', 'height'].forEach(dimension => {
+    matchUtilities({
+      [`scrollbar-${dimension[0]}`]: value => ({
+        '&::-webkit-scrollbar': {
+          [dimension]: value
+        }
+      })
+    }, {
+      values: theme(dimension)
+    });
+  });
+};
+
 module.exports = {
   BASE_STYLES,
-  COMPONENTS,
-  SCROLLBAR_SIZE_UTILITIES
+  SCROLLBAR_SIZE_UTILITIES,
+  addColorUtilities,
+  addRoundedUtilities,
+  addSizeUtilities
 };
