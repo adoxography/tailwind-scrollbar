@@ -22,6 +22,7 @@ test('it generates .scrollbar utilities', async () => {
     }
     .scrollbar::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius);
     }
     .scrollbar::-webkit-scrollbar-track:hover {
         background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
@@ -31,6 +32,7 @@ test('it generates .scrollbar utilities', async () => {
     }
     .scrollbar::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius);
     }
     .scrollbar::-webkit-scrollbar-thumb:hover {
         background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
@@ -40,6 +42,7 @@ test('it generates .scrollbar utilities', async () => {
     }
     .scrollbar::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
+        border-radius: var(--scrollbar-corner-radius);
     }
     .scrollbar::-webkit-scrollbar-corner:hover {
         background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
@@ -79,6 +82,7 @@ test('it generates .scrollbar-thin utilities', async () => {
     }
     .scrollbar-thin::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius);
     }
     .scrollbar-thin::-webkit-scrollbar-track:hover {
         background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
@@ -88,6 +92,7 @@ test('it generates .scrollbar-thin utilities', async () => {
     }
     .scrollbar-thin::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius);
     }
     .scrollbar-thin::-webkit-scrollbar-thumb:hover {
         background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
@@ -97,6 +102,7 @@ test('it generates .scrollbar-thin utilities', async () => {
     }
     .scrollbar-thin::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
+        border-radius: var(--scrollbar-corner-radius);
     }
     .scrollbar-thin::-webkit-scrollbar-corner:hover {
         background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
@@ -562,6 +568,7 @@ test('it generates rounded states in nocompatible mode', async () => {
         <div class="scrollbar-thumb-rounded-md" />
         <div class="scrollbar-track-rounded-md" />
         <div class="scrollbar-track-rounded-[16px]" />
+        <div class="scrollbar-corner-rounded" />
       `
     }]
   }, {
@@ -570,19 +577,22 @@ test('it generates rounded states in nocompatible mode', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-rounded::-webkit-scrollbar-track {
-        border-radius: 0.25rem
+        --scrollbar-track-radius: 0.25rem
     }
     .scrollbar-track-rounded-md::-webkit-scrollbar-track {
-        border-radius: 0.375rem
+        --scrollbar-track-radius: 0.375rem
     }
     .scrollbar-track-rounded-\\[16px\\]::-webkit-scrollbar-track {
-        border-radius: 16px
+        --scrollbar-track-radius: 16px
     }
     .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-        border-radius: 0.25rem
+        --scrollbar-thumb-radius: 0.25rem
     }
     .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
-        border-radius: 0.375rem
+        --scrollbar-thumb-radius: 0.375rem
+    }
+    .scrollbar-corner-rounded::-webkit-scrollbar-corner {
+        --scrollbar-corner-radius: 0.25rem
     }"
 `);
 });
@@ -608,7 +618,7 @@ test('it generates rounded states when "rounded" is specified as a variant', asy
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-        border-radius: 0.25rem
+        --scrollbar-thumb-radius: 0.25rem
     }"
 `);
 });
