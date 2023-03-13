@@ -51,8 +51,8 @@ test('it generates .scrollbar utilities', async () => {
         scrollbar-width: auto;
     }
     .scrollbar::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px);
     }"
   `);
 });
@@ -504,13 +504,13 @@ test('it generates width utilties in nocompatible mode', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-w-1::-webkit-scrollbar {
-        width: 0.25rem
+        --scrollbar-width: 0.25rem
     }
     .scrollbar-w-full::-webkit-scrollbar {
-        width: 100%
+        --scrollbar-width: 100%
     }
     .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
-        width: 3px
+        --scrollbar-width: 3px
     }"
 `);
 });
@@ -536,13 +536,13 @@ test('it generates height utilties in nocompatible mode', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-h-1::-webkit-scrollbar {
-        height: 0.25rem
+        --scrollbar-height: 0.25rem
     }
     .scrollbar-h-full::-webkit-scrollbar {
-        height: 100%
+        --scrollbar-height: 100%
     }
     .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
-        height: 3px
+        --scrollbar-height: 3px
     }"
 `);
 });
@@ -600,14 +600,14 @@ test('scrollbar, width, and height utilities are generated in the correct order'
         scrollbar-width: auto;
     }
     .scrollbar::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px);
     }
     .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
-        width: 3px;
+        --scrollbar-width: 3px;
     }
     .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
-        height: 3px;
+        --scrollbar-height: 3px;
     }"
   `);
 });

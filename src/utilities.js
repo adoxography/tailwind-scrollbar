@@ -61,8 +61,8 @@ const SCROLLBAR_SIZE_UTILITIES = {
     'scrollbar-width': 'auto',
 
     '&::-webkit-scrollbar': {
-      width: '16px',
-      height: '16px'
+      width: 'var(--scrollbar-width, 16px)',
+      height: 'var(--scrollbar-height, 16px)'
     }
   },
 
@@ -147,7 +147,7 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
     matchUtilities({
       [`scrollbar-${dimension[0]}`]: value => ({
         '&::-webkit-scrollbar': {
-          [dimension]: value
+          [`--scrollbar-${dimension}`]: value
         }
       })
     }, {
