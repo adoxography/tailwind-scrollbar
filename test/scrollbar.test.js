@@ -509,13 +509,13 @@ test('it generates width utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-w-1::-webkit-scrollbar {
+    ".scrollbar-w-1 {
         --scrollbar-width: 0.25rem
     }
-    .scrollbar-w-full::-webkit-scrollbar {
+    .scrollbar-w-full {
         --scrollbar-width: 100%
     }
-    .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
+    .scrollbar-w-\\[3px\\] {
         --scrollbar-width: 3px
     }"
 `);
@@ -541,13 +541,13 @@ test('it generates height utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-h-1::-webkit-scrollbar {
+    ".scrollbar-h-1 {
         --scrollbar-height: 0.25rem
     }
-    .scrollbar-h-full::-webkit-scrollbar {
+    .scrollbar-h-full {
         --scrollbar-height: 100%
     }
-    .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
+    .scrollbar-h-\\[3px\\] {
         --scrollbar-height: 3px
     }"
 `);
