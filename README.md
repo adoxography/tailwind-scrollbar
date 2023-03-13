@@ -81,8 +81,8 @@ These styles are only available in `noncompatible` mode. They won't have any eff
 
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
-| `scrollbar-w-*` | Sets the width of vertical scrollbars | The asterisk can be replaced with any Tailwind [width setting](https://tailwindcss.com/docs/width), including arbitrary values. |
-| `scrollbar-h-*` | Sets the height of horizontal scrollbars | The asterisk can be replaced with any Tailwind [height setting](https://tailwindcss.com/docs/height), including arbitrary values. |
+| `scrollbar-w-*` | Sets the width of vertical scrollbars | The asterisk can be replaced with any Tailwind [width setting](https://tailwindcss.com/docs/width), including arbitrary values. Only applies to scrollbars styled with `scrollbar` (not `scrollbar-thin`). |
+| `scrollbar-h-*` | Sets the height of horizontal scrollbars | The asterisk can be replaced with any Tailwind [height setting](https://tailwindcss.com/docs/height), including arbitrary values. Only applies to scrollbars styled with `scrollbar` (not `scrollbar-thin`). |
 | `scrollbar-rounded-*` | Rounds a scrollbar thumb's corners | The asterisk can be replaced with any Tailwind [rounded setting](https://tailwindcss.com/docs/border-radius#using-custom-values), including arbitrary values. |
 
 ## License
