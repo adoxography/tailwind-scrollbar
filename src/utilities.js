@@ -126,9 +126,7 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
     matchUtilities(
       {
         [`scrollbar-${component}-rounded`]: value => ({
-          [`&::-webkit-scrollbar-${component}`]: {
-            [`--scrollbar-${component}-radius`]: value
-          }
+          [`--scrollbar-${component}-radius`]: value
         })
       },
       {
