@@ -145,9 +145,7 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
   ['width', 'height'].forEach(dimension => {
     matchUtilities({
       [`scrollbar-${dimension[0]}`]: value => ({
-        '&::-webkit-scrollbar': {
-          [`--scrollbar-${dimension}`]: value
-        }
+        [`--scrollbar-${dimension}`]: value
       })
     }, {
       values: theme(dimension)
