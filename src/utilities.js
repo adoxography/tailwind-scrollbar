@@ -20,9 +20,6 @@ const BASE_STYLES = {
  * variables
  */
 const SCROLLBAR_SIZE_BASE = {
-  '--scrollbar-track': 'initial',
-  '--scrollbar-thumb': 'initial',
-  '--scrollbar-corner': 'initial',
   '--scrollbar-track-hover': 'var(--scrollbar-track)',
   '--scrollbar-thumb-hover': 'var(--scrollbar-thumb)',
   '--scrollbar-corner-hover': 'var(--scrollbar-corner)',
@@ -30,7 +27,7 @@ const SCROLLBAR_SIZE_BASE = {
   '--scrollbar-thumb-active': 'var(--scrollbar-thumb-hover)',
   '--scrollbar-corner-active': 'var(--scrollbar-corner-hover)',
 
-  'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
+  'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
 
   // Make sure the scrollbars are calculated in the elements width
   // TODO: Retrace why this was included - firefox compatibility, maybe?
