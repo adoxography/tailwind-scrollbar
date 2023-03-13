@@ -21,19 +21,6 @@ const BASE_STYLES = {
 const SCROLLBAR_SIZE_BASE = {
   'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
 
-  // Make sure the scrollbars are calculated in the elements width
-  // TODO: Retrace why this was included - firefox compatibility, maybe?
-  overflow: 'overlay',
-
-  // Prevent the plugin from overriding overflow-hidden
-  '&.overflow-x-hidden': {
-    'overflow-x': 'hidden'
-  },
-
-  '&.overflow-y-hidden': {
-    'overflow-y': 'hidden'
-  },
-
   ...Object.fromEntries(COMPONENTS.map(component => {
     const base = `&::-webkit-scrollbar-${component}`;
 
