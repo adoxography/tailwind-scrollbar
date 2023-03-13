@@ -576,22 +576,22 @@ test('it generates rounded states in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-track-rounded::-webkit-scrollbar-track {
+    ".scrollbar-track-rounded {
         --scrollbar-track-radius: 0.25rem
     }
-    .scrollbar-track-rounded-md::-webkit-scrollbar-track {
+    .scrollbar-track-rounded-md {
         --scrollbar-track-radius: 0.375rem
     }
-    .scrollbar-track-rounded-\\[16px\\]::-webkit-scrollbar-track {
+    .scrollbar-track-rounded-\\[16px\\] {
         --scrollbar-track-radius: 16px
     }
-    .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    .scrollbar-thumb-rounded {
         --scrollbar-thumb-radius: 0.25rem
     }
-    .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
+    .scrollbar-thumb-rounded-md {
         --scrollbar-thumb-radius: 0.375rem
     }
-    .scrollbar-corner-rounded::-webkit-scrollbar-corner {
+    .scrollbar-corner-rounded {
         --scrollbar-corner-radius: 0.25rem
     }"
 `);
@@ -617,7 +617,7 @@ test('it generates rounded states when "rounded" is specified as a variant', asy
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
+    ".scrollbar-thumb-rounded {
         --scrollbar-thumb-radius: 0.25rem
     }"
 `);
