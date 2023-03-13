@@ -11,16 +11,13 @@ test('it generates .scrollbar utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
         --scrollbar-track-hover: var(--scrollbar-track);
         --scrollbar-thumb-hover: var(--scrollbar-thumb);
         --scrollbar-corner-hover: var(--scrollbar-corner);
         --scrollbar-track-active: var(--scrollbar-track-hover);
         --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
         --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
         overflow: overlay;
     }
     .scrollbar.overflow-x-hidden {
@@ -77,16 +74,13 @@ test('it generates .scrollbar-thin utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thin {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
         --scrollbar-track-hover: var(--scrollbar-track);
         --scrollbar-thumb-hover: var(--scrollbar-thumb);
         --scrollbar-corner-hover: var(--scrollbar-corner);
         --scrollbar-track-active: var(--scrollbar-track-hover);
         --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
         --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
         overflow: overlay;
     }
     .scrollbar-thin.overflow-x-hidden {
@@ -578,16 +572,13 @@ test('scrollbar, width, and height utilities are generated in the correct order'
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
         --scrollbar-track-hover: var(--scrollbar-track);
         --scrollbar-thumb-hover: var(--scrollbar-thumb);
         --scrollbar-corner-hover: var(--scrollbar-corner);
         --scrollbar-track-active: var(--scrollbar-track-hover);
         --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
         --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
         overflow: overlay;
     }
     .scrollbar.overflow-x-hidden {
