@@ -39,7 +39,8 @@ const SCROLLBAR_SIZE_BASE = {
 
     return [
       [base, {
-        'background-color': `var(--scrollbar-${component})`
+        'background-color': `var(--scrollbar-${component})`,
+        'border-radius': `var(--scrollbar-${component}-radius)`
       }],
       [`${base}:hover`, {
         'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
@@ -126,7 +127,7 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
       {
         [`scrollbar-${component}-rounded`]: value => ({
           [`&::-webkit-scrollbar-${component}`]: {
-            'border-radius': value
+            [`--scrollbar-${component}-radius`]: value
           }
         })
       },
