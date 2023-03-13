@@ -583,32 +583,6 @@ test('it generates rounded states in nocompatible mode', async () => {
 `);
 });
 
-test('it generates rounded states when "rounded" is specified as a variant', async () => {
-  // Deprecated
-  const css = await generatePluginCss({
-    theme: {
-      borderRadius: {
-        DEFAULT: '0.25rem',
-        md: '0.375rem'
-      }
-    },
-    variants: {
-      scrollbar: ['rounded']
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-rounded" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-rounded {
-        --scrollbar-thumb-radius: 0.25rem
-    }"
-`);
-});
-
 test('it does not generate width utilties in nocompatible mode', async () => {
   const css = await generatePluginCss({
     theme: {
