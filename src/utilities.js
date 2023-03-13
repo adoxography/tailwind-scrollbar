@@ -2,7 +2,6 @@ const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
 
-const VARIANTS = ['hover', 'active'];
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
 /**
@@ -20,13 +19,6 @@ const BASE_STYLES = {
  * variables
  */
 const SCROLLBAR_SIZE_BASE = {
-  '--scrollbar-track-hover': 'var(--scrollbar-track)',
-  '--scrollbar-thumb-hover': 'var(--scrollbar-thumb)',
-  '--scrollbar-corner-hover': 'var(--scrollbar-corner)',
-  '--scrollbar-track-active': 'var(--scrollbar-track-hover)',
-  '--scrollbar-thumb-active': 'var(--scrollbar-thumb-hover)',
-  '--scrollbar-corner-active': 'var(--scrollbar-corner-hover)',
-
   'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
 
   // Make sure the scrollbars are calculated in the elements width
@@ -42,16 +34,20 @@ const SCROLLBAR_SIZE_BASE = {
     'overflow-y': 'hidden'
   },
 
-  ...Object.fromEntries(['', ...VARIANTS].map(variant => {
-    const classSep = variant ? ':' : '';
-    const valueSep = variant ? '-' : '';
+  ...Object.fromEntries(COMPONENTS.map(component => {
+    const base = `&::-webkit-scrollbar-${component}`;
 
-    return COMPONENTS.map(component => ([
-      `&::-webkit-scrollbar-${component}${classSep}${variant}`,
-      {
-        'background-color': `var(--scrollbar-${component}${valueSep}${variant})`
-      }
-    ]));
+    return [
+      [base, {
+        'background-color': `var(--scrollbar-${component})`
+      }],
+      [`${base}:hover`, {
+        'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
+      }],
+      [`${base}:active`, {
+        'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`
+      }]
+    ];
   }).flat())
 };
 
