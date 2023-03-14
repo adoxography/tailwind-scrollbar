@@ -76,8 +76,8 @@ All of the asterisks can be replaced [with any tailwind colour](https://tailwind
 | `scrollbar-track-*` | Sets the colour of the scrollbar track | |
 | `scrollbar-corner-*` | Sets the colour of the scrollbar corner | The corner will only appear if you have both vertical and horizontal scrollbars. |
 
-### Noncompatible utilities
-These styles are only available in `noncompatible` mode. They won't have any effect in Firefox.
+### Nocompatible utilities
+These styles are only available in `nocompatible` mode. They won't have any effect in Firefox.
 
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
