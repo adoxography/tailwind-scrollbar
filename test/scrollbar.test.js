@@ -12,13 +12,6 @@ test('it generates .scrollbar utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
         scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
-        overflow: overlay;
-    }
-    .scrollbar.overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    .scrollbar.overflow-y-hidden {
-        overflow-y: hidden;
     }
     .scrollbar::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
@@ -72,13 +65,6 @@ test('it generates .scrollbar-thin utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thin {
         scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
-        overflow: overlay;
-    }
-    .scrollbar-thin.overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    .scrollbar-thin.overflow-y-hidden {
-        overflow-y: hidden;
     }
     .scrollbar-thin::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
