@@ -68,7 +68,7 @@ These utilities initialize scrollbar styling. You always need one of them, even 
 | `scrollbar-none` | Hides the scrollbar completely | Because of browser quirks, this cannot be used to hide an existing styled scrollbar - i.e. `scrollbar hover:scrollbar-none` will not work. |
 
 ### Colour utilities
-All of the asterisks can be replaced [with any tailwind colour](https://tailwindcss.com/docs/customizing-colors#using-custom-colors), including [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) and [opacity modifiers](https://tailwindcss.com/docs/background-color#changing-the-opacity).
+All of the asterisks can be replaced [with any tailwind colour](https://tailwindcss.com/docs/customizing-colors#using-custom-colors), including [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values) and [opacity modifiers](https://tailwindcss.com/docs/background-color#changing-the-opacity). With the exception of the width utilities, all utilities are inherited by child elements.
 
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
