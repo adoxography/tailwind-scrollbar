@@ -11,57 +11,44 @@ test('it generates .scrollbar utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
-        --scrollbar-track-hover: var(--scrollbar-track);
-        --scrollbar-thumb-hover: var(--scrollbar-thumb);
-        --scrollbar-corner-hover: var(--scrollbar-corner);
-        --scrollbar-track-active: var(--scrollbar-track-hover);
-        --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
-        --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-        overflow: overlay;
-    }
-    .scrollbar.overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    .scrollbar.overflow-y-hidden {
-        overflow-y: hidden;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
     }
     .scrollbar::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius);
+    }
+    .scrollbar::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
+    }
+    .scrollbar::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)));
     }
     .scrollbar::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius);
+    }
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
+    }
+    .scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
     }
     .scrollbar::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-    }
-    .scrollbar::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover);
-    }
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover);
+        border-radius: var(--scrollbar-corner-radius);
     }
     .scrollbar::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover);
-    }
-    .scrollbar::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active);
-    }
-    .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active);
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
     }
     .scrollbar::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active);
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
     }
     .scrollbar {
         scrollbar-width: auto;
     }
     .scrollbar::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px);
     }"
   `);
 });
@@ -77,50 +64,37 @@ test('it generates .scrollbar-thin utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thin {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
-        --scrollbar-track-hover: var(--scrollbar-track);
-        --scrollbar-thumb-hover: var(--scrollbar-thumb);
-        --scrollbar-corner-hover: var(--scrollbar-corner);
-        --scrollbar-track-active: var(--scrollbar-track-hover);
-        --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
-        --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-        overflow: overlay;
-    }
-    .scrollbar-thin.overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    .scrollbar-thin.overflow-y-hidden {
-        overflow-y: hidden;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
     }
     .scrollbar-thin::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius);
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)));
     }
     .scrollbar-thin::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius);
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
     }
     .scrollbar-thin::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover);
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover);
+        border-radius: var(--scrollbar-corner-radius);
     }
     .scrollbar-thin::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover);
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active);
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active);
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
     }
     .scrollbar-thin::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active);
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
     }
     .scrollbar-thin {
         scrollbar-width: thin;
@@ -521,14 +495,14 @@ test('it generates width utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-w-1::-webkit-scrollbar {
-        width: 0.25rem
+    ".scrollbar-w-1 {
+        --scrollbar-width: 0.25rem
     }
-    .scrollbar-w-full::-webkit-scrollbar {
-        width: 100%
+    .scrollbar-w-full {
+        --scrollbar-width: 100%
     }
-    .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
-        width: 3px
+    .scrollbar-w-\\[3px\\] {
+        --scrollbar-width: 3px
     }"
 `);
 });
@@ -553,90 +527,16 @@ test('it generates height utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-h-1::-webkit-scrollbar {
-        height: 0.25rem
+    ".scrollbar-h-1 {
+        --scrollbar-height: 0.25rem
     }
-    .scrollbar-h-full::-webkit-scrollbar {
-        height: 100%
+    .scrollbar-h-full {
+        --scrollbar-height: 100%
     }
-    .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
-        height: 3px
+    .scrollbar-h-\\[3px\\] {
+        --scrollbar-height: 3px
     }"
 `);
-});
-
-test('scrollbar, width, and height utilities are generated in the correct order', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-h-[3px] scrollbar-w-[3px] scrollbar" />
-      `
-    }]
-  }, {
-    nocompatible: true
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar {
-        --scrollbar-track: initial;
-        --scrollbar-thumb: initial;
-        --scrollbar-corner: initial;
-        --scrollbar-track-hover: var(--scrollbar-track);
-        --scrollbar-thumb-hover: var(--scrollbar-thumb);
-        --scrollbar-corner-hover: var(--scrollbar-corner);
-        --scrollbar-track-active: var(--scrollbar-track-hover);
-        --scrollbar-thumb-active: var(--scrollbar-thumb-hover);
-        --scrollbar-corner-active: var(--scrollbar-corner-hover);
-        scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
-        overflow: overlay;
-    }
-    .scrollbar.overflow-x-hidden {
-        overflow-x: hidden;
-    }
-    .scrollbar.overflow-y-hidden {
-        overflow-y: hidden;
-    }
-    .scrollbar::-webkit-scrollbar-track {
-        background-color: var(--scrollbar-track);
-    }
-    .scrollbar::-webkit-scrollbar-thumb {
-        background-color: var(--scrollbar-thumb);
-    }
-    .scrollbar::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-corner);
-    }
-    .scrollbar::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover);
-    }
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover);
-    }
-    .scrollbar::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover);
-    }
-    .scrollbar::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active);
-    }
-    .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active);
-    }
-    .scrollbar::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active);
-    }
-    .scrollbar {
-        scrollbar-width: auto;
-    }
-    .scrollbar::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
-    }
-    .scrollbar-w-\\[3px\\]::-webkit-scrollbar {
-        width: 3px;
-    }
-    .scrollbar-h-\\[3px\\]::-webkit-scrollbar {
-        height: 3px;
-    }"
-  `);
 });
 
 test('it generates rounded states in nocompatible mode', async () => {
@@ -654,6 +554,7 @@ test('it generates rounded states in nocompatible mode', async () => {
         <div class="scrollbar-thumb-rounded-md" />
         <div class="scrollbar-track-rounded-md" />
         <div class="scrollbar-track-rounded-[16px]" />
+        <div class="scrollbar-corner-rounded" />
       `
     }]
   }, {
@@ -661,46 +562,23 @@ test('it generates rounded states in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-track-rounded::-webkit-scrollbar-track {
-        border-radius: 0.25rem
+    ".scrollbar-track-rounded {
+        --scrollbar-track-radius: 0.25rem
     }
-    .scrollbar-track-rounded-md::-webkit-scrollbar-track {
-        border-radius: 0.375rem
+    .scrollbar-track-rounded-md {
+        --scrollbar-track-radius: 0.375rem
     }
-    .scrollbar-track-rounded-\\[16px\\]::-webkit-scrollbar-track {
-        border-radius: 16px
+    .scrollbar-track-rounded-\\[16px\\] {
+        --scrollbar-track-radius: 16px
     }
-    .scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-        border-radius: 0.25rem
+    .scrollbar-thumb-rounded {
+        --scrollbar-thumb-radius: 0.25rem
     }
-    .scrollbar-thumb-rounded-md::-webkit-scrollbar-thumb {
-        border-radius: 0.375rem
-    }"
-`);
-});
-
-test('it generates rounded states when "rounded" is specified as a variant', async () => {
-  // Deprecated
-  const css = await generatePluginCss({
-    theme: {
-      borderRadius: {
-        DEFAULT: '0.25rem',
-        md: '0.375rem'
-      }
-    },
-    variants: {
-      scrollbar: ['rounded']
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-rounded" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thumb-rounded::-webkit-scrollbar-thumb {
-        border-radius: 0.25rem
+    .scrollbar-thumb-rounded-md {
+        --scrollbar-thumb-radius: 0.375rem
+    }
+    .scrollbar-corner-rounded {
+        --scrollbar-corner-radius: 0.25rem
     }"
 `);
 });
