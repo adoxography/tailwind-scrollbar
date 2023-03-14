@@ -2,7 +2,6 @@ const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
 const toColorValue = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
 
-const VARIANTS = ['hover', 'active'];
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
 /**
@@ -20,17 +19,7 @@ const BASE_STYLES = {
  * variables
  */
 const SCROLLBAR_SIZE_BASE = {
-  '--scrollbar-track': 'initial',
-  '--scrollbar-thumb': 'initial',
-  '--scrollbar-corner': 'initial',
-  '--scrollbar-track-hover': 'var(--scrollbar-track)',
-  '--scrollbar-thumb-hover': 'var(--scrollbar-thumb)',
-  '--scrollbar-corner-hover': 'var(--scrollbar-corner)',
-  '--scrollbar-track-active': 'var(--scrollbar-track-hover)',
-  '--scrollbar-thumb-active': 'var(--scrollbar-thumb-hover)',
-  '--scrollbar-corner-active': 'var(--scrollbar-corner-hover)',
-
-  'scrollbar-color': 'var(--scrollbar-thumb) var(--scrollbar-track)',
+  'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
 
   // Make sure the scrollbars are calculated in the elements width
   // TODO: Retrace why this was included - firefox compatibility, maybe?
@@ -45,16 +34,21 @@ const SCROLLBAR_SIZE_BASE = {
     'overflow-y': 'hidden'
   },
 
-  ...Object.fromEntries(['', ...VARIANTS].map(variant => {
-    const classSep = variant ? ':' : '';
-    const valueSep = variant ? '-' : '';
+  ...Object.fromEntries(COMPONENTS.map(component => {
+    const base = `&::-webkit-scrollbar-${component}`;
 
-    return COMPONENTS.map(component => ([
-      `&::-webkit-scrollbar-${component}${classSep}${variant}`,
-      {
-        'background-color': `var(--scrollbar-${component}${valueSep}${variant})`
-      }
-    ]));
+    return [
+      [base, {
+        'background-color': `var(--scrollbar-${component})`,
+        'border-radius': `var(--scrollbar-${component}-radius)`
+      }],
+      [`${base}:hover`, {
+        'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
+      }],
+      [`${base}:active`, {
+        'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`
+      }]
+    ];
   }).flat())
 };
 
@@ -68,8 +62,8 @@ const SCROLLBAR_SIZE_UTILITIES = {
     'scrollbar-width': 'auto',
 
     '&::-webkit-scrollbar': {
-      width: '16px',
-      height: '16px'
+      width: 'var(--scrollbar-width, 16px)',
+      height: 'var(--scrollbar-height, 16px)'
     }
   },
 
@@ -132,9 +126,7 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
     matchUtilities(
       {
         [`scrollbar-${component}-rounded`]: value => ({
-          [`&::-webkit-scrollbar-${component}`]: {
-            'border-radius': value
-          }
+          [`--scrollbar-${component}-radius`]: value
         })
       },
       {
@@ -153,9 +145,7 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
   ['width', 'height'].forEach(dimension => {
     matchUtilities({
       [`scrollbar-${dimension[0]}`]: value => ({
-        '&::-webkit-scrollbar': {
-          [dimension]: value
-        }
+        [`--scrollbar-${dimension}`]: value
       })
     }, {
       values: theme(dimension)
