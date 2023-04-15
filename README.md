@@ -10,9 +10,13 @@ Adds styling utilities for scrollbars in Firefox and webkit-based browsers.
 ```bash
 yarn add -D tailwind-scrollbar
 ```
-or
+using npm: 
 ```bash
 npm install --save-dev tailwind-scrollbar
+```
+using pnpm:
+```bash
+pnpm install -D tailwind-scrollbar
 ```
 
 Add it to the plugins array of your Tailwind config.
@@ -50,6 +54,14 @@ This plugin is capable of adding utilties for creating rounded scrollbars by ref
 plugins: [
     // ...
     require('tailwind-scrollbar')({ nocompatible: true }),
+],
+```
+Or if your using Typescript:
+
+```ts
+plugins: [
+    //...
+    tailwindScrollbar({ nocompatible: true })
 ],
 ```
 
