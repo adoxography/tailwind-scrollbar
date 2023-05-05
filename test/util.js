@@ -5,6 +5,23 @@ const tailwindcss = require('tailwindcss');
 const scrollbarPlugin = require('..');
 
 /**
+ * Runs a config through tailwind
+ *
+ * @see https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
+ * @param {object} config Tailwind config options to pass to tailwind
+ * @returns {Promise<string>} The CSS generated using the provided config
+ */
+const generateTailwindCss = async (config = {}) => {
+  const { currentTestName } = expect.getState();
+
+  const result = await postcss(tailwindcss(config))
+    .process('@tailwind utilities;', {
+      from: `${path.resolve(__filename)}?test=${currentTestName}`
+    });
+
+  return result.css;
+};
+/**
  * Generates the CSS for the plugin
  *
  * @see https://www.oliverdavies.uk/blog/testing-tailwind-css-plugins-jest
@@ -17,16 +34,10 @@ const generatePluginCss = async (config = {}, options = {}) => {
     plugins: [scrollbarPlugin(options)]
   }, config);
 
-  const { currentTestName } = expect.getState();
-
-  const result = await postcss(tailwindcss(tailwindConfig))
-    .process('@tailwind utilities;', {
-      from: `${path.resolve(__filename)}?test=${currentTestName}`
-    });
-
-  return result.css;
+  return generateTailwindCss(tailwindConfig);
 };
 
 module.exports = {
+  generateTailwindCss,
   generatePluginCss
 };

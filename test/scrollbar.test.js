@@ -1,4 +1,4 @@
-const { generatePluginCss } = require('./util');
+const { generatePluginCss, generateTailwindCss } = require('./util');
 
 test('it generates .scrollbar utilities', async () => {
   const css = await generatePluginCss({
@@ -647,4 +647,17 @@ test('it does not generate rounded states when not in nocompatible mode', async 
   });
 
   expect(css).toBe('');
+});
+
+test('it preserves the order of variants', async () => {
+  const content = [{
+    raw: `
+      <button class="hover:bg-black active:bg-black focus:bg-black focus-within:bg-black focus-visible:bg-black disabled:bg-black" />
+    `
+  }];
+
+  const pluginCss = await generatePluginCss({ content });
+  const normalCss = await generateTailwindCss({ content });
+
+  expect(pluginCss).toBe(normalCss);
 });
