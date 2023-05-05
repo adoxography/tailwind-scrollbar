@@ -9,35 +9,49 @@ const typedefs = require('./typedefs');
  */
 
 /**
- * Generates the variants that will need overriding for scrollbar variants to
- * work as expected.
- *
- * Each entry consists of the variant name, the format all non scrollbar
- * variants should take, and the format scrollbar variants should take.
- *
- * @param {Function} config - Accesses Tailwind's configuration
- * @returns {VariantOverride[]} - The overrides
+ * The variants tailwind-scrollbar cares about. hover and focus are the real
+ * targets, but we include the others so that their relative order can be
+ * preserved.
  */
-const generateVariantOverrides = config => [
-  ...[
-    !flagEnabled(config(), 'hoverOnlyWhenSupported')
-      ? {
-        variant: 'hover',
-        defaultFormat: '&:hover',
-        scrollbarFormat: '&'
-      }
-      : {
-        variant: 'hover',
-        defaultFormat: '@media (hover: hover) and (pointer: fine) { &:hover }',
-        scrollbarFormat: '@media (hover: hover) and (pointer: fine) { & }'
-      }
-  ],
-  {
-    variant: 'active',
-    defaultFormat: '&:active',
-    scrollbarFormat: '&'
-  }
+const variants = [
+  'hover',
+  'focus',
+  'focus-visible',
+  'active',
+  'enabled',
+  'disabled'
 ];
+
+/**
+ * Gets the variant format string used by Tailwind for a variant.
+ *
+ * @param {string} variant The name of the variant
+ * @param {typedefs.TailwindPlugin.config} config - Tailwind's configuration
+ * @returns {string} The variant format string
+ */
+const getDefaultFormat = (variant, config) => {
+  if (variant === 'hover' && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+    return '@media (hover: hover) and (pointer: fine) { &:hover }';
+  }
+
+  return `&:${variant}`;
+};
+
+/**
+ * Gets the variant format string that should be used if a rule is detected to
+ * target a scrollbar
+ *
+ * @param {string} variant The name of the variant
+ * @param {typedefs.TailwindPlugin.config} config - Tailwind's configuration
+ * @returns {string} The variant format string
+ */
+const getScrollbarFormat = (variant, config) => {
+  if (variant === 'hover' && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+    return '@media (hover: hover) and (pointer: fine) { & }';
+  }
+
+  return '&';
+};
 
 /**
  * Modifies the way variant utilities are generated for scrollbars.
@@ -51,9 +65,7 @@ const generateVariantOverrides = config => [
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addVariantOverrides = ({ addVariant, config }) => {
-  const variantOverrides = generateVariantOverrides(config);
-
-  variantOverrides.forEach(({ variant, defaultFormat, scrollbarFormat }) => {
+  variants.forEach(variant => {
     addVariant(variant, ({ container }) => {
       const suffix = `-${variant}`;
       let found = false;
@@ -68,7 +80,11 @@ const addVariantOverrides = ({ addVariant, config }) => {
         });
       });
 
-      return found ? scrollbarFormat : defaultFormat;
+      if (found) {
+        return getScrollbarFormat(variant, config);
+      }
+
+      return getDefaultFormat(variant, config);
     });
   });
 };
