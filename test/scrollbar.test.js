@@ -47,6 +47,7 @@ test('it generates .scrollbar utilities', async () => {
         scrollbar-width: auto;
     }
     .scrollbar::-webkit-scrollbar {
+        display: block;
         width: var(--scrollbar-width, 16px);
         height: var(--scrollbar-height, 16px);
     }"
@@ -100,6 +101,7 @@ test('it generates .scrollbar-thin utilities', async () => {
         scrollbar-width: thin;
     }
     .scrollbar-thin::-webkit-scrollbar {
+        display: block;
         width: 8px;
         height: 8px;
     }"
