@@ -49,6 +49,7 @@ const SCROLLBAR_SIZE_UTILITIES = {
     'scrollbar-width': 'auto',
 
     '&::-webkit-scrollbar': {
+      display: 'block',
       width: 'var(--scrollbar-width, 16px)',
       height: 'var(--scrollbar-height, 16px)'
     }
@@ -59,6 +60,7 @@ const SCROLLBAR_SIZE_UTILITIES = {
     'scrollbar-width': 'thin',
 
     '&::-webkit-scrollbar': {
+      display: 'block',
       width: '8px',
       height: '8px'
     }
