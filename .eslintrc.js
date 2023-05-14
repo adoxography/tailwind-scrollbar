@@ -34,5 +34,10 @@ module.exports = {
         ArrowFunctionExpression: true
       }
     }]
+  },
+  settings: {
+    jsdoc: {
+      mode: 'typescript'
+    }
   }
 };
