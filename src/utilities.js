@@ -1,6 +1,8 @@
-const flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette');
-const toColorValue = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
+const { agnosticRequire } = require('./helpers');
+
+const flattenColorPalette = agnosticRequire('tailwindcss/lib/util/flattenColorPalette');
+const toColorValue = agnosticRequire('tailwindcss/lib/util/toColorValue');
 
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
@@ -81,16 +83,16 @@ const SCROLLBAR_SIZE_UTILITIES = {
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addColorUtilities = ({ matchUtilities, theme }) => {
-  const themeColors = flattenColorPalette.default(theme('colors'));
+  const themeColors = flattenColorPalette(theme('colors'));
   const colors = Object.fromEntries(
-    Object.entries(themeColors).map(([k, v]) => [k, toColorValue.default(v)])
+    Object.entries(themeColors).map(([k, v]) => [k, toColorValue(v)])
   );
 
   COMPONENTS.forEach(component => {
     matchUtilities(
       {
         [`scrollbar-${component}`]: value => {
-          const color = toColorValue.default(value);
+          const color = toColorValue(value);
           return {
             [`--scrollbar-${component}`]: `${color} !important`
           };
