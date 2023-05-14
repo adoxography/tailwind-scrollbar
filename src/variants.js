@@ -1,3 +1,5 @@
+// This import doesn't work on Tailwind Play. Move to typescript might fix it
+// on its own, so for now, we just won't check flags on Tailwind Play.
 const { flagEnabled } = require('tailwindcss/lib/featureFlags');
 const typedefs = require('./typedefs');
 
@@ -30,7 +32,7 @@ const variants = [
  * @returns {string} The variant format string
  */
 const getDefaultFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+  if (variant === 'hover' && flagEnabled?.(config(), 'hoverOnlyWhenSupported')) {
     return '@media (hover: hover) and (pointer: fine) { &:hover }';
   }
 
@@ -46,7 +48,7 @@ const getDefaultFormat = (variant, config) => {
  * @returns {string} The variant format string
  */
 const getScrollbarFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+  if (variant === 'hover' && flagEnabled?.(config(), 'hoverOnlyWhenSupported')) {
     return '@media (hover: hover) and (pointer: fine) { & }';
   }
 
