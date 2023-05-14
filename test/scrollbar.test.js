@@ -189,11 +189,11 @@ test('it generates scrollbar thumb utilities', async () => {
     .scrollbar-thumb-indigo {
         --scrollbar-thumb: #5c6ac4 !important
     }
-    .scrollbar-thumb-indigo-dark {
-        --scrollbar-thumb: #202e78 !important
-    }
     .scrollbar-thumb-indigo-100 {
         --scrollbar-thumb: #808080 !important
+    }
+    .scrollbar-thumb-indigo-dark {
+        --scrollbar-thumb: #202e78 !important
     }"
   `);
 });
@@ -227,11 +227,11 @@ test('it generates scrollbar corner utilities', async () => {
     .scrollbar-corner-indigo {
         --scrollbar-corner: #5c6ac4 !important
     }
-    .scrollbar-corner-indigo-dark {
-        --scrollbar-corner: #202e78 !important
-    }
     .scrollbar-corner-indigo-100 {
         --scrollbar-corner: #808080 !important
+    }
+    .scrollbar-corner-indigo-dark {
+        --scrollbar-corner: #202e78 !important
     }"
   `);
 });
@@ -500,11 +500,11 @@ test('it generates width utilties in nocompatible mode', async () => {
     ".scrollbar-w-1 {
         --scrollbar-width: 0.25rem
     }
-    .scrollbar-w-full {
-        --scrollbar-width: 100%
-    }
     .scrollbar-w-\\[3px\\] {
         --scrollbar-width: 3px
+    }
+    .scrollbar-w-full {
+        --scrollbar-width: 100%
     }"
 `);
 });
@@ -532,11 +532,11 @@ test('it generates height utilties in nocompatible mode', async () => {
     ".scrollbar-h-1 {
         --scrollbar-height: 0.25rem
     }
-    .scrollbar-h-full {
-        --scrollbar-height: 100%
-    }
     .scrollbar-h-\\[3px\\] {
         --scrollbar-height: 3px
+    }
+    .scrollbar-h-full {
+        --scrollbar-height: 100%
     }"
 `);
 });
@@ -567,11 +567,11 @@ test('it generates rounded states in nocompatible mode', async () => {
     ".scrollbar-track-rounded {
         --scrollbar-track-radius: 0.25rem
     }
-    .scrollbar-track-rounded-md {
-        --scrollbar-track-radius: 0.375rem
-    }
     .scrollbar-track-rounded-\\[16px\\] {
         --scrollbar-track-radius: 16px
+    }
+    .scrollbar-track-rounded-md {
+        --scrollbar-track-radius: 0.375rem
     }
     .scrollbar-thumb-rounded {
         --scrollbar-thumb-radius: 0.25rem

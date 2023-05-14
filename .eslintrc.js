@@ -33,6 +33,9 @@ module.exports = {
       require: {
         ArrowFunctionExpression: true
       }
+    }],
+    'jsdoc/tag-lines': ['error', 'never', {
+      startLines: null
     }]
   },
   settings: {
