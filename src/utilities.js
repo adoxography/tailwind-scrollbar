@@ -1,8 +1,12 @@
+const flattenColorPaletteImport = require('tailwindcss/lib/util/flattenColorPalette');
+const toColorValueImport = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
-const { agnosticRequire } = require('./helpers');
+const { importDefault } = require('./helpers');
 
-const flattenColorPalette = agnosticRequire('tailwindcss/lib/util/flattenColorPalette');
-const toColorValue = agnosticRequire('tailwindcss/lib/util/toColorValue');
+// Tailwind Play will import these internal imports as ES6 imports, while most
+// other workflows will import them as CommonJS imports.
+const flattenColorPalette = importDefault(flattenColorPaletteImport);
+const toColorValue = importDefault(toColorValueImport);
 
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
