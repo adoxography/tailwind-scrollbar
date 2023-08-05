@@ -32,7 +32,7 @@ const variants = [
  * @returns {string} The variant format string
  */
 const getDefaultFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled?.(config(), 'hoverOnlyWhenSupported')) {
+  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
     return '@media (hover: hover) and (pointer: fine) { &:hover }';
   }
 
@@ -48,7 +48,7 @@ const getDefaultFormat = (variant, config) => {
  * @returns {string} The variant format string
  */
 const getScrollbarFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled?.(config(), 'hoverOnlyWhenSupported')) {
+  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
     return '@media (hover: hover) and (pointer: fine) { & }';
   }
 
