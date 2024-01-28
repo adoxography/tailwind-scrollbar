@@ -9,9 +9,7 @@ sidebar_position: 1
 
 ## Motivation
 
-There are currently two competing standards for styling scrollbars amongst browsers: the [scrollbar-width](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width) and [scrollbar-color](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color) properties used by Firefox and the [::-webkit-scrollbar](https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar) family of pseudoelements used by everything else\*. This plugin defines a single API for configuring both standards at once from within Tailwind.
-
-_\* As of Chrome v118, `scrollbar-width` and `scrollbar-color` are now supported with the `#enable-experimental-web-platform-features` flag._
+There are currently two competing standards for styling scrollbars amongst browsers: the [scrollbar-width](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-width) and [scrollbar-color](https://developer.mozilla.org/en-US/docs/Web/CSS/scrollbar-color) properties used by Firefox and newer Chromium-based browsers, and the [::-webkit-scrollbar](https://developer.mozilla.org/en-US/docs/Web/CSS/::-webkit-scrollbar) family of pseudoelements used by everything else. This plugin defines a single API for configuring both standards at once from within Tailwind.
 
 ### What this plugin isn't
 
