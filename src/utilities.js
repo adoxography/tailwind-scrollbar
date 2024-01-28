@@ -11,22 +11,44 @@ const toColorValue = importDefault(toColorValueImport);
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
 /**
- * Base resets to make the plugin's utilities work
+ * @param {Record<never, unknown>} properties - The properties to assign
+ * @param {boolean} preferPseudoElements - If true, only browsers that cannot
+ *    use pseudoelements will specify scrollbar properties
+ * @returns {Record<string, unknown>} - The generated CSS rules
  */
-const BASE_STYLES = {
-  '*': {
-    'scrollbar-color': 'initial',
-    'scrollbar-width': 'initial'
+const scrollbarProperties = (properties, preferPseudoElements) => {
+  if (preferPseudoElements) {
+    return {
+      '@supports (-moz-appearance:none)': properties
+    };
   }
+
+  return properties;
 };
 
 /**
- * Tells an element what to do with --scrollbar-track and --scrollbar-thumb
- * variables
+ * Base resets to make the plugin's utilities work
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ *    scrollbar styling strategy: standards track or pseudoelements
  */
-const SCROLLBAR_SIZE_BASE = {
-  'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)',
+const addBaseStyles = ({ addBase }, preferredStrategy) => {
+  addBase({
+    '*': scrollbarProperties({
+      'scrollbar-color': 'initial',
+      'scrollbar-width': 'initial'
+    }, preferredStrategy === 'pseudoelements')
+  });
+};
 
+/**
+ * Generates utilties that tell an element what to do with
+ * --scrollbar-track and --scrollbar-thumb custom properties
+ *
+ * @returns {Record<string, unknown>} - The generated CSS
+ */
+const generateBaseUtilities = () => ({
   ...Object.fromEntries(COMPONENTS.map(component => {
     const base = `&::-webkit-scrollbar-${component}`;
 
@@ -43,16 +65,24 @@ const SCROLLBAR_SIZE_BASE = {
       }]
     ];
   }).flat())
-};
+});
 
 /**
  * Utilities for initializing a custom styled scrollbar, which implicitly set
  * the scrollbar's size
+ *
+ * @param {object} options - Options
+ * @param {boolean} options.preferPseudoElements - If true, only browsers that
+ *    cannot use pseudoelements will specify scrollbar-width
+ * @returns {Record<string, unknown>} - Base size utilities for scrollbars
  */
-const SCROLLBAR_SIZE_UTILITIES = {
+const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
   '.scrollbar': {
-    ...SCROLLBAR_SIZE_BASE,
-    'scrollbar-width': 'auto',
+    ...generateBaseUtilities(),
+    ...scrollbarProperties({
+      'scrollbar-width': 'auto',
+      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
+    }, preferPseudoElements),
 
     '&::-webkit-scrollbar': {
       display: 'block',
@@ -62,8 +92,11 @@ const SCROLLBAR_SIZE_UTILITIES = {
   },
 
   '.scrollbar-thin': {
-    ...SCROLLBAR_SIZE_BASE,
-    'scrollbar-width': 'thin',
+    ...generateBaseUtilities(),
+    ...scrollbarProperties({
+      'scrollbar-width': 'thin',
+      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
+    }, preferPseudoElements),
 
     '&::-webkit-scrollbar': {
       display: 'block',
@@ -73,13 +106,15 @@ const SCROLLBAR_SIZE_UTILITIES = {
   },
 
   '.scrollbar-none': {
-    'scrollbar-width': 'none',
+    ...scrollbarProperties({
+      'scrollbar-width': 'none'
+    }, preferPseudoElements),
 
     '&::-webkit-scrollbar': {
       display: 'none'
     }
   }
-};
+});
 
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
@@ -132,6 +167,17 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
 };
 
 /**
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ *    scrollbar styling strategy: standards track or pseudoelements
+ */
+const addBaseSizeUtilities = ({ addUtilities }, preferredStrategy) => {
+  addUtilities(generateScrollbarSizeUtilities({
+    preferPseudoElements: preferredStrategy === 'pseudoelements'
+  }));
+};
+
+/**
  * Adds scrollbar-w-* and scrollbar-h-* utilities
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
@@ -149,8 +195,8 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
 };
 
 module.exports = {
-  BASE_STYLES,
-  SCROLLBAR_SIZE_UTILITIES,
+  addBaseStyles,
+  addBaseSizeUtilities,
   addColorUtilities,
   addRoundedUtilities,
   addSizeUtilities

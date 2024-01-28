@@ -1,26 +1,17 @@
 /**
  * Base resets to make the plugin's utilities work
+ *
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ *    scrollbar styling strategy: standards track or pseudoelements
  */
-export const BASE_STYLES: {
-    '*': {
-        'scrollbar-color': string;
-        'scrollbar-width': string;
-    };
-};
+export function addBaseStyles({ addBase }: typedefs.TailwindPlugin, preferredStrategy: 'standard' | 'peseudoelements'): void;
 /**
- * Utilities for initializing a custom styled scrollbar, which implicitly set
- * the scrollbar's size
+ * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ *    scrollbar styling strategy: standards track or pseudoelements
  */
-export const SCROLLBAR_SIZE_UTILITIES: {
-    '.scrollbar': any;
-    '.scrollbar-thin': any;
-    '.scrollbar-none': {
-        'scrollbar-width': string;
-        '&::-webkit-scrollbar': {
-            display: string;
-        };
-    };
-};
+export function addBaseSizeUtilities({ addUtilities }: typedefs.TailwindPlugin, preferredStrategy: 'standard' | 'peseudoelements'): void;
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
  *
