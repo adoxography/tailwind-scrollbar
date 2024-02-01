@@ -24,7 +24,8 @@ module.exports = {
   },
   plugins: [
     require('tailwind-scrollbar')({
-      nocompatible: true
+      nocompatible: true,
+      preferredStrategy: 'pseudoelements'
     }),
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('self-dark', '[data-theme="dark"]&');
