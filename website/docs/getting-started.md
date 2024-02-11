@@ -32,7 +32,7 @@ module.exports = {
 
 ### `nocompatible`
 
-By default, only utilities that can have expressions across browsers are available. In order to access additional utilities that may not exist in all browsers, like [rounding](/examples#rounded-bars) and [custom sizes](/examples#custom-sizes), you can add the `nocompatible` flag to the configuration.
+By default, only utilities that can have expressions across browsers are available. In order to access additional utilities that may not exist in all browsers, like [rounding](/examples#rounded-bars) and [custom sizes](/examples#custom-sizes), you can add the `nocompatible` flag to the configuration. You may need to also set the [preferred strategy](#preferredstrategy) to `pseudoelements` for `nocompatible` utilities to take effect in newer browsers.
 
 ```javascript
 module.exports = {
