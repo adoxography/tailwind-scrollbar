@@ -10,46 +10,44 @@ test('it generates .scrollbar utilities', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar {
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
-    }
-    .scrollbar::-webkit-scrollbar-track {
+    ".scrollbar::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius);
+        border-radius: var(--scrollbar-track-radius)
     }
     .scrollbar::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
     }
     .scrollbar::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)));
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
     }
     .scrollbar::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius);
+        border-radius: var(--scrollbar-thumb-radius)
     }
     .scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
     }
     .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
     }
     .scrollbar::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius);
+        border-radius: var(--scrollbar-corner-radius)
     }
     .scrollbar::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
     }
     .scrollbar::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
     }
     .scrollbar {
         scrollbar-width: auto;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
     }
     .scrollbar::-webkit-scrollbar {
         display: block;
         width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px);
+        height: var(--scrollbar-height, 16px)
     }"
   `);
 });
@@ -64,46 +62,44 @@ test('it generates .scrollbar-thin utilities', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thin {
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
-    }
-    .scrollbar-thin::-webkit-scrollbar-track {
+    ".scrollbar-thin::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius);
+        border-radius: var(--scrollbar-track-radius)
     }
     .scrollbar-thin::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track));
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
     }
     .scrollbar-thin::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)));
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
     }
     .scrollbar-thin::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius);
+        border-radius: var(--scrollbar-thumb-radius)
     }
     .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb));
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
     }
     .scrollbar-thin::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
     }
     .scrollbar-thin::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius);
+        border-radius: var(--scrollbar-corner-radius)
     }
     .scrollbar-thin::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner));
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
     }
     .scrollbar-thin::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
     }
     .scrollbar-thin {
         scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
     }
     .scrollbar-thin::-webkit-scrollbar {
         display: block;
         width: 8px;
-        height: 8px;
+        height: 8px
     }"
   `);
 });
@@ -125,6 +121,143 @@ test('it generates .scrollbar-none utilities', async () => {
         display: none;
     }"
   `);
+});
+
+describe('it limits scrollbar properties to Firefox when pseudoelements are preferred', () => {
+  test('for scrollbar', async () => {
+    const css = await generatePluginCss({
+      content: [{
+        raw: `
+          <div class="scrollbar" />
+        `
+      }]
+    }, {
+      preferredStrategy: 'pseudoelements'
+    });
+
+    expect(css).toMatchInlineSnapshot(`
+    ".scrollbar::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius)
+    }
+    .scrollbar::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
+    }
+    .scrollbar::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
+    }
+    .scrollbar::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius)
+    }
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
+    }
+    .scrollbar::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
+    }
+    .scrollbar::-webkit-scrollbar-corner {
+        background-color: var(--scrollbar-corner);
+        border-radius: var(--scrollbar-corner-radius)
+    }
+    .scrollbar::-webkit-scrollbar-corner:hover {
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
+    }
+    .scrollbar::-webkit-scrollbar-corner:active {
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
+    }
+    @supports (-moz-appearance:none) {
+        .scrollbar {
+            scrollbar-width: auto;
+            scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
+        }
+    }
+    .scrollbar::-webkit-scrollbar {
+        display: block;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px)
+    }"
+  `);
+  });
+
+  test('for scrollbar-thin', async () => {
+    const css = await generatePluginCss({
+      content: [{
+        raw: `
+          <div class="scrollbar-thin" />
+        `
+      }]
+    }, {
+      preferredStrategy: 'pseudoelements'
+    });
+
+    expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-thin::-webkit-scrollbar-track {
+        background-color: var(--scrollbar-track);
+        border-radius: var(--scrollbar-track-radius)
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:hover {
+        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
+    }
+    .scrollbar-thin::-webkit-scrollbar-track:active {
+        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-thumb);
+        border-radius: var(--scrollbar-thumb-radius)
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
+    }
+    .scrollbar-thin::-webkit-scrollbar-thumb:active {
+        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner {
+        background-color: var(--scrollbar-corner);
+        border-radius: var(--scrollbar-corner-radius)
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner:hover {
+        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
+    }
+    .scrollbar-thin::-webkit-scrollbar-corner:active {
+        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
+    }
+    @supports (-moz-appearance:none) {
+        .scrollbar-thin {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
+        }
+    }
+    .scrollbar-thin::-webkit-scrollbar {
+        display: block;
+        width: 8px;
+        height: 8px
+    }"
+  `);
+  });
+
+  test('for scrollbar-none', async () => {
+    const css = await generatePluginCss({
+      content: [{
+        raw: `
+          <div class="scrollbar-none" />
+        `
+      }]
+    }, {
+      preferredStrategy: 'pseudoelements'
+    });
+
+    expect(css).toMatchInlineSnapshot(`
+    "@supports (-moz-appearance:none) {
+        .scrollbar-none {
+            scrollbar-width: none
+        }
+    }
+    .scrollbar-none::-webkit-scrollbar {
+        display: none
+    }"
+  `);
+  });
 });
 
 test('it generates scrollbar track utilities', async () => {

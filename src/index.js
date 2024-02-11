@@ -1,7 +1,7 @@
 const plugin = require('tailwindcss/plugin');
 const {
-  BASE_STYLES,
-  SCROLLBAR_SIZE_UTILITIES,
+  addBaseStyles,
+  addBaseSizeUtilities,
   addColorUtilities,
   addRoundedUtilities,
   addSizeUtilities
@@ -9,8 +9,16 @@ const {
 const { addVariantOverrides } = require('./variants');
 
 module.exports = plugin.withOptions((options = {}) => tailwind => {
-  tailwind.addBase(BASE_STYLES);
-  tailwind.addUtilities(SCROLLBAR_SIZE_UTILITIES);
+  let preferredStrategy = options.preferredStrategy ?? 'standard';
+
+  if (preferredStrategy !== 'standard' && preferredStrategy !== 'pseudoelements') {
+    // eslint-disable-next-line no-console
+    console.warn('WARNING: tailwind-scrollbar preferredStrategy should be \'standard\' or \'pseudoelements\'');
+    preferredStrategy = 'standard';
+  }
+
+  addBaseStyles(tailwind, preferredStrategy);
+  addBaseSizeUtilities(tailwind, preferredStrategy);
   addColorUtilities(tailwind);
   addVariantOverrides(tailwind);
 
