@@ -23,5 +23,5 @@ export type VariantOverride = {
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
-export function addVariantOverrides({ addVariant, config }: typedefs.TailwindPlugin): void;
+export function addVariantOverrides({ addVariant, matchVariant, config }: typedefs.TailwindPlugin): void;
 import typedefs = require("./typedefs");

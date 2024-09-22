@@ -66,7 +66,7 @@ const getScrollbarFormat = (variant, config) => {
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
-const addVariantOverrides = ({ addVariant, config }) => {
+const addVariantOverrides = ({ addVariant, matchVariant, config }) => {
   variants.forEach(variant => {
     addVariant(variant, ({ container }) => {
       const suffix = `-${variant}`;
@@ -89,6 +89,12 @@ const addVariantOverrides = ({ addVariant, config }) => {
       return getDefaultFormat(variant, config);
     });
   });
+
+  // The reordering also affects matched variants, such as the built in data-
+  // variant. Regenerating the match causes the variant to be put back to where
+  // it should be. It's quite possible that there are other classes of variants
+  // that should be here, too.
+  matchVariant('data', value => `&[data-${value}]`);
 };
 
 module.exports = {

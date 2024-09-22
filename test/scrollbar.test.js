@@ -796,3 +796,16 @@ test('it preserves the order of variants', async () => {
 
   expect(pluginCss).toBe(normalCss);
 });
+
+test('it preserves the order of data- variants', async () => {
+  const content = [{
+    raw: `
+      <button class="focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-yellow-500" />
+    `
+  }];
+
+  const pluginCss = await generatePluginCss({ content });
+  const normalCss = await generateTailwindCss({ content });
+
+  expect(pluginCss).toBe(normalCss);
+});
