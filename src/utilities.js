@@ -1,12 +1,10 @@
 const flattenColorPaletteImport = require('tailwindcss/lib/util/flattenColorPalette');
-const toColorValueImport = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
 const { importDefault } = require('./helpers');
 
 // Tailwind Play will import these internal imports as ES6 imports, while most
 // other workflows will import them as CommonJS imports.
 const flattenColorPalette = importDefault(flattenColorPaletteImport);
-const toColorValue = importDefault(toColorValueImport);
 
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
@@ -115,6 +113,14 @@ const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
     }
   }
 });
+
+/**
+ * Converts a color value or function to a color value
+ *
+ * @param {string | Function} maybeFunction - The color value or function
+ * @returns {string} - The color value
+ */
+const toColorValue = maybeFunction => (typeof maybeFunction === 'function' ? maybeFunction({}) : maybeFunction);
 
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
