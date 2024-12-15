@@ -1,7 +1,14 @@
-// This import doesn't work on Tailwind Play. Move to typescript might fix it
-// on its own, so for now, we just won't check flags on Tailwind Play.
-const { flagEnabled } = require('tailwindcss/lib/featureFlags');
 const typedefs = require('./typedefs');
+
+const { flagEnabled } = (() => {
+  try {
+    // from tailwind v4, featureFlags is not exist
+    // eslint-disable-next-line global-require
+    return require('tailwindcss/lib/featureFlags');
+  } catch {
+    return {};
+  }
+})();
 
 /**
  * @typedef {object} VariantOverride
