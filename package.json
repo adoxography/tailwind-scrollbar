@@ -18,7 +18,7 @@
     "src/*"
   ],
   "peerDependencies": {
-    "tailwindcss": "3.x"
+    "tailwindcss": "4.x || 3.x"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
