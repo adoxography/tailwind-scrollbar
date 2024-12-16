@@ -1,12 +1,21 @@
 const typedefs = require('./typedefs');
 
+let featureFlagsAvailable = true;
+
 const { flagEnabled } = (() => {
+  // from tailwind v4, featureFlags is not exist
   try {
-    // from tailwind v4, featureFlags is not exist
+    // with tailwind v3
     // eslint-disable-next-line global-require
     return require('tailwindcss/lib/featureFlags');
-  } catch {
-    return {};
+  } catch (e) {
+    // with tailwind v4
+    if (e instanceof Error && e.code === 'ERR_PACKAGE_PATH_NOT_EXPORTED') {
+      featureFlagsAvailable = false;
+      return {};
+    }
+    // unknown error
+    throw e;
   }
 })();
 
@@ -39,8 +48,14 @@ const variants = [
  * @returns {string} The variant format string
  */
 const getDefaultFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
-    return '@media (hover: hover) and (pointer: fine) { &:hover }';
+  if (variant === 'hover') {
+    if (!featureFlagsAvailable) {
+      return '@media (hover: hover) { &:hover }';
+    }
+
+    if (flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+      return '@media (hover: hover) and (pointer: fine) { &:hover }';
+    }
   }
 
   return `&:${variant}`;
@@ -55,8 +70,14 @@ const getDefaultFormat = (variant, config) => {
  * @returns {string} The variant format string
  */
 const getScrollbarFormat = (variant, config) => {
-  if (variant === 'hover' && flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
-    return '@media (hover: hover) and (pointer: fine) { & }';
+  if (variant === 'hover') {
+    if (!featureFlagsAvailable) {
+      return '@media (hover: hover) { & }';
+    }
+
+    if (flagEnabled && flagEnabled(config(), 'hoverOnlyWhenSupported')) {
+      return '@media (hover: hover) and (pointer: fine) { & }';
+    }
   }
 
   return '&';
