@@ -206,16 +206,16 @@ test('it generates scrollbar track utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-black {
-      --scrollbar-track: #000000 !important;
+      --scrollbar-track: #000000;
     }
     .scrollbar-track-indigo {
-      --scrollbar-track: #5c6ac4 !important;
+      --scrollbar-track: #5c6ac4;
     }
     .scrollbar-track-indigo-100 {
-      --scrollbar-track: #808080 !important;
+      --scrollbar-track: #808080;
     }
     .scrollbar-track-indigo-dark {
-      --scrollbar-track: #202e78 !important;
+      --scrollbar-track: #202e78;
     }
     :root {
       --color-black: #000000;
@@ -244,16 +244,16 @@ test('it generates scrollbar thumb utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-black {
-      --scrollbar-thumb: #000000 !important;
+      --scrollbar-thumb: #000000;
     }
     .scrollbar-thumb-indigo {
-      --scrollbar-thumb: #5c6ac4 !important;
+      --scrollbar-thumb: #5c6ac4;
     }
     .scrollbar-thumb-indigo-100 {
-      --scrollbar-thumb: #808080 !important;
+      --scrollbar-thumb: #808080;
     }
     .scrollbar-thumb-indigo-dark {
-      --scrollbar-thumb: #202e78 !important;
+      --scrollbar-thumb: #202e78;
     }
     :root {
       --color-black: #000000;
@@ -282,16 +282,16 @@ test('it generates scrollbar corner utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-black {
-      --scrollbar-corner: #000000 !important;
+      --scrollbar-corner: #000000;
     }
     .scrollbar-corner-indigo {
-      --scrollbar-corner: #5c6ac4 !important;
+      --scrollbar-corner: #5c6ac4;
     }
     .scrollbar-corner-indigo-100 {
-      --scrollbar-corner: #808080 !important;
+      --scrollbar-corner: #808080;
     }
     .scrollbar-corner-indigo-dark {
-      --scrollbar-corner: #202e78 !important;
+      --scrollbar-corner: #202e78;
     }
     :root {
       --color-black: #000000;
@@ -313,7 +313,7 @@ test('it uses arbitrary color values', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-\\[\\#ff0000\\] {
-      --scrollbar-track: #ff0000 !important;
+      --scrollbar-track: #ff0000;
     }
     @layer base {
       * {
@@ -331,7 +331,7 @@ test('it can use opacity modifiers', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-red-100\\/50 {
-      --scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent) !important;
+      --scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent);
     }
     :root {
       --color-red-100: rgb(254 226 226);
@@ -361,7 +361,7 @@ test.skip('it handles color functions', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-func {
-        --scrollbar-thumb: red !important
+        --scrollbar-thumb: red
     }"
 `);
 });
@@ -376,11 +376,11 @@ test('it generates thumb hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-      --scrollbar-thumb: #fff !important;
+      --scrollbar-thumb: #fff;
     }
     .scrollbar-hover\\:scrollbar-thumb-black {
       &::-webkit-scrollbar-thumb:hover {
-        --scrollbar-thumb: #000 !important;
+        --scrollbar-thumb: #000;
       }
     }
     :root {
@@ -406,11 +406,11 @@ test('it generates track hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-      --scrollbar-track: #fff !important;
+      --scrollbar-track: #fff;
     }
     .scrollbar-track-hover\\:scrollbar-track-black {
       &::-webkit-scrollbar-track:hover {
-        --scrollbar-track: #000 !important;
+        --scrollbar-track: #000;
       }
     }
     :root {
@@ -436,11 +436,11 @@ test('it generates corner hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-white {
-      --scrollbar-corner: #fff !important;
+      --scrollbar-corner: #fff;
     }
     .scrollbar-corner-hover\\:scrollbar-corner-black {
       &::-webkit-scrollbar-corner:hover {
-        --scrollbar-corner: #000 !important;
+        --scrollbar-corner: #000;
       }
     }
     :root {
@@ -466,11 +466,11 @@ test('it generates thumb active utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-      --scrollbar-thumb: #fff !important;
+      --scrollbar-thumb: #fff;
     }
     .scrollbar-active\\:scrollbar-thumb-black {
       &::-webkit-scrollbar-thumb:active {
-        --scrollbar-thumb: #000 !important;
+        --scrollbar-thumb: #000;
       }
     }
     :root {
@@ -496,11 +496,11 @@ test('it generates track active utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-      --scrollbar-track: #fff !important;
+      --scrollbar-track: #fff;
     }
     .scrollbar-track-active\\:scrollbar-track-black {
       &::-webkit-scrollbar-track:active {
-        --scrollbar-track: #000 !important;
+        --scrollbar-track: #000;
       }
     }
     :root {
@@ -526,11 +526,11 @@ test('it generates corner active utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-white {
-      --scrollbar-corner: #fff !important;
+      --scrollbar-corner: #fff;
     }
     .scrollbar-corner-active\\:scrollbar-corner-black {
       &::-webkit-scrollbar-corner:active {
-        --scrollbar-corner: #000 !important;
+        --scrollbar-corner: #000;
       }
     }
     :root {
@@ -554,7 +554,7 @@ test('it generates dark utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".dark\\:scrollbar-thumb-black {
       @media (prefers-color-scheme: dark) {
-        --scrollbar-thumb: #000000 !important;
+        --scrollbar-thumb: #000000;
       }
     }
     :root {

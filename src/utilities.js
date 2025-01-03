@@ -132,12 +132,9 @@ const addColorUtilities = ({ matchUtilities, theme }) => {
   COMPONENTS.forEach(component => {
     matchUtilities(
       {
-        [`scrollbar-${component}`]: value => {
-          const color = toColorValue(value);
-          return {
-            [`--scrollbar-${component}`]: `${color} !important`
-          };
-        }
+        [`scrollbar-${component}`]: value => ({
+          [`--scrollbar-${component}`]: toColorValue(value)
+        })
       },
       {
         values: colors,
