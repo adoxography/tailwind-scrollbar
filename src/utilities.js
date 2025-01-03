@@ -1,3 +1,5 @@
+// TODO: Figure out why the linter is unhappy with this import
+// eslint-disable-next-line import/no-unresolved
 const flattenColorPaletteImport = require('tailwindcss/lib/util/flattenColorPalette');
 const typedefs = require('./typedefs');
 const { importDefault } = require('./helpers');
@@ -54,12 +56,6 @@ const generateBaseUtilities = () => ({
       [base, {
         'background-color': `var(--scrollbar-${component})`,
         'border-radius': `var(--scrollbar-${component}-radius)`
-      }],
-      [`${base}:hover`, {
-        'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
-      }],
-      [`${base}:active`, {
-        'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`
       }]
     ];
   }).flat())

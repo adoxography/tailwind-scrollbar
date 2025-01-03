@@ -9,7 +9,7 @@ export type TailwindPlugin = import("./typedefs").TailwindPlugin;
  * approach:
  *     - It made the plugin prone to breaking other unrelated styles
  *     - It made logic like "make an element's scrollbar green when the
- *       *element* is hovered impossible. (This is unusual, but should still
+ *       _element_ is hovered impossible. (This is unusual, but should still
  *       be possible.)
  *     - It straight up does not work in Tailwind v4.
  *
