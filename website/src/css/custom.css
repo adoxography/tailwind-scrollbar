@@ -4,9 +4,20 @@
  * work well for content-centric websites.
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@plugin 'tailwind-scrollbar' {
+  nocompatible: true;
+  preferredStrategy: "pseudoelements";
+}
+@plugin 'tailwindcss/plugin';
+
+@variant dark (&:is([data-theme="dark"] *));
+
+@theme {
+  --color-custom: #10b981;
+  --color-custom-light: #d1fae5;
+}
 
 /* You can override the default Infima variables here. */
 :root {
