@@ -217,7 +217,7 @@ test('it generates scrollbar track utilities', async () => {
     .scrollbar-track-indigo-dark {
       --scrollbar-track: #202e78;
     }
-    :root {
+    :root, :host {
       --color-black: #000000;
       --color-indigo: #5c6ac4;
       --color-indigo-dark: #202e78;
@@ -255,7 +255,7 @@ test('it generates scrollbar thumb utilities', async () => {
     .scrollbar-thumb-indigo-dark {
       --scrollbar-thumb: #202e78;
     }
-    :root {
+    :root, :host {
       --color-black: #000000;
       --color-indigo: #5c6ac4;
       --color-indigo-dark: #202e78;
@@ -293,7 +293,7 @@ test('it generates scrollbar corner utilities', async () => {
     .scrollbar-corner-indigo-dark {
       --scrollbar-corner: #202e78;
     }
-    :root {
+    :root, :host {
       --color-black: #000000;
       --color-indigo: #5c6ac4;
       --color-indigo-dark: #202e78;
@@ -333,7 +333,7 @@ test('it can use opacity modifiers', async () => {
     ".scrollbar-track-red-100\\/50 {
       --scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent);
     }
-    :root {
+    :root, :host {
       --color-red-100: rgb(254 226 226);
     }
     @layer base {
@@ -383,7 +383,7 @@ test('it generates thumb hover utilities', async () => {
         --scrollbar-thumb: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -413,7 +413,7 @@ test('it generates track hover utilities', async () => {
         --scrollbar-track: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -443,7 +443,7 @@ test('it generates corner hover utilities', async () => {
         --scrollbar-corner: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -473,7 +473,7 @@ test('it generates thumb active utilities', async () => {
         --scrollbar-thumb: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -503,7 +503,7 @@ test('it generates track active utilities', async () => {
         --scrollbar-track: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -533,7 +533,7 @@ test('it generates corner active utilities', async () => {
         --scrollbar-corner: #000;
       }
     }
-    :root {
+    :root, :host {
       --color-white: #fff;
       --color-black: #000;
     }
@@ -557,7 +557,7 @@ test('it generates dark utilities', async () => {
         --scrollbar-thumb: #000000;
       }
     }
-    :root {
+    :root, :host {
       --color-black: #000000;
     }
     @layer base {
@@ -588,7 +588,7 @@ test('it generates width utilties in nocompatible mode', async () => {
     .scrollbar-w-full {
       --scrollbar-width: 100%;
     }
-    :root {
+    :root, :host {
       --width-1: 0.25rem;
       --width-full: 100%;
     }
@@ -620,7 +620,7 @@ test('it generates height utilties in nocompatible mode', async () => {
     .scrollbar-h-full {
       --scrollbar-height: 100%;
     }
-    :root {
+    :root, :host {
       --height-1: 0.25rem;
       --height-full: 100%;
     }
@@ -661,7 +661,7 @@ test('it generates rounded states in nocompatible mode', async () => {
     .scrollbar-track-rounded-md {
       --scrollbar-track-radius: 0.375rem;
     }
-    :root {
+    :root, :host {
       --rounded: 0.25rem;
       --rounded-md: 0.375rem;
     }
@@ -683,7 +683,7 @@ test('it does not generate width utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ":root {
+    ":root, :host {
       --width-1: 0.25rem;
       --width-full: 100%;
     }
@@ -705,7 +705,7 @@ test('it does not generate height utilties in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ":root {
+    ":root, :host {
       --height-1: 0.25rem;
       --height-full: 100%;
     }
@@ -724,7 +724,7 @@ test('it does not generate rounded states when not in nocompatible mode', async 
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ":root {
+    ":root, :host {
       --rounded: 0.25rem;
     }
     @layer base {
