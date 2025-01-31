@@ -516,36 +516,6 @@ test('it generates track active utilities', async () => {
 `);
 });
 
-test('it generates corner active utilities', async () => {
-  const css = await generatePluginCss('corner-active.html', {
-    theme: `
-      --color-white: #fff;
-      --color-black: #000;
-    `
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-corner-white {
-      --scrollbar-corner: #fff;
-    }
-    .scrollbar-corner-active\\:scrollbar-corner-black {
-      &::-webkit-scrollbar-corner:active {
-        --scrollbar-corner: #000;
-      }
-    }
-    :root, :host {
-      --color-white: #fff;
-      --color-black: #000;
-    }
-    @layer base {
-      * {
-        scrollbar-color: initial;
-        scrollbar-width: initial;
-      }
-    }"
-`);
-});
-
 test('it generates dark utilities', async () => {
   const css = await generatePluginCss('dark-mode.html', {
     theme: '--color-black: #000000;'

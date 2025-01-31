@@ -22,7 +22,7 @@ const addVariants = ({ addVariant }) => {
 
   addVariant('scrollbar-active', '&::-webkit-scrollbar-thumb:active');
   addVariant('scrollbar-track-active', '&::-webkit-scrollbar-track:active');
-  addVariant('scrollbar-corner-active', '&::-webkit-scrollbar-corner:active');
+  // Corners can't be active, so they don't get their own active variant.
 };
 
 module.exports = {
