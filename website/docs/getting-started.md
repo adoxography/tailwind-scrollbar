@@ -22,7 +22,7 @@ pnpm add -D tailwind-scrollbar
 The lastest version of `tailwind-scrollbar` (v4) is only compatible with `tailwindcss` v4. If you're using `tailwindcss` v3, you'll need to use `tailwind-scrollbar` v3.
 :::
 
-2. Add it to the plugins array of your Tailwind config
+2. Add the plugin to your Tailwind config
 
 <Tabs groupId="config">
     <TabItem value="css" label="New CSS Config" default>

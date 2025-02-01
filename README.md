@@ -20,16 +20,14 @@ yarn add -D tailwind-scrollbar
 pnpm add -D tailwind-scrollbar
 ```
 
-2. Add it to the plugins array of your Tailwind config
+2. Add the plugin to your Tailwind config
 
-```javascript
-module.exports = {
-    // ...
-    plugins: [
-        // ...
-        require('tailwind-scrollbar'),
-    ],
-};
+```css
+@import 'tailwindcss';
+
+/* ... */
+
+@plugin 'tailwind-scrollbar';
 ```
 
 ## Usage
