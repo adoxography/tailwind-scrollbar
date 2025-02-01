@@ -1,10 +1,14 @@
 // @ts-check
 /* eslint import/no-extraneous-dependencies: 0 */
 
+// TODO: Figure out why the linter is unhappy with these imports
+// eslint-disable-next-line import/no-unresolved
 const { themes } = require('prism-react-renderer');
+// eslint-disable-next-line import/no-unresolved
+const tailwindcss = require('@tailwindcss/postcss');
+
 const lightCodeTheme = themes.github;
 const darkCodeTheme = themes.dracula;
-const tailwindcss = require('@tailwindcss/postcss');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
