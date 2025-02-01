@@ -10,7 +10,6 @@
   nocompatible: true;
   preferredStrategy: "pseudoelements";
 }
-@plugin 'tailwindcss/plugin';
 
 @variant dark (&:is([data-theme="dark"] *));
 
@@ -53,4 +52,8 @@
   --ifm-color-primary-lighter: #7dd3fc;
   --ifm-color-primary-lightest: #bae6fd;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+ol {
+  list-style: decimal;
 }

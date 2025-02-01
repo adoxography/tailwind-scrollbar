@@ -1,6 +1,8 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Examples
 
@@ -39,10 +41,11 @@ The scollbar colour utilities are inherited, so if you want to use the same colo
 ```
 
 ## Variants
+Use the `scrollbar-hover:` and `scrollbar-thumb:` variants to apply utilties when the scrollbar's thumb is hovered or active, respectively. Note that only scrollbars that are being [styled using pseudoelements](/getting-started#preferred-strategy) will pay attention to these variants; standards-track scrollbars (like those used in FireFox exclusively and in Chrome/Edge by default) deal with hover and active states on their own.
 
-`hover:` and `active:` variants will be honoured in most browsers, but be aware that Firefox applies its own hover and active styling instead.
-
-All browsers are compatible with `dark:` variants.
+:::warning
+If you're using `tailwind-scrollbar`@v3, use the built-in `hover:` and `active:` variants instead of `scrollbar-hover:` and `scrollbar-thumb:`.
+:::
 
 <div className="scrollbar-hover:scrollbar-thumb-sky-500 scrollbar-active:scrollbar-thumb-sky-400 h-32 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scroll">
     <div className="h-64 bg-slate-400"></div>
@@ -56,7 +59,7 @@ All browsers are compatible with `dark:` variants.
 
 ## Custom colours
 
-The colour utilities can accept colours in any format Tailwind's native colour utilities like `bg-*` can, including [custom colours](https://tailwindcss.com/docs/customizing-colors#adding-additional-colors) and [arbitrary values](https://tailwindcss.com/docs/customizing-colors#arbitrary-values).
+The colour utilities can accept colours in any format Tailwind's native colour utilities like `bg-*` can, including [custom colours](https://tailwindcss.com/docs/colors#customizing-your-colors) and [arbitrary values](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
 
 <div className="scrollbar-thumb-custom scrollbar-track-custom-light scrollbar-hover:scrollbar-thumb-[#059669] scrollbar-active:scrollbar-thumb-emerald-500/50 scrollbar h-32 overflow-y-scroll">
     <div className="h-64 bg-slate-400"></div>
@@ -68,21 +71,37 @@ The colour utilities can accept colours in any format Tailwind's native colour u
 </div>
 ```
 
-```javascript title="tailwind.config.js"
-module.exports = {
-    // ...
-    theme: {
-        extend: {
-            colors: {
-                custom: {
-                    DEFAULT: '#10B981',
-                    light: '#D1FAE5',
+<Tabs groupId="config">
+    <TabItem value="css" label="New CSS Config" default>
+        ```css
+        @import 'tailwindcss';
+
+        /* ... */
+
+        @theme {
+            --color-custom: #d1fae5;
+            --color-custom-light: #10b981;
+        }
+        ```
+    </TabItem>
+    <TabItem value="js" label="Legacy JavaScript Config">
+        ```javascript
+        module.exports = {
+            // ...
+            theme: {
+                extend: {
+                    colors: {
+                        custom: {
+                            DEFAULT: '#10b981',
+                            light: '#d1fae5',
+                        },
+                    },
                 },
             },
-        },
-    },
-};
-```
+        };
+        ```
+    </TabItem>
+</Tabs>
 
 ## Corners
 
@@ -100,7 +119,7 @@ When you have both a vertical and horizontal scrollbar, you'll end up with an em
 
 ## Rounded bars
 
-*These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration).*
+*These utilities only work in `nocompatible` mode, and have no effect on standards-track scrollbars. See [configuration](/getting-started#configuration).*
 
 The `scrollbar-*-rounded-*` family of utilities can be applied to the `thumb`, `track`, or `corner` components, and work in the same was as Tailwind's native `rounded-*` utilities. Custom values and arbitrary values are permitted.
 
@@ -116,7 +135,7 @@ The `scrollbar-*-rounded-*` family of utilities can be applied to the `thumb`, `
 
 ## Custom sizes
 
-*These utilities only work in `nocompatible` mode, and have no effect in Firefox. See [configuration](/getting-started#configuration).*
+*These utilities only work in `nocompatible` mode, and have no effect on standards-track scrollbars. See [configuration](/getting-started#configuration).*
 
 The `scrollbar-w-*` and `scrollbar-h-*` utilities can be used to fine-tine the width and height of scrollbars. Note that these only have effects on vertical and horizontal scrollbars, respectively, and can only be used with the `scrollbar` utility (not `scrollbar-thin`).
 

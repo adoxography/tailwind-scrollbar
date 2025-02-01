@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-# Complete list of utilities
+# Complete list of utilities/variants
 
 ## Base utilities
 These utilities initialize scrollbar styling. You always need one of them, even if you're using custom widths.
@@ -22,10 +22,8 @@ All of the asterisks can be replaced [with any tailwind colour](https://tailwind
 | <span className="whitespace-nowrap">`scrollbar-track-*`</span> | Sets the colour of the scrollbar track | |
 | <span className="whitespace-nowrap">`scrollbar-corner-*`</span> | Sets the colour of the scrollbar corner | The corner will only appear if you have both vertical and horizontal scrollbars. |
 
-Additionally, `hover:` and `active:` [variants](https://tailwindcss.com/docs/hover-focus-and-other-states#hover-focus-and-active) may be used, but they will be ignored by Firefox since it defines these styles itself.
-
 ## Nocompatible utilities
-These styles are only available in [`nocompatible` mode](/getting-started#configuration). They won't have any effect in Firefox.
+These styles are only available in [`nocompatible` mode](/getting-started#configuration). They won't have any effect on standards-track scrollbars, such as those used by Firefox or by Chrome/Edge by default.
 
 | Utility     | Effect | Notes |
 |-------------|--------|-------|
@@ -35,3 +33,18 @@ These styles are only available in [`nocompatible` mode](/getting-started#config
 | <span className="whitespace-nowrap">`scrollbar-track-rounded-*`</span> | Rounds a scrollbar track's corners | See above, but for the track |
 | <span className="whitespace-nowrap">`scrollbar-corner-rounded-*`</span> | Rounds a scrollbar corner's corners | See above, but for the corner pseudoelement created when both horizontal and vertial scrollbars are present |
 
+## Variants
+
+:::warning
+These variants are not available in `tailwind-scrollbar`@v3. Use the built-in `hover:` and `active:` instead.
+:::
+
+These variants don't have any effect on standards-track scrollbars, such as those used by Firefox or by Chrome/Edge by default. The responsibility of styling hover and active states is assumed by the browser in that scenario.
+
+| Variant                   | Effect                                                   |
+| ------------------------- | -------------------------------------------------------- |
+| `scrollbar-hover:`        | Applies a utility when the scrollbar's thumb is hovered  |
+| `scrollbar-active:`       | Applies a utility when the scrollbar's thumb is active   |
+| `scrollbar-track-hover:`  | Applies a utility when the scrollbar's track is hovered  |
+| `scrollbar-track-active:` | Applies a utility when the scrollbar's track is active   |
+| `scrollbar-corner-hover:` | Applies a utility when the scrollbar's corner is hovered |
