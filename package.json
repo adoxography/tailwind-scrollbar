@@ -18,7 +18,7 @@
     "src/*"
   ],
   "peerDependencies": {
-    "tailwindcss": "^4.0.0"
+    "tailwindcss": "4.x"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
