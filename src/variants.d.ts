@@ -1,27 +1,18 @@
-export type VariantOverride = {
-    /**
-     * - The variant name as it appears in the utitlity
-     */
-    variant: string;
-    /**
-     * - The format for non-scrollbar utilities
-     */
-    defaultFormat: string;
-    /**
-     * - The format for scrollbar utilities
-     */
-    scrollbarFormat: string;
-};
+export type TailwindPlugin = import("./typedefs").TailwindPlugin;
+/** @typedef {import('./typedefs').TailwindPlugin} TailwindPlugin */
 /**
- * Modifies the way variant utilities are generated for scrollbars.
+ * Adds scrollbar variants for styling webkit scrollbars' hover and active
+ * states.
  *
- * Tailwind isn't very good at styling arbitrary pseudo classes of pseudo
- * elements, so scrollbar colour classes keep track of a default, hover, and
- * active state and use the cascade to determine which one to use. Instead of
- * trying to style a pseudo class, scrollbar utilities modify the name of the
- * property that is being applied and apply directly to the original class.
+ * Earlier iterations of this plugin hijacked the hover: and active: variants
+ * directly to create a cleaner syntax, but there are several issues with that
+ * approach:
+ *     - It made the plugin prone to breaking other unrelated styles
+ *     - It made logic like "make an element's scrollbar green when the
+ *       _element_ is hovered impossible. (This is unusual, but should still
+ *       be possible.)
+ *     - It straight up does not work in Tailwind v4.
  *
- * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
+ * @param {TailwindPlugin} tailwind - Tailwind's plugin object
  */
-export function addVariantOverrides({ addVariant, config }: typedefs.TailwindPlugin): void;
-import typedefs = require("./typedefs");
+export function addVariants({ addVariant }: TailwindPlugin): void;

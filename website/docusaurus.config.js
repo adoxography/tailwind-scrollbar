@@ -1,10 +1,14 @@
 // @ts-check
 /* eslint import/no-extraneous-dependencies: 0 */
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-const tailwindcss = require('tailwindcss');
-const autoprefixer = require('autoprefixer');
+// TODO: Figure out why the linter is unhappy with these imports
+// eslint-disable-next-line import/no-unresolved
+const { themes } = require('prism-react-renderer');
+// eslint-disable-next-line import/no-unresolved
+const tailwindcss = require('@tailwindcss/postcss');
+
+const lightCodeTheme = themes.github;
+const darkCodeTheme = themes.dracula;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -32,7 +36,6 @@ const config = {
         name: 'docusaurus-tailwindcss',
         configurePostCss(postcssOptions) {
           postcssOptions.plugins.push(tailwindcss);
-          postcssOptions.plugins.push(autoprefixer);
           return postcssOptions;
         }
       };

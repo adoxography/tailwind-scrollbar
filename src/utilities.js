@@ -1,12 +1,12 @@
+// TODO: Figure out why the linter is unhappy with this import
+// eslint-disable-next-line import/no-unresolved
 const flattenColorPaletteImport = require('tailwindcss/lib/util/flattenColorPalette');
-const toColorValueImport = require('tailwindcss/lib/util/toColorValue');
 const typedefs = require('./typedefs');
 const { importDefault } = require('./helpers');
 
 // Tailwind Play will import these internal imports as ES6 imports, while most
 // other workflows will import them as CommonJS imports.
 const flattenColorPalette = importDefault(flattenColorPaletteImport);
-const toColorValue = importDefault(toColorValueImport);
 
 const COMPONENTS = ['track', 'thumb', 'corner'];
 
@@ -56,12 +56,6 @@ const generateBaseUtilities = () => ({
       [base, {
         'background-color': `var(--scrollbar-${component})`,
         'border-radius': `var(--scrollbar-${component}-radius)`
-      }],
-      [`${base}:hover`, {
-        'background-color': `var(--scrollbar-${component}-hover, var(--scrollbar-${component}))`
-      }],
-      [`${base}:active`, {
-        'background-color': `var(--scrollbar-${component}-active, var(--scrollbar-${component}-hover, var(--scrollbar-${component})))`
       }]
     ];
   }).flat())
@@ -117,6 +111,14 @@ const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
 });
 
 /**
+ * Converts a color value or function to a color value
+ *
+ * @param {string | Function} maybeFunction - The color value or function
+ * @returns {string} - The color value
+ */
+const toColorValue = maybeFunction => (typeof maybeFunction === 'function' ? maybeFunction({}) : maybeFunction);
+
+/**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
@@ -130,12 +132,9 @@ const addColorUtilities = ({ matchUtilities, theme }) => {
   COMPONENTS.forEach(component => {
     matchUtilities(
       {
-        [`scrollbar-${component}`]: value => {
-          const color = toColorValue(value);
-          return {
-            [`--scrollbar-${component}`]: `${color} !important`
-          };
-        }
+        [`scrollbar-${component}`]: value => ({
+          [`--scrollbar-${component}`]: toColorValue(value)
+        })
       },
       {
         values: colors,

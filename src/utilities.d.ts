@@ -5,13 +5,13 @@
  * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
  *    scrollbar styling strategy: standards track or pseudoelements
  */
-export function addBaseStyles({ addBase }: typedefs.TailwindPlugin, preferredStrategy: 'standard' | 'peseudoelements'): void;
+export function addBaseStyles({ addBase }: typedefs.TailwindPlugin, preferredStrategy: "standard" | "peseudoelements"): void;
 /**
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
  *    scrollbar styling strategy: standards track or pseudoelements
  */
-export function addBaseSizeUtilities({ addUtilities }: typedefs.TailwindPlugin, preferredStrategy: 'standard' | 'peseudoelements'): void;
+export function addBaseSizeUtilities({ addUtilities }: typedefs.TailwindPlugin, preferredStrategy: "standard" | "peseudoelements"): void;
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
  *

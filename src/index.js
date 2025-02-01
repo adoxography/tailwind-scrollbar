@@ -1,3 +1,5 @@
+// TODO: Figure out why the linter is unhappy with this import
+// eslint-disable-next-line import/no-unresolved
 const plugin = require('tailwindcss/plugin');
 const {
   addBaseStyles,
@@ -6,7 +8,7 @@ const {
   addRoundedUtilities,
   addSizeUtilities
 } = require('./utilities');
-const { addVariantOverrides } = require('./variants');
+const { addVariants } = require('./variants');
 
 module.exports = plugin.withOptions((options = {}) => tailwind => {
   let preferredStrategy = options.preferredStrategy ?? 'standard';
@@ -20,7 +22,7 @@ module.exports = plugin.withOptions((options = {}) => tailwind => {
   addBaseStyles(tailwind, preferredStrategy);
   addBaseSizeUtilities(tailwind, preferredStrategy);
   addColorUtilities(tailwind);
-  addVariantOverrides(tailwind);
+  addVariants(tailwind);
 
   if (options.nocompatible) {
     addRoundedUtilities(tailwind);

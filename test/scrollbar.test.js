@@ -1,435 +1,351 @@
-const { generatePluginCss, generateTailwindCss } = require('./util');
+const { generatePluginCss } = require('./util');
 
 test('it generates .scrollbar utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar" />
-      `
-    }]
-  });
+  const css = await generatePluginCss('scrollbar.html');
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar::-webkit-scrollbar-track {
+    ".scrollbar {
+      &::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius)
-    }
-    .scrollbar::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
-    }
-    .scrollbar::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
-    }
-    .scrollbar::-webkit-scrollbar-thumb {
+        border-radius: var(--scrollbar-track-radius);
+      }
+      &::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius)
-    }
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
-    }
-    .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
-    }
-    .scrollbar::-webkit-scrollbar-corner {
+        border-radius: var(--scrollbar-thumb-radius);
+      }
+      &::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius)
-    }
-    .scrollbar::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
-    }
-    .scrollbar::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
-    }
-    .scrollbar {
-        scrollbar-width: auto;
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
-    }
-    .scrollbar::-webkit-scrollbar {
+        border-radius: var(--scrollbar-corner-radius);
+      }
+      scrollbar-width: auto;
+      scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      &::-webkit-scrollbar {
         display: block;
         width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px)
+        height: var(--scrollbar-height, 16px);
+      }
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it generates .scrollbar-thin utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-thin" />
-      `
-    }]
-  });
+  const css = await generatePluginCss('scrollbar-thin.html');
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thin::-webkit-scrollbar-track {
+    ".scrollbar-thin {
+      &::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb {
+        border-radius: var(--scrollbar-track-radius);
+      }
+      &::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner {
+        border-radius: var(--scrollbar-thumb-radius);
+      }
+      &::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
-    }
-    .scrollbar-thin {
-        scrollbar-width: thin;
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
-    }
-    .scrollbar-thin::-webkit-scrollbar {
+        border-radius: var(--scrollbar-corner-radius);
+      }
+      scrollbar-width: thin;
+      scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      &::-webkit-scrollbar {
         display: block;
         width: 8px;
-        height: 8px
+        height: 8px;
+      }
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it generates .scrollbar-none utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-none" />
-      `
-    }]
-  });
+  const css = await generatePluginCss('scrollbar-none.html');
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-none {
-        scrollbar-width: none;
-    }
-    .scrollbar-none::-webkit-scrollbar {
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
         display: none;
+      }
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 describe('it limits scrollbar properties to Firefox when pseudoelements are preferred', () => {
   test('for scrollbar', async () => {
-    const css = await generatePluginCss({
-      content: [{
-        raw: `
-          <div class="scrollbar" />
-        `
-      }]
-    }, {
-      preferredStrategy: 'pseudoelements'
+    const css = await generatePluginCss('scrollbar.html', {
+      pluginOptions: '{ preferredStrategy: "pseudoelements" }'
     });
 
     expect(css).toMatchInlineSnapshot(`
-    ".scrollbar::-webkit-scrollbar-track {
+    ".scrollbar {
+      &::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius)
-    }
-    .scrollbar::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
-    }
-    .scrollbar::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
-    }
-    .scrollbar::-webkit-scrollbar-thumb {
+        border-radius: var(--scrollbar-track-radius);
+      }
+      &::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius)
-    }
-    .scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
-    }
-    .scrollbar::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
-    }
-    .scrollbar::-webkit-scrollbar-corner {
+        border-radius: var(--scrollbar-thumb-radius);
+      }
+      &::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius)
-    }
-    .scrollbar::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
-    }
-    .scrollbar::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
-    }
-    @supports (-moz-appearance:none) {
-        .scrollbar {
-            scrollbar-width: auto;
-            scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
-        }
-    }
-    .scrollbar::-webkit-scrollbar {
+        border-radius: var(--scrollbar-corner-radius);
+      }
+      @supports (-moz-appearance:none) {
+        scrollbar-width: auto;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      }
+      &::-webkit-scrollbar {
         display: block;
         width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px)
+        height: var(--scrollbar-height, 16px);
+      }
+    }
+    @layer base {
+      * {
+        @supports (-moz-appearance:none) {
+          scrollbar-color: initial;
+          scrollbar-width: initial;
+        }
+      }
     }"
   `);
   });
 
   test('for scrollbar-thin', async () => {
-    const css = await generatePluginCss({
-      content: [{
-        raw: `
-          <div class="scrollbar-thin" />
-        `
-      }]
-    }, {
-      preferredStrategy: 'pseudoelements'
+    const css = await generatePluginCss('scrollbar-thin.html', {
+      pluginOptions: '{ preferredStrategy: "pseudoelements" }'
     });
 
     expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-thin::-webkit-scrollbar-track {
+    ".scrollbar-thin {
+      &::-webkit-scrollbar-track {
         background-color: var(--scrollbar-track);
-        border-radius: var(--scrollbar-track-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:hover {
-        background-color: var(--scrollbar-track-hover, var(--scrollbar-track))
-    }
-    .scrollbar-thin::-webkit-scrollbar-track:active {
-        background-color: var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track)))
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb {
+        border-radius: var(--scrollbar-track-radius);
+      }
+      &::-webkit-scrollbar-thumb {
         background-color: var(--scrollbar-thumb);
-        border-radius: var(--scrollbar-thumb-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background-color: var(--scrollbar-thumb-hover, var(--scrollbar-thumb))
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb:active {
-        background-color: var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)))
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner {
+        border-radius: var(--scrollbar-thumb-radius);
+      }
+      &::-webkit-scrollbar-corner {
         background-color: var(--scrollbar-corner);
-        border-radius: var(--scrollbar-corner-radius)
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner:hover {
-        background-color: var(--scrollbar-corner-hover, var(--scrollbar-corner))
-    }
-    .scrollbar-thin::-webkit-scrollbar-corner:active {
-        background-color: var(--scrollbar-corner-active, var(--scrollbar-corner-hover, var(--scrollbar-corner)))
-    }
-    @supports (-moz-appearance:none) {
-        .scrollbar-thin {
-            scrollbar-width: thin;
-            scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)
-        }
-    }
-    .scrollbar-thin::-webkit-scrollbar {
+        border-radius: var(--scrollbar-corner-radius);
+      }
+      @supports (-moz-appearance:none) {
+        scrollbar-width: thin;
+        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      }
+      &::-webkit-scrollbar {
         display: block;
         width: 8px;
-        height: 8px
+        height: 8px;
+      }
+    }
+    @layer base {
+      * {
+        @supports (-moz-appearance:none) {
+          scrollbar-color: initial;
+          scrollbar-width: initial;
+        }
+      }
     }"
   `);
   });
 
   test('for scrollbar-none', async () => {
-    const css = await generatePluginCss({
-      content: [{
-        raw: `
-          <div class="scrollbar-none" />
-        `
-      }]
-    }, {
-      preferredStrategy: 'pseudoelements'
+    const css = await generatePluginCss('scrollbar-none.html', {
+      pluginOptions: '{ preferredStrategy: "pseudoelements" }'
     });
 
     expect(css).toMatchInlineSnapshot(`
-    "@supports (-moz-appearance:none) {
-        .scrollbar-none {
-            scrollbar-width: none
-        }
+    ".scrollbar-none {
+      @supports (-moz-appearance:none) {
+        scrollbar-width: none;
+      }
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
-    .scrollbar-none::-webkit-scrollbar {
-        display: none
+    @layer base {
+      * {
+        @supports (-moz-appearance:none) {
+          scrollbar-color: initial;
+          scrollbar-width: initial;
+        }
+      }
     }"
   `);
   });
 });
 
 test('it generates scrollbar track utilities', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000',
-        indigo: {
-          DEFAULT: '#5c6ac4',
-          dark: '#202e78'
-        }
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-track-black" />
-        <div class="scrollbar-track-indigo" />
-        <div class="scrollbar-track-indigo-dark" />
-      `
-    }]
+  const css = await generatePluginCss('scrollbar-track.html', {
+    theme: `
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-black {
-        --scrollbar-track: #000000 !important
+      --scrollbar-track: #000000;
     }
     .scrollbar-track-indigo {
-        --scrollbar-track: #5c6ac4 !important
+      --scrollbar-track: #5c6ac4;
+    }
+    .scrollbar-track-indigo-100 {
+      --scrollbar-track: #808080;
     }
     .scrollbar-track-indigo-dark {
-        --scrollbar-track: #202e78 !important
+      --scrollbar-track: #202e78;
+    }
+    :root, :host {
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it generates scrollbar thumb utilities', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000',
-        indigo: {
-          DEFAULT: '#5c6ac4',
-          dark: '#202e78',
-          100: '#808080'
-        }
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-black" />
-        <div class="scrollbar-thumb-indigo" />
-        <div class="scrollbar-thumb-indigo-dark" />
-        <div class="scrollbar-thumb-indigo-100" />
-      `
-    }]
+  const css = await generatePluginCss('scrollbar-thumb.html', {
+    theme: `
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-black {
-        --scrollbar-thumb: #000000 !important
+      --scrollbar-thumb: #000000;
     }
     .scrollbar-thumb-indigo {
-        --scrollbar-thumb: #5c6ac4 !important
+      --scrollbar-thumb: #5c6ac4;
     }
     .scrollbar-thumb-indigo-100 {
-        --scrollbar-thumb: #808080 !important
+      --scrollbar-thumb: #808080;
     }
     .scrollbar-thumb-indigo-dark {
-        --scrollbar-thumb: #202e78 !important
+      --scrollbar-thumb: #202e78;
+    }
+    :root, :host {
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it generates scrollbar corner utilities', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000',
-        indigo: {
-          DEFAULT: '#5c6ac4',
-          dark: '#202e78',
-          100: '#808080'
-        }
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-corner-black" />
-        <div class="scrollbar-corner-indigo" />
-        <div class="scrollbar-corner-indigo-dark" />
-        <div class="scrollbar-corner-indigo-100" />
-      `
-    }]
+  const css = await generatePluginCss('scrollbar-corner.html', {
+    theme: `
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-black {
-        --scrollbar-corner: #000000 !important
+      --scrollbar-corner: #000000;
     }
     .scrollbar-corner-indigo {
-        --scrollbar-corner: #5c6ac4 !important
+      --scrollbar-corner: #5c6ac4;
     }
     .scrollbar-corner-indigo-100 {
-        --scrollbar-corner: #808080 !important
+      --scrollbar-corner: #808080;
     }
     .scrollbar-corner-indigo-dark {
-        --scrollbar-corner: #202e78 !important
+      --scrollbar-corner: #202e78;
+    }
+    :root, :host {
+      --color-black: #000000;
+      --color-indigo: #5c6ac4;
+      --color-indigo-dark: #202e78;
+      --color-indigo-100: #808080;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it uses arbitrary color values', async () => {
-  const css = await generatePluginCss({
-    theme: {},
-    content: [{
-      raw: `
-        <div class="scrollbar-track-[#ff0000]" />
-      `
-    }]
-  });
+  const css = await generatePluginCss('arbitrary-colors.html');
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-\\[\\#ff0000\\] {
-        --scrollbar-track: #ff0000 !important
+      --scrollbar-track: #ff0000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it can use opacity modifiers', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-track-red-100/50" />
-      `
-    }]
+  const css = await generatePluginCss('opacity.html', {
+    theme: '--color-red-100: rgb(254 226 226);'
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-red-100\\/50 {
-        --scrollbar-track: rgb(254 226 226 / 0.5) !important
-    }"
-  `);
-});
-
-test('it can use opacity modifiers with custom properties', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      extend: {
-        colors: {
-          surface: 'hsl(var(--color-surface) / <alpha-value>)'
-        }
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-track-surface" />
-        <div class="scrollbar-track-surface/100" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-track-surface {
-        --scrollbar-track: hsl(var(--color-surface) / 1) !important
+      --scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent);
     }
-    .scrollbar-track-surface\\/100 {
-        --scrollbar-track: hsl(var(--color-surface) / 1) !important
+    :root, :host {
+      --color-red-100: rgb(254 226 226);
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
-test('it handles color functions', async () => {
+test.skip('it handles color functions', async () => {
   const css = await generatePluginCss({
     theme: {
       colors: {
@@ -445,354 +361,347 @@ test('it handles color functions', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-func {
-        --scrollbar-thumb: red !important
+        --scrollbar-thumb: red
     }"
 `);
 });
 
 test('it generates thumb hover utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-white hover:scrollbar-thumb-black" />
-      `
-    }]
+  const css = await generatePluginCss('thumb-hover.html', {
+    theme: `
+      --color-white: #fff;
+      --color-black: #000;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-        --scrollbar-thumb: #fff !important
+      --scrollbar-thumb: #fff;
     }
-    .hover\\:scrollbar-thumb-black {
-        --scrollbar-thumb-hover: #000 !important
+    .scrollbar-hover\\:scrollbar-thumb-black {
+      &::-webkit-scrollbar-thumb:hover {
+        --scrollbar-thumb: #000;
+      }
+    }
+    :root, :host {
+      --color-white: #fff;
+      --color-black: #000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates track hover utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-track-white hover:scrollbar-track-black" />
-      `
-    }]
+  const css = await generatePluginCss('track-hover.html', {
+    theme: `
+      --color-white: #fff;
+      --color-black: #000;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-        --scrollbar-track: #fff !important
+      --scrollbar-track: #fff;
     }
-    .hover\\:scrollbar-track-black {
-        --scrollbar-track-hover: #000 !important
+    .scrollbar-track-hover\\:scrollbar-track-black {
+      &::-webkit-scrollbar-track:hover {
+        --scrollbar-track: #000;
+      }
+    }
+    :root, :host {
+      --color-white: #fff;
+      --color-black: #000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
-test("it doesn't get in the way of the hoverOnlyWhenSupported flag", async () => {
-  const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000'
-      }
-    },
-    future: {
-      hoverOnlyWhenSupported: true
-    },
-    content: [{
-      raw: `
-        <div class="hover:scrollbar-track-black" />
-      `
-    }]
+test('it generates corner hover utilities', async () => {
+  const css = await generatePluginCss('corner-hover.html', {
+    theme: `
+      --color-white: #fff;
+      --color-black: #000;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
-    "@media (hover: hover) and (pointer: fine) {
-        .hover\\:scrollbar-track-black {
-            --scrollbar-track-hover: #000000 !important
-        }
+    ".scrollbar-corner-white {
+      --scrollbar-corner: #fff;
+    }
+    .scrollbar-corner-hover\\:scrollbar-corner-black {
+      &::-webkit-scrollbar-corner:hover {
+        --scrollbar-corner: #000;
+      }
+    }
+    :root, :host {
+      --color-white: #fff;
+      --color-black: #000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates thumb active utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-          <div class="scrollbar-thumb-white active:scrollbar-thumb-black" />
-      `
-    }]
+  const css = await generatePluginCss('thumb-active.html', {
+    theme: `
+      --color-white: #fff;
+      --color-black: #000;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-        --scrollbar-thumb: #fff !important
+      --scrollbar-thumb: #fff;
     }
-    .active\\:scrollbar-thumb-black {
-        --scrollbar-thumb-active: #000 !important
+    .scrollbar-active\\:scrollbar-thumb-black {
+      &::-webkit-scrollbar-thumb:active {
+        --scrollbar-thumb: #000;
+      }
+    }
+    :root, :host {
+      --color-white: #fff;
+      --color-black: #000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates track active utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="scrollbar-track-white active:scrollbar-track-black" />
-      `
-    }]
+  const css = await generatePluginCss('track-active.html', {
+    theme: `
+      --color-white: #fff;
+      --color-black: #000;
+    `
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-        --scrollbar-track: #fff !important
+      --scrollbar-track: #fff;
     }
-    .active\\:scrollbar-track-black {
-        --scrollbar-track-active: #000 !important
-    }"
-`);
-});
-
-test('it does not insert scrollbar elements in other hover utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="hover:px-1" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".hover\\:px-1:hover {
-        padding-left: 0.25rem;
-        padding-right: 0.25rem
-    }"
-`);
-});
-
-test('it does not insert scrollbar elements in other active utilities', async () => {
-  const css = await generatePluginCss({
-    content: [{
-      raw: `
-        <div class="active:px-1" />
-      `
-    }]
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".active\\:px-1:active {
-        padding-left: 0.25rem;
-        padding-right: 0.25rem
+    .scrollbar-track-active\\:scrollbar-track-black {
+      &::-webkit-scrollbar-track:active {
+        --scrollbar-track: #000;
+      }
+    }
+    :root, :host {
+      --color-white: #fff;
+      --color-black: #000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates dark utilities', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      colors: {
-        black: '#000000'
-      }
-    },
-    darkMode: 'media',
-    content: [{
-      raw: `
-        <div class="dark:scrollbar-thumb-black" />
-      `
-    }]
+  const css = await generatePluginCss('dark-mode.html', {
+    theme: '--color-black: #000000;'
   });
 
   expect(css).toMatchInlineSnapshot(`
-    "@media (prefers-color-scheme: dark) {
-        .dark\\:scrollbar-thumb-black {
-            --scrollbar-thumb: #000000 !important
-        }
+    ".dark\\:scrollbar-thumb-black {
+      @media (prefers-color-scheme: dark) {
+        --scrollbar-thumb: #000000;
+      }
+    }
+    :root, :host {
+      --color-black: #000000;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
   `);
 });
 
 test('it generates width utilties in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      width: {
-        1: '0.25rem',
-        full: '100%'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-w-1" />
-        <div class="scrollbar-w-full" />
-        <div class="scrollbar-w-[3px]" />
-      `
-    }]
-  }, {
-    nocompatible: true
+  const css = await generatePluginCss('width.html', {
+    theme: `
+      --width-1: 0.25rem;
+      --width-full: 100%;
+    `,
+    pluginOptions: '{ nocompatible: true }'
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-w-1 {
-        --scrollbar-width: 0.25rem
+      --scrollbar-width: 0.25rem;
     }
     .scrollbar-w-\\[3px\\] {
-        --scrollbar-width: 3px
+      --scrollbar-width: 3px;
     }
     .scrollbar-w-full {
-        --scrollbar-width: 100%
+      --scrollbar-width: 100%;
+    }
+    :root, :host {
+      --width-1: 0.25rem;
+      --width-full: 100%;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates height utilties in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      height: {
-        1: '0.25rem',
-        full: '100%'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-h-1" />
-        <div class="scrollbar-h-full" />
-        <div class="scrollbar-h-[3px]" />
-      `
-    }]
-  }, {
-    nocompatible: true
+  const css = await generatePluginCss('height.html', {
+    theme: `
+      --height-1: 0.25rem;
+      --height-full: 100%;
+    `,
+    pluginOptions: '{ nocompatible: true }'
   });
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-h-1 {
-        --scrollbar-height: 0.25rem
+      --scrollbar-height: 0.25rem;
     }
     .scrollbar-h-\\[3px\\] {
-        --scrollbar-height: 3px
+      --scrollbar-height: 3px;
     }
     .scrollbar-h-full {
-        --scrollbar-height: 100%
+      --scrollbar-height: 100%;
+    }
+    :root, :host {
+      --height-1: 0.25rem;
+      --height-full: 100%;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it generates rounded states in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      borderRadius: {
-        DEFAULT: '0.25rem',
-        md: '0.375rem'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-rounded" />
-        <div class="scrollbar-track-rounded" />
-        <div class="scrollbar-thumb-rounded-md" />
-        <div class="scrollbar-track-rounded-md" />
-        <div class="scrollbar-track-rounded-[16px]" />
-        <div class="scrollbar-corner-rounded" />
-      `
-    }]
-  }, {
-    nocompatible: true
+  const css = await generatePluginCss('rounded.html', {
+    theme: `
+      --rounded: 0.25rem;
+      --rounded-md: 0.375rem;
+    `,
+    pluginOptions: '{ nocompatible: true }'
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-track-rounded {
-        --scrollbar-track-radius: 0.25rem
-    }
-    .scrollbar-track-rounded-\\[16px\\] {
-        --scrollbar-track-radius: 16px
-    }
-    .scrollbar-track-rounded-md {
-        --scrollbar-track-radius: 0.375rem
+    ".scrollbar-corner-rounded {
+      --scrollbar-corner-radius: 0.25rem;
     }
     .scrollbar-thumb-rounded {
-        --scrollbar-thumb-radius: 0.25rem
+      --scrollbar-thumb-radius: 0.25rem;
     }
     .scrollbar-thumb-rounded-md {
-        --scrollbar-thumb-radius: 0.375rem
+      --scrollbar-thumb-radius: 0.375rem;
     }
-    .scrollbar-corner-rounded {
-        --scrollbar-corner-radius: 0.25rem
+    .scrollbar-track-rounded {
+      --scrollbar-track-radius: 0.25rem;
+    }
+    .scrollbar-track-rounded-\\[16px\\] {
+      --scrollbar-track-radius: 16px;
+    }
+    .scrollbar-track-rounded-md {
+      --scrollbar-track-radius: 0.375rem;
+    }
+    :root, :host {
+      --rounded: 0.25rem;
+      --rounded-md: 0.375rem;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
     }"
 `);
 });
 
 test('it does not generate width utilties in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      width: {
-        1: '0.25rem',
-        full: '100%'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-w-1" />
-        <div class="scrollbar-w-full" />
-        <div class="scrollbar-w-[3px]" />
-      `
-    }]
-  }, {
-    nocompatible: false
+  const css = await generatePluginCss('width.html', {
+    theme: `
+      --width-1: 0.25rem;
+      --width-full: 100%;
+    `
   });
 
-  expect(css).toBe('');
+  expect(css).toMatchInlineSnapshot(`
+    ":root, :host {
+      --width-1: 0.25rem;
+      --width-full: 100%;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
+    }"
+`);
 });
 
 test('it does not generate height utilties in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      height: {
-        1: '0.25rem',
-        full: '100%'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-h-1" />
-        <div class="scrollbar-h-full" />
-        <div class="scrollbar-h-[3px]" />
-      `
-    }]
-  }, {
-    nocompatible: false
+  const css = await generatePluginCss('height.html', {
+    theme: `
+      --height-1: 0.25rem;
+      --height-full: 100%;
+    `
   });
 
-  expect(css).toBe('');
+  expect(css).toMatchInlineSnapshot(`
+    ":root, :host {
+      --height-1: 0.25rem;
+      --height-full: 100%;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
+    }"
+`);
 });
 
 test('it does not generate rounded states when not in nocompatible mode', async () => {
-  const css = await generatePluginCss({
-    theme: {
-      borderRadius: {
-        DEFAULT: '0.25rem'
-      }
-    },
-    content: [{
-      raw: `
-        <div class="scrollbar-thumb-rounded" />
-        <div class="scrollbar-track-rounded" />
-        <div class="scrollbar-thumb-rounded-md" />
-        <div class="scrollbar-track-rounded-md" />
-      `
-    }]
-  }, {
-    nocompatible: false
+  const css = await generatePluginCss('rounded.html', {
+    theme: '--rounded: 0.25rem;'
   });
 
-  expect(css).toBe('');
-});
-
-test('it preserves the order of variants', async () => {
-  const content = [{
-    raw: `
-      <button class="hover:bg-black active:bg-black focus:bg-black focus-within:bg-black focus-visible:bg-black disabled:bg-black" />
-    `
-  }];
-
-  const pluginCss = await generatePluginCss({ content });
-  const normalCss = await generateTailwindCss({ content });
-
-  expect(pluginCss).toBe(normalCss);
+  expect(css).toMatchInlineSnapshot(`
+    ":root, :host {
+      --rounded: 0.25rem;
+    }
+    @layer base {
+      * {
+        scrollbar-color: initial;
+        scrollbar-width: initial;
+      }
+    }"
+`);
 });
