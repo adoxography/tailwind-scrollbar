@@ -11,7 +11,7 @@ const {
 const { addVariants } = require('./variants');
 
 module.exports = plugin.withOptions((options = {}) => tailwind => {
-  let preferredStrategy = options.preferredStrategy ?? 'standard';
+  let preferredStrategy = options.preferredStrategy ?? options.preferredstrategy ?? 'standard';
 
   if (preferredStrategy !== 'standard' && preferredStrategy !== 'pseudoelements') {
     // eslint-disable-next-line no-console
