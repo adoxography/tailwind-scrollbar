@@ -644,7 +644,7 @@ test('it generates rounded states in nocompatible mode', async () => {
 `);
 });
 
-test('it does not generate width utilties in nocompatible mode', async () => {
+test('it does not generate width utilties in compatible mode', async () => {
   const css = await generatePluginCss('width.html', {
     theme: `
       --width-1: 0.25rem;
@@ -666,7 +666,7 @@ test('it does not generate width utilties in nocompatible mode', async () => {
 `);
 });
 
-test('it does not generate height utilties in nocompatible mode', async () => {
+test('it does not generate height utilties in compatible mode', async () => {
   const css = await generatePluginCss('height.html', {
     theme: `
       --height-1: 0.25rem;
@@ -688,7 +688,7 @@ test('it does not generate height utilties in nocompatible mode', async () => {
 `);
 });
 
-test('it does not generate rounded states when not in nocompatible mode', async () => {
+test('it does not generate rounded states when not in compatible mode', async () => {
   const css = await generatePluginCss('rounded.html', {
     theme: '--rounded: 0.25rem;'
   });
