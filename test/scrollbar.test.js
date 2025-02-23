@@ -192,6 +192,31 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
     }"
   `);
   });
+
+  test('as lowercase', async () => {
+    const css = await generatePluginCss('scrollbar-none.html', {
+      pluginOptions: '{ preferredstrategy: "pseudoelements" }'
+    });
+
+    expect(css).toMatchInlineSnapshot(`
+    ".scrollbar-none {
+      @supports (-moz-appearance:none) {
+        scrollbar-width: none;
+      }
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    @layer base {
+      * {
+        @supports (-moz-appearance:none) {
+          scrollbar-color: initial;
+          scrollbar-width: initial;
+        }
+      }
+    }"
+  `);
+  });
 });
 
 test('it generates scrollbar track utilities', async () => {
