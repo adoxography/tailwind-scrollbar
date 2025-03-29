@@ -35,8 +35,5 @@
   },
   "engines": {
     "node": ">=12.13.0"
-  },
-  "dependencies": {
-    "prism-react-renderer": "^2.4.1"
   }
 }
