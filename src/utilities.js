@@ -124,9 +124,9 @@ const toColorValue = maybeFunction => (typeof maybeFunction === 'function' ? may
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 const addColorUtilities = ({ matchUtilities, theme }) => {
-  const themeColors = flattenColorPalette(theme('colors'));
+  const themeColors = theme('scrollbarColor') ?? theme('colors');
   const colors = Object.fromEntries(
-    Object.entries(themeColors).map(([k, v]) => [k, toColorValue(v)])
+    Object.entries(flattenColorPalette(themeColors)).map(([k, v]) => [k, toColorValue(v)])
   );
 
   COMPONENTS.forEach(component => {
