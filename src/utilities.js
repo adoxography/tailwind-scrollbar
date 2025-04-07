@@ -70,29 +70,25 @@ const scrollbarProperties = (properties, preferPseudoElements) => {
  * @param {boolean} options.nocompatible - True is incompatible properties are permitted
  */
 const addBaseStyles = ({ addBase }, { preferredStrategy, nocompatible }) => {
+  // Properties set by utilities (as opposed to global configuration) are not
+  // inherited by default. Utilities specified with variants are scoped to their
+  // respective pseudoelements, preventing them from being inherited, so this
+  // keeps the inheritance (or lack thereof) consistent.
   const properties = [
-    // The _ prefixed properties represent properties set by utilities (as
-    // opposed to global configuration). We mark them as not inherited by
-    // default, since utilities specified with variants are scoped to their
-    // respective pseudoelements, preventing them from being inherited. This
-    // keeps them consistent across the board.
-    Object.fromEntries(COMPONENTS.map(component => [`@property ${props.colourUtility(component)}`, {
-      syntax: '"*"',
-      inherits: false
-    }]))
+    ...COMPONENTS.map(props.colourUtility),
+    props.dimensionUtility('width'),
+    props.dimensionUtility('height')
   ];
 
   if (nocompatible) {
-    properties.push(
-      Object.fromEntries(COMPONENTS.map(component => [`@property ${props.radiusUtility(component)}`, {
-        syntax: '"*"',
-        inherits: false
-      }]))
-    );
+    properties.push(...COMPONENTS.map(props.radiusUtility));
   }
 
   addBase([
-    ...properties,
+    Object.fromEntries(properties.map(property => [`@property ${property}`, {
+      syntax: '"*"',
+      inherits: false
+    }])),
 
     {
       '*': scrollbarProperties({
@@ -198,8 +194,14 @@ const generateScrollbarSizeUtilities = options => {
 
       '&::-webkit-scrollbar': {
         display: 'block',
-        width: 'var(--scrollbar-width, 16px)',
-        height: 'var(--scrollbar-height, 16px)'
+        width: buildPropertyFallbackChain([
+          props.dimensionUtility('width'),
+          props.dimensionDefault('width')
+        ], '16px'),
+        height: buildPropertyFallbackChain([
+          props.dimensionUtility('height'),
+          props.dimensionDefault('height')
+        ], '16px')
       }
     },
 
@@ -301,7 +303,7 @@ const addSizeUtilities = ({ matchUtilities, theme }) => {
   ['width', 'height'].forEach(dimension => {
     matchUtilities({
       [`scrollbar-${dimension[0]}`]: value => ({
-        [`--scrollbar-${dimension}`]: value
+        [props.dimensionUtility(dimension)]: value
       })
     }, {
       values: theme(dimension)

@@ -19,6 +19,16 @@ export function hoverColourDefault(component: string): string;
  */
 export function activeColourDefault(component: string): string;
 /**
+ * @param {'width' | 'height'} dimension The scrollbar dimension
+ * @returns {string} The utility property for the given dimension
+ */
+export function dimensionUtility(dimension: "width" | "height"): string;
+/**
+ * @param {'width' | 'height'} dimension The scrollbar dimension
+ * @returns {string} The default property for the given dimension
+ */
+export function dimensionDefault(dimension: "width" | "height"): string;
+/**
  * @param {string} component The scrollbar component
  * @returns {string} The radius utility property for the given component
  */

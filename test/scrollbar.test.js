@@ -33,8 +33,8 @@ test('it generates .scrollbar utilities', async () => {
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
         display: block;
-        width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px);
+        width: var(--_scrollbar-width, var(--scrollbar-width, 16px));
+        height: var(--_scrollbar-height, var(--scrollbar-height, 16px));
       }
     }
     @layer base {
@@ -47,6 +47,14 @@ test('it generates .scrollbar utilities', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -108,6 +116,14 @@ test('it generates .scrollbar-thin utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -136,6 +152,14 @@ test('it generates .scrollbar-none utilities', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -185,8 +209,8 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       }
       &::-webkit-scrollbar {
         display: block;
-        width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px);
+        width: var(--_scrollbar-width, var(--scrollbar-width, 16px));
+        height: var(--_scrollbar-height, var(--scrollbar-height, 16px));
       }
     }
     @layer base {
@@ -199,6 +223,14 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -266,6 +298,14 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -303,6 +343,14 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -337,6 +385,14 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -393,6 +449,14 @@ test('it generates scrollbar track utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -440,6 +504,14 @@ test('it generates scrollbar thumb utilities', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -493,6 +565,14 @@ test('it generates scrollbar corner utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -518,6 +598,14 @@ test('it uses arbitrary color values', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -551,6 +639,14 @@ test('it can use opacity modifiers', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -617,6 +713,14 @@ test('it generates thumb hover utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -656,6 +760,14 @@ test('it generates track hover utilities', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -701,6 +813,14 @@ test('it generates thumb active utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -743,6 +863,14 @@ test('it generates track active utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -778,6 +906,14 @@ test('it generates dark utilities', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -797,13 +933,13 @@ test('it generates width utilties in nocompatible mode', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-w-1 {
-      --scrollbar-width: 0.25rem;
+      --_scrollbar-width: 0.25rem;
     }
     .scrollbar-w-\\[3px\\] {
-      --scrollbar-width: 3px;
+      --_scrollbar-width: 3px;
     }
     .scrollbar-w-full {
-      --scrollbar-width: 100%;
+      --_scrollbar-width: 100%;
     }
     :root, :host {
       --width-1: 0.25rem;
@@ -819,6 +955,14 @@ test('it generates width utilties in nocompatible mode', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -853,13 +997,13 @@ test('it generates height utilties in nocompatible mode', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-h-1 {
-      --scrollbar-height: 0.25rem;
+      --_scrollbar-height: 0.25rem;
     }
     .scrollbar-h-\\[3px\\] {
-      --scrollbar-height: 3px;
+      --_scrollbar-height: 3px;
     }
     .scrollbar-h-full {
-      --scrollbar-height: 100%;
+      --_scrollbar-height: 100%;
     }
     :root, :host {
       --height-1: 0.25rem;
@@ -875,6 +1019,14 @@ test('it generates height utilties in nocompatible mode', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -943,8 +1095,8 @@ test('it generates rounded states in nocompatible mode', async () => {
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
         display: block;
-        width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px);
+        width: var(--_scrollbar-width, var(--scrollbar-width, 16px));
+        height: var(--_scrollbar-height, var(--scrollbar-height, 16px));
       }
     }
     .scrollbar-corner-rounded {
@@ -979,6 +1131,14 @@ test('it generates rounded states in nocompatible mode', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -1028,6 +1188,14 @@ test('it does not generate width utilties in compatible mode', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -1059,6 +1227,14 @@ test('it does not generate height utilties in compatible mode', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }
@@ -1105,8 +1281,8 @@ test('it does not generate rounded states when not in compatible mode', async ()
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
         display: block;
-        width: var(--scrollbar-width, 16px);
-        height: var(--scrollbar-height, 16px);
+        width: var(--_scrollbar-width, var(--scrollbar-width, 16px));
+        height: var(--_scrollbar-height, var(--scrollbar-height, 16px));
       }
     }
     :root, :host {
@@ -1122,6 +1298,14 @@ test('it does not generate rounded states when not in compatible mode', async ()
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-width {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-height {
         syntax: "*";
         inherits: false;
       }

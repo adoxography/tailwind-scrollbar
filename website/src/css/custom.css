@@ -48,6 +48,8 @@
   --scrollbar-track-hover: var(--color-teal-200);
   --scrollbar-track-active: var(--color-teal-100);
   --scrollbar-corner: var(--color-pink-300);
+  --scrollbar-width: calc(var(--spacing) * 4);
+  --scrollbar-height: calc(var(--spacing) * 4);
   --scrollbar-thumb-radius: var(--radius-none);
   --scrollbar-track-radius: var(--radius-none);
   --scrollbar-corner-radius: var(--radius-none);

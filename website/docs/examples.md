@@ -138,7 +138,7 @@ Instead of having to add colour utilities to every element that needs a scrollba
 This only works in `tailwind-scrollbar`&GreaterEqual;4.1. If you're using v3, you can achieve a similar effect by applying colour utilities to a high-level element (e.g. `:root`, `html`, `body`).
 :::
 
-<div className="scrollbar-thin h-32 overflow-y-scroll">
+<div className="scrollbar h-32 overflow-y-scroll">
     <div className="h-64 w-screen bg-slate-400"></div>
 </div>
 
@@ -152,6 +152,9 @@ This only works in `tailwind-scrollbar`&GreaterEqual;4.1. If you're using v3, yo
     --scrollbar-track-active: var(--color-teal-100);
     --scrollbar-corner: var(--color-pink-300);
 
+    --scrollbar-width: calc(var(--spacing) * 4);
+    --scrollbar-height: calc(var(--spacing) * 4);
+
     --scrollbar-thumb-radius: var(--radius-none);
     --scrollbar-track-radius: var(--radius-none);
     --scrollbar-corner-radius: var(--radius-none);
@@ -159,7 +162,7 @@ This only works in `tailwind-scrollbar`&GreaterEqual;4.1. If you're using v3, yo
 ```
 
 ```html
-<div className="scrollbar-thin h-32 overflow-scroll">
+<div className="scrollbar h-32 overflow-scroll">
     <div className="h-64 w-screen bg-slate-400"></div>
 </div>
 ```

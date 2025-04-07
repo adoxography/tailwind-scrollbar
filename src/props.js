@@ -32,6 +32,22 @@ module.exports = {
   },
 
   /**
+   * @param {'width' | 'height'} dimension The scrollbar dimension
+   * @returns {string} The utility property for the given dimension
+   */
+  dimensionUtility(dimension) {
+    return `--_scrollbar-${dimension}`;
+  },
+
+  /**
+   * @param {'width' | 'height'} dimension The scrollbar dimension
+   * @returns {string} The default property for the given dimension
+   */
+  dimensionDefault(dimension) {
+    return `--scrollbar-${dimension}`;
+  },
+
+  /**
    * @param {string} component The scrollbar component
    * @returns {string} The radius utility property for the given component
    */
