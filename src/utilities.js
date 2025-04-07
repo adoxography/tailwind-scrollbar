@@ -140,24 +140,20 @@ const generateBaseUtilities = ({ nocompatible }) => ({
     }
 
     const entries = [
-      [base, baseStyles],
+      [base, baseStyles]
+    ];
 
-      // Styles applied to the :hover pseudoselector of the pseudoelement
-      [`${base}:hover`, {
-        // Prefer the value from a utility, then fall back to the value(s) from
-        // the configuration. If there wsa not conifgured hover value, use the
-        // default configured value.
+    // Corners don't have active/hover states, so don't bother including CSS
+    // for handling them.
+    if (component !== 'corner') {
+      entries.push([`${base}:hover`, {
         'background-color': buildPropertyFallbackChain([
           utilityProperty,
           hoverProperty,
           idleProperty
         ])
-      }]
-    ];
+      }]);
 
-    // Corners can't be active, so don't bother including CSS for handling
-    // their active states.
-    if (component !== 'corner') {
       entries.push([`${base}:active`, {
         'background-color': buildPropertyFallbackChain([
           utilityProperty,

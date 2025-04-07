@@ -29,9 +29,6 @@ test('it generates .scrollbar utilities', async () => {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
       }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
-      }
       scrollbar-width: auto;
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
@@ -89,9 +86,6 @@ test('it generates .scrollbar-thin utilities', async () => {
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-      }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
       }
       scrollbar-width: thin;
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
@@ -185,9 +179,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
       }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
-      }
       @supports (-moz-appearance:none) {
         scrollbar-width: auto;
         scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
@@ -251,9 +242,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-      }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
       }
       @supports (-moz-appearance:none) {
         scrollbar-width: thin;
@@ -679,48 +667,6 @@ test('it generates track hover utilities', async () => {
 `);
 });
 
-test('it generates corner hover utilities', async () => {
-  const css = await generatePluginCss('corner-hover.html', {
-    theme: `
-      --color-white: #fff;
-      --color-black: #000;
-    `
-  });
-
-  expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-corner-white {
-      --_scrollbar-corner: #fff;
-    }
-    .scrollbar-corner-hover\\:scrollbar-corner-black {
-      &::-webkit-scrollbar-corner:hover {
-        --_scrollbar-corner: #000;
-      }
-    }
-    :root, :host {
-      --color-white: #fff;
-      --color-black: #000;
-    }
-    @layer base {
-      @property --_scrollbar-track {
-        syntax: "*";
-        inherits: false;
-      }
-      @property --_scrollbar-thumb {
-        syntax: "*";
-        inherits: false;
-      }
-      @property --_scrollbar-corner {
-        syntax: "*";
-        inherits: false;
-      }
-      * {
-        scrollbar-color: initial;
-        scrollbar-width: initial;
-      }
-    }"
-`);
-});
-
 test('it generates thumb active utilities', async () => {
   const css = await generatePluginCss('thumb-active.html', {
     theme: `
@@ -993,9 +939,6 @@ test('it generates rounded states in nocompatible mode', async () => {
         --_scrollbar-corner-radius: inherit;
         border-radius: var(--_scrollbar-corner-radius, var(--scrollbar-corner-radius));
       }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
-      }
       scrollbar-width: auto;
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
@@ -1157,9 +1100,6 @@ test('it does not generate rounded states when not in compatible mode', async ()
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-      }
-      &::-webkit-scrollbar-corner:hover {
-        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
       }
       scrollbar-width: auto;
       scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
