@@ -41,10 +41,10 @@ The scollbar colour utilities are inherited, so if you want to use the same colo
 ```
 
 ## Variants
-Use the `scrollbar-hover:` and `scrollbar-thumb:` variants to apply utilties when the scrollbar's thumb is hovered or active, respectively. Note that only scrollbars that are being [styled using pseudoelements](/getting-started#preferred-strategy) will pay attention to these variants; standards-track scrollbars (like those used in FireFox exclusively and in Chrome/Edge by default) deal with hover and active states on their own.
+Use the `scrollbar-hover:` and `scrollbar-active:` variants to apply utilties when the scrollbar's thumb is hovered or active, respectively. Note that only scrollbars that are being [styled using pseudoelements](/getting-started#preferred-strategy) will pay attention to these variants; standards-track scrollbars (like those used in FireFox exclusively and in Chrome/Edge by default) deal with hover and active states on their own.
 
 :::warning
-If you're using `tailwind-scrollbar`@v3, use the built-in `hover:` and `active:` variants instead of `scrollbar-hover:` and `scrollbar-thumb:`.
+If you're using `tailwind-scrollbar`@v3, use the built-in `hover:` and `active:` variants instead of `scrollbar-hover:` and `scrollbar-active:`.
 :::
 
 <div className="scrollbar-hover:scrollbar-thumb-sky-500 scrollbar-active:scrollbar-thumb-sky-400 h-32 scrollbar scrollbar-thumb-slate-700 scrollbar-track-slate-300 overflow-y-scroll">
