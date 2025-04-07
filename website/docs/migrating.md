@@ -16,4 +16,4 @@ Let's be honest, though, that's probably not what you're after. To apply variant
 
 ### Colour utilities are not longer inherited
 
-v3 allowed scrollbar colour utilities to be inherited by elements' children. This is not the case in v4. This feature was most commonly used to "set and forget" your scrollbar colours on a top-level selector, reducing the overall number of scrollbar-related utilities needed. To achieve this kind of behaviour in v4, see [global scrollbar colours](/examples#global-scrollbar-colours).
+v3 allowed scrollbar colour utilities to be inherited by elements' children. This is not the case in v4. This feature was most commonly used to "set and forget" your scrollbar colours on a top-level selector, reducing the overall number of scrollbar-related utilities needed. To achieve this kind of behaviour in v4, see [global scrollbar colours](/examples#global-configuration).

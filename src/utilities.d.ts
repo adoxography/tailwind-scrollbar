@@ -1,18 +1,25 @@
-export type ScrollbarComponent = (typeof COMPONENTS)[number];
+export type ScrollbarOptions = {
+    preferredStrategy: "standard" | "pseudoelements";
+    nocompatible: boolean;
+};
 /**
  * Base resets to make the plugin's utilities work
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
- * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ * @param {object} options - Style options
+ * @param {'standard' | 'pseudoelements'} options.preferredStrategy - The preferred
  *    scrollbar styling strategy: standards track or pseudoelements
+ * @param {boolean} options.nocompatible - True is incompatible properties are permitted
  */
-export function addBaseStyles({ addBase }: typedefs.TailwindPlugin, preferredStrategy: "standard" | "peseudoelements"): void;
+export function addBaseStyles({ addBase }: typedefs.TailwindPlugin, { preferredStrategy, nocompatible }: {
+    preferredStrategy: "standard" | "pseudoelements";
+    nocompatible: boolean;
+}): void;
 /**
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
- * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
- *    scrollbar styling strategy: standards track or pseudoelements
+ * @param {ScrollbarOptions} options - Plugin options
  */
-export function addBaseSizeUtilities({ addUtilities }: typedefs.TailwindPlugin, preferredStrategy: "standard" | "peseudoelements"): void;
+export function addBaseSizeUtilities({ addUtilities }: typedefs.TailwindPlugin, options: ScrollbarOptions): void;
 /**
  * Adds scrollbar-COMPONENT-COLOR utilities for every scrollbar component.
  *
@@ -32,6 +39,4 @@ export function addRoundedUtilities({ theme, matchUtilities }: typedefs.Tailwind
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 export function addSizeUtilities({ matchUtilities, theme }: typedefs.TailwindPlugin): void;
-declare const COMPONENTS: string[];
 import typedefs = require("./typedefs");
-export {};

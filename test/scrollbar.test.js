@@ -8,7 +8,6 @@ test('it generates .scrollbar utilities', async () => {
       &::-webkit-scrollbar-track {
         --_scrollbar-track: inherit;
         background-color: var(--_scrollbar-track, var(--scrollbar-track));
-        border-radius: var(--scrollbar-track-radius);
       }
       &::-webkit-scrollbar-track:hover {
         background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
@@ -19,7 +18,6 @@ test('it generates .scrollbar utilities', async () => {
       &::-webkit-scrollbar-thumb {
         --_scrollbar-thumb: inherit;
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
-        border-radius: var(--scrollbar-thumb-radius);
       }
       &::-webkit-scrollbar-thumb:hover {
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
@@ -30,7 +28,6 @@ test('it generates .scrollbar utilities', async () => {
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-        border-radius: var(--scrollbar-corner-radius);
       }
       &::-webkit-scrollbar-corner:hover {
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
@@ -72,7 +69,6 @@ test('it generates .scrollbar-thin utilities', async () => {
       &::-webkit-scrollbar-track {
         --_scrollbar-track: inherit;
         background-color: var(--_scrollbar-track, var(--scrollbar-track));
-        border-radius: var(--scrollbar-track-radius);
       }
       &::-webkit-scrollbar-track:hover {
         background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
@@ -83,7 +79,6 @@ test('it generates .scrollbar-thin utilities', async () => {
       &::-webkit-scrollbar-thumb {
         --_scrollbar-thumb: inherit;
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
-        border-radius: var(--scrollbar-thumb-radius);
       }
       &::-webkit-scrollbar-thumb:hover {
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
@@ -94,7 +89,6 @@ test('it generates .scrollbar-thin utilities', async () => {
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-        border-radius: var(--scrollbar-corner-radius);
       }
       &::-webkit-scrollbar-corner:hover {
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
@@ -170,7 +164,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-track {
         --_scrollbar-track: inherit;
         background-color: var(--_scrollbar-track, var(--scrollbar-track));
-        border-radius: var(--scrollbar-track-radius);
       }
       &::-webkit-scrollbar-track:hover {
         background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
@@ -181,7 +174,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-thumb {
         --_scrollbar-thumb: inherit;
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
-        border-radius: var(--scrollbar-thumb-radius);
       }
       &::-webkit-scrollbar-thumb:hover {
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
@@ -192,7 +184,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-        border-radius: var(--scrollbar-corner-radius);
       }
       &::-webkit-scrollbar-corner:hover {
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
@@ -240,7 +231,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-track {
         --_scrollbar-track: inherit;
         background-color: var(--_scrollbar-track, var(--scrollbar-track));
-        border-radius: var(--scrollbar-track-radius);
       }
       &::-webkit-scrollbar-track:hover {
         background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
@@ -251,7 +241,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-thumb {
         --_scrollbar-thumb: inherit;
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
-        border-radius: var(--scrollbar-thumb-radius);
       }
       &::-webkit-scrollbar-thumb:hover {
         background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
@@ -262,7 +251,6 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       &::-webkit-scrollbar-corner {
         --_scrollbar-corner: inherit;
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
-        border-radius: var(--scrollbar-corner-radius);
       }
       &::-webkit-scrollbar-corner:hover {
         background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
@@ -888,6 +876,18 @@ test('it generates width utilties in nocompatible mode', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-track-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner-radius {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -932,6 +932,18 @@ test('it generates height utilties in nocompatible mode', async () => {
         syntax: "*";
         inherits: false;
       }
+      @property --_scrollbar-track-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner-radius {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -950,23 +962,65 @@ test('it generates rounded states in nocompatible mode', async () => {
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ".scrollbar-corner-rounded {
-      --scrollbar-corner-radius: 0.25rem;
+    ".scrollbar {
+      &::-webkit-scrollbar-track {
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
+        --_scrollbar-track-radius: inherit;
+        border-radius: var(--_scrollbar-track-radius, var(--scrollbar-track-radius));
+      }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
+      &::-webkit-scrollbar-thumb {
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
+        --_scrollbar-thumb-radius: inherit;
+        border-radius: var(--_scrollbar-thumb-radius, var(--scrollbar-thumb-radius));
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
+      &::-webkit-scrollbar-corner {
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
+        --_scrollbar-corner-radius: inherit;
+        border-radius: var(--_scrollbar-corner-radius, var(--scrollbar-corner-radius));
+      }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+      }
+      scrollbar-width: auto;
+      scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
+      &::-webkit-scrollbar {
+        display: block;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px);
+      }
+    }
+    .scrollbar-corner-rounded {
+      --_scrollbar-corner-radius: 0.25rem;
     }
     .scrollbar-thumb-rounded {
-      --scrollbar-thumb-radius: 0.25rem;
+      --_scrollbar-thumb-radius: 0.25rem;
     }
     .scrollbar-thumb-rounded-md {
-      --scrollbar-thumb-radius: 0.375rem;
+      --_scrollbar-thumb-radius: 0.375rem;
     }
     .scrollbar-track-rounded {
-      --scrollbar-track-radius: 0.25rem;
+      --_scrollbar-track-radius: 0.25rem;
     }
     .scrollbar-track-rounded-\\[16px\\] {
-      --scrollbar-track-radius: 16px;
+      --_scrollbar-track-radius: 16px;
     }
     .scrollbar-track-rounded-md {
-      --scrollbar-track-radius: 0.375rem;
+      --_scrollbar-track-radius: 0.375rem;
     }
     :root, :host {
       --rounded: 0.25rem;
@@ -982,6 +1036,18 @@ test('it generates rounded states in nocompatible mode', async () => {
         inherits: false;
       }
       @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-track-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb-radius {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner-radius {
         syntax: "*";
         inherits: false;
       }
@@ -1067,7 +1133,43 @@ test('it does not generate rounded states when not in compatible mode', async ()
   });
 
   expect(css).toMatchInlineSnapshot(`
-    ":root, :host {
+    ".scrollbar {
+      &::-webkit-scrollbar-track {
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
+      }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
+      &::-webkit-scrollbar-thumb {
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
+      &::-webkit-scrollbar-corner {
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
+      }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+      }
+      scrollbar-width: auto;
+      scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
+      &::-webkit-scrollbar {
+        display: block;
+        width: var(--scrollbar-width, 16px);
+        height: var(--scrollbar-height, 16px);
+      }
+    }
+    :root, :host {
       --rounded: 0.25rem;
     }
     @layer base {

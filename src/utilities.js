@@ -5,6 +5,13 @@ const typedefs = require('./typedefs');
 const { importDefault } = require('./helpers');
 const props = require('./props');
 
+/**
+ * @typedef {{
+ *     preferredStrategy: 'standard' | 'pseudoelements';
+ *     nocompatible: boolean;
+ * }} ScrollbarOptions
+ */
+
 // Tailwind Play will import these internal imports as ES6 imports, while most
 // other workflows will import them as CommonJS imports.
 const flattenColorPalette = importDefault(flattenColorPaletteImport);
@@ -57,11 +64,13 @@ const scrollbarProperties = (properties, preferPseudoElements) => {
  * Base resets to make the plugin's utilities work
  *
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
- * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
+ * @param {object} options - Style options
+ * @param {'standard' | 'pseudoelements'} options.preferredStrategy - The preferred
  *    scrollbar styling strategy: standards track or pseudoelements
+ * @param {boolean} options.nocompatible - True is incompatible properties are permitted
  */
-const addBaseStyles = ({ addBase }, preferredStrategy) => {
-  addBase([
+const addBaseStyles = ({ addBase }, { preferredStrategy, nocompatible }) => {
+  const properties = [
     // The _ prefixed properties represent properties set by utilities (as
     // opposed to global configuration). We mark them as not inherited by
     // default, since utilities specified with variants are scoped to their
@@ -70,7 +79,20 @@ const addBaseStyles = ({ addBase }, preferredStrategy) => {
     Object.fromEntries(COMPONENTS.map(component => [`@property ${props.colourUtility(component)}`, {
       syntax: '"*"',
       inherits: false
-    }])),
+    }]))
+  ];
+
+  if (nocompatible) {
+    properties.push(
+      Object.fromEntries(COMPONENTS.map(component => [`@property ${props.radiusUtility(component)}`, {
+        syntax: '"*"',
+        inherits: false
+      }]))
+    );
+  }
+
+  addBase([
+    ...properties,
 
     {
       '*': scrollbarProperties({
@@ -85,9 +107,10 @@ const addBaseStyles = ({ addBase }, preferredStrategy) => {
  * Generates utilties that tell an element what to do with
  * --scrollbar-track and --scrollbar-thumb custom properties
  *
+ * @param {ScrollbarOptions} options - Plugin options
  * @returns {Record<string, unknown>} - The generated CSS
  */
-const generateBaseUtilities = () => ({
+const generateBaseUtilities = ({ nocompatible }) => ({
   ...Object.fromEntries(COMPONENTS.map(component => {
     const base = `&::-webkit-scrollbar-${component}`;
 
@@ -96,18 +119,28 @@ const generateBaseUtilities = () => ({
     const hoverProperty = props.hoverColourDefault(component);
     const activeProperty = props.activeColourDefault(component);
 
-    const entries = [
-      // Styles applied to the pseudoelement (without any pseudoselectors)
-      [base, {
-        // The utility-defined colour is set on the element itself, but we want
-        // the pseudoelement to inherit it. It's set to not inherit by default.
-        [utilityProperty]: 'inherit',
+    const radiusUtilityProperty = props.radiusUtility(component);
+    const radiusProperty = props.radiusDefault(component);
 
-        // Prefer the value from a utility, but fall back to the globally
-        // configured value.
-        'background-color': buildPropertyFallbackChain([utilityProperty, idleProperty]),
-        'border-radius': `var(--scrollbar-${component}-radius)`
-      }],
+    // Styles applied to the pseudoelement (without any pseudoselectors)
+    const baseStyles = {
+      // The utility-defined colour is set on the element itself, but we want
+      // the pseudoelement to inherit it. It's set to not inherit by default.
+      [utilityProperty]: 'inherit',
+
+      // Prefer the value from a utility, but fall back to the globally
+      // configured value.
+      'background-color': buildPropertyFallbackChain([utilityProperty, idleProperty])
+    };
+
+    // Only add rounded logic to the base styles in nocompatible mode
+    if (nocompatible) {
+      baseStyles[radiusUtilityProperty] = 'inherit';
+      baseStyles['border-radius'] = buildPropertyFallbackChain([radiusUtilityProperty, radiusProperty]);
+    }
+
+    const entries = [
+      [base, baseStyles],
 
       // Styles applied to the :hover pseudoselector of the pseudoelement
       [`${base}:hover`, {
@@ -143,12 +176,12 @@ const generateBaseUtilities = () => ({
  * Utilities for initializing a custom styled scrollbar, which implicitly set
  * the scrollbar's size and set up the logic for colour assignment.
  *
- * @param {object} options - Options
- * @param {boolean} options.preferPseudoElements - If true, only browsers that
- *    cannot use pseudoelements will specify scrollbar-width
+ * @param {ScrollbarOptions} options - Plugin options
  * @returns {Record<string, unknown>} - Base size utilities for scrollbars
  */
-const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => {
+const generateScrollbarSizeUtilities = options => {
+  const preferPseudoElements = options.preferredStrategy === 'pseudoelements';
+
   const scrollbarThumbColor = buildPropertyFallbackChain([
     props.colourUtility('thumb'),
     props.colourDefault('thumb')
@@ -161,7 +194,7 @@ const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => {
 
   return {
     '.scrollbar': {
-      ...generateBaseUtilities(),
+      ...generateBaseUtilities(options),
       ...scrollbarProperties({
         'scrollbar-width': 'auto',
         'scrollbar-color': scrollbarColorValue
@@ -175,7 +208,7 @@ const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => {
     },
 
     '.scrollbar-thin': {
-      ...generateBaseUtilities(),
+      ...generateBaseUtilities(options),
       ...scrollbarProperties({
         'scrollbar-width': 'thin',
         'scrollbar-color': scrollbarColorValue
@@ -245,7 +278,7 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
     matchUtilities(
       {
         [`scrollbar-${component}-rounded`]: value => ({
-          [`--scrollbar-${component}-radius`]: value
+          [props.radiusUtility(component)]: value
         })
       },
       {
@@ -257,13 +290,10 @@ const addRoundedUtilities = ({ theme, matchUtilities }) => {
 
 /**
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
- * @param {'standard' | 'peseudoelements'} preferredStrategy - The preferred
- *    scrollbar styling strategy: standards track or pseudoelements
+ * @param {ScrollbarOptions} options - Plugin options
  */
-const addBaseSizeUtilities = ({ addUtilities }, preferredStrategy) => {
-  addUtilities(generateScrollbarSizeUtilities({
-    preferPseudoElements: preferredStrategy === 'pseudoelements'
-  }));
+const addBaseSizeUtilities = ({ addUtilities }, options) => {
+  addUtilities(generateScrollbarSizeUtilities(options));
 };
 
 /**

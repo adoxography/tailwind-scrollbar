@@ -11,20 +11,29 @@ const {
 const { addVariants } = require('./variants');
 
 module.exports = plugin.withOptions((options = {}) => tailwind => {
-  let preferredStrategy = options.preferredStrategy ?? options.preferredstrategy ?? 'standard';
+  const passedPreferredStrategy = options.preferredStrategy ?? options.preferredstrategy ?? 'standard';
+  /** @type {'standard' | 'pseudoelements'} */
+  let preferredStrategy;
 
-  if (preferredStrategy !== 'standard' && preferredStrategy !== 'pseudoelements') {
+  if (passedPreferredStrategy === 'standard' || passedPreferredStrategy === 'pseudoelements') {
+    preferredStrategy = passedPreferredStrategy;
+  } else {
     // eslint-disable-next-line no-console
     console.warn('WARNING: tailwind-scrollbar preferredStrategy should be \'standard\' or \'pseudoelements\'');
     preferredStrategy = 'standard';
   }
 
-  addBaseStyles(tailwind, preferredStrategy);
-  addBaseSizeUtilities(tailwind, preferredStrategy);
+  const completeOptions = {
+    preferredStrategy,
+    nocompatible: !!options.nocompatible
+  };
+
+  addBaseStyles(tailwind, completeOptions);
+  addBaseSizeUtilities(tailwind, completeOptions);
   addColorUtilities(tailwind);
   addVariants(tailwind);
 
-  if (options.nocompatible) {
+  if (completeOptions.nocompatible) {
     addRoundedUtilities(tailwind);
     addSizeUtilities(tailwind);
   }
