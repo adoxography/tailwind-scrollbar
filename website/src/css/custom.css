@@ -40,6 +40,14 @@
   --ifm-color-gray-700: #334155;
   --ifm-color-gray-800: #1e293b;
   --ifm-color-gray-900: #0f172a;
+
+  --scrollbar-thumb: var(--color-sky-700);
+  --scrollbar-thumb-hover: var(--color-sky-500);
+  --scrollbar-thumb-active: var(--color-sky-400);
+  --scrollbar-track: var(--color-teal-300);
+  --scrollbar-track-hover: var(--color-teal-200);
+  --scrollbar-track-active: var(--color-teal-100);
+  --scrollbar-corner: var(--color-pink-300);
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */

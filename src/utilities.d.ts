@@ -1,3 +1,4 @@
+export type ScrollbarComponent = (typeof COMPONENTS)[number];
 /**
  * Base resets to make the plugin's utilities work
  *
@@ -31,4 +32,6 @@ export function addRoundedUtilities({ theme, matchUtilities }: typedefs.Tailwind
  * @param {typedefs.TailwindPlugin} tailwind - Tailwind's plugin object
  */
 export function addSizeUtilities({ matchUtilities, theme }: typedefs.TailwindPlugin): void;
+declare const COMPONENTS: string[];
 import typedefs = require("./typedefs");
+export {};

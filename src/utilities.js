@@ -3,12 +3,39 @@
 const flattenColorPaletteImport = require('tailwindcss/lib/util/flattenColorPalette');
 const typedefs = require('./typedefs');
 const { importDefault } = require('./helpers');
+const props = require('./props');
 
 // Tailwind Play will import these internal imports as ES6 imports, while most
 // other workflows will import them as CommonJS imports.
 const flattenColorPalette = importDefault(flattenColorPaletteImport);
 
 const COMPONENTS = ['track', 'thumb', 'corner'];
+
+/**
+ * Creates a nested chain of CSS properties with fallbacks
+ * (e.g. var(--foo, var(...)))
+ *
+ * @param {string[]} properties The properties, in order of precedence
+ * @param {string?} fallback The finall fallback value in the chain
+ * @returns {string} The resulting CSS value
+ */
+const buildPropertyFallbackChain = (properties, fallback) => {
+  const [first, ...rest] = properties;
+
+  if (!first) {
+    return '';
+  }
+
+  if (!rest.length) {
+    if (fallback) {
+      return `var(${first}, ${fallback})`;
+    }
+
+    return `var(${first})`;
+  }
+
+  return `var(${first}, ${buildPropertyFallbackChain(rest, fallback)})`;
+};
 
 /**
  * @param {Record<never, unknown>} properties - The properties to assign
@@ -34,12 +61,24 @@ const scrollbarProperties = (properties, preferPseudoElements) => {
  *    scrollbar styling strategy: standards track or pseudoelements
  */
 const addBaseStyles = ({ addBase }, preferredStrategy) => {
-  addBase({
-    '*': scrollbarProperties({
-      'scrollbar-color': 'initial',
-      'scrollbar-width': 'initial'
-    }, preferredStrategy === 'pseudoelements')
-  });
+  addBase([
+    // The _ prefixed properties represent properties set by utilities (as
+    // opposed to global configuration). We mark them as not inherited by
+    // default, since utilities specified with variants are scoped to their
+    // respective pseudoelements, preventing them from being inherited. This
+    // keeps them consistent across the board.
+    Object.fromEntries(COMPONENTS.map(component => [`@property ${props.colourUtility(component)}`, {
+      syntax: '"*"',
+      inherits: false
+    }])),
+
+    {
+      '*': scrollbarProperties({
+        'scrollbar-color': 'initial',
+        'scrollbar-width': 'initial'
+      }, preferredStrategy === 'pseudoelements')
+    }
+  ]);
 };
 
 /**
@@ -52,63 +91,114 @@ const generateBaseUtilities = () => ({
   ...Object.fromEntries(COMPONENTS.map(component => {
     const base = `&::-webkit-scrollbar-${component}`;
 
-    return [
+    const utilityProperty = props.colourUtility(component);
+    const idleProperty = props.colourDefault(component);
+    const hoverProperty = props.hoverColourDefault(component);
+    const activeProperty = props.activeColourDefault(component);
+
+    const entries = [
+      // Styles applied to the pseudoelement (without any pseudoselectors)
       [base, {
-        'background-color': `var(--scrollbar-${component})`,
+        // The utility-defined colour is set on the element itself, but we want
+        // the pseudoelement to inherit it. It's set to not inherit by default.
+        [utilityProperty]: 'inherit',
+
+        // Prefer the value from a utility, but fall back to the globally
+        // configured value.
+        'background-color': buildPropertyFallbackChain([utilityProperty, idleProperty]),
         'border-radius': `var(--scrollbar-${component}-radius)`
+      }],
+
+      // Styles applied to the :hover pseudoselector of the pseudoelement
+      [`${base}:hover`, {
+        // Prefer the value from a utility, then fall back to the value(s) from
+        // the configuration. If there wsa not conifgured hover value, use the
+        // default configured value.
+        'background-color': buildPropertyFallbackChain([
+          utilityProperty,
+          hoverProperty,
+          idleProperty
+        ])
       }]
     ];
+
+    // Corners can't be active, so don't bother including CSS for handling
+    // their active states.
+    if (component !== 'corner') {
+      entries.push([`${base}:active`, {
+        'background-color': buildPropertyFallbackChain([
+          utilityProperty,
+          activeProperty,
+          hoverProperty,
+          idleProperty
+        ])
+      }]);
+    }
+
+    return entries;
   }).flat())
 });
 
 /**
  * Utilities for initializing a custom styled scrollbar, which implicitly set
- * the scrollbar's size
+ * the scrollbar's size and set up the logic for colour assignment.
  *
  * @param {object} options - Options
  * @param {boolean} options.preferPseudoElements - If true, only browsers that
  *    cannot use pseudoelements will specify scrollbar-width
  * @returns {Record<string, unknown>} - Base size utilities for scrollbars
  */
-const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => ({
-  '.scrollbar': {
-    ...generateBaseUtilities(),
-    ...scrollbarProperties({
-      'scrollbar-width': 'auto',
-      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
-    }, preferPseudoElements),
+const generateScrollbarSizeUtilities = ({ preferPseudoElements }) => {
+  const scrollbarThumbColor = buildPropertyFallbackChain([
+    props.colourUtility('thumb'),
+    props.colourDefault('thumb')
+  ], 'initial');
+  const scrollbarTrackColor = buildPropertyFallbackChain([
+    props.colourUtility('track'),
+    props.colourDefault('track')
+  ], 'initial');
+  const scrollbarColorValue = `${scrollbarThumbColor} ${scrollbarTrackColor}`;
 
-    '&::-webkit-scrollbar': {
-      display: 'block',
-      width: 'var(--scrollbar-width, 16px)',
-      height: 'var(--scrollbar-height, 16px)'
+  return {
+    '.scrollbar': {
+      ...generateBaseUtilities(),
+      ...scrollbarProperties({
+        'scrollbar-width': 'auto',
+        'scrollbar-color': scrollbarColorValue
+      }, preferPseudoElements),
+
+      '&::-webkit-scrollbar': {
+        display: 'block',
+        width: 'var(--scrollbar-width, 16px)',
+        height: 'var(--scrollbar-height, 16px)'
+      }
+    },
+
+    '.scrollbar-thin': {
+      ...generateBaseUtilities(),
+      ...scrollbarProperties({
+        'scrollbar-width': 'thin',
+        'scrollbar-color': scrollbarColorValue
+      }, preferPseudoElements),
+
+      '&::-webkit-scrollbar': {
+        display: 'block',
+        width: '8px',
+        height: '8px'
+      }
+    },
+
+    '.scrollbar-none': {
+      ...scrollbarProperties({
+        'scrollbar-width': 'none'
+      }, preferPseudoElements),
+
+      '&::-webkit-scrollbar': {
+        display: 'none'
+      }
     }
-  },
-
-  '.scrollbar-thin': {
-    ...generateBaseUtilities(),
-    ...scrollbarProperties({
-      'scrollbar-width': 'thin',
-      'scrollbar-color': 'var(--scrollbar-thumb, initial) var(--scrollbar-track, initial)'
-    }, preferPseudoElements),
-
-    '&::-webkit-scrollbar': {
-      display: 'block',
-      width: '8px',
-      height: '8px'
-    }
-  },
-
-  '.scrollbar-none': {
-    ...scrollbarProperties({
-      'scrollbar-width': 'none'
-    }, preferPseudoElements),
-
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  }
-});
+  };
+};
 
 /**
  * Converts a color value or function to a color value
@@ -133,7 +223,7 @@ const addColorUtilities = ({ matchUtilities, theme }) => {
     matchUtilities(
       {
         [`scrollbar-${component}`]: value => ({
-          [`--scrollbar-${component}`]: toColorValue(value)
+          [props.colourUtility(component)]: toColorValue(value)
         })
       },
       {

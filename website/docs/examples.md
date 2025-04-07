@@ -22,23 +22,37 @@ It's a good idea to start with an element that already has a scrollbar. Begin cu
 
 ## Global scrollbar colours
 
-The scollbar colour utilities are inherited, so if you want to use the same colours on every custom scrollbar, you can define them at a high-level element (e.g. `html`) and then simply add `scrollbar` or `scrollbar-thin` to each scrollbar you'd like to apply custom styling to.
+Instead of having to add colour utilities to every element that needs a scrollbar, you can define defaults in your CSS configuration file and then simply add `scrollbar` or `scrollbar-thin` to each scrollbar you'd like to apply custom styling to.
 
-<div className="scrollbar-thumb-sky-700 scrollbar-track-sky-300 scrollbar-hover:scrollbar-thumb-sky-700 scrollbar-active:scrollbar-thumb-sky-700">
-    <div className="scrollbar-thin h-32 overflow-y-scroll">
-        <div className="h-64 bg-slate-400"></div>
-    </div>
+:::warning
+This only works in `tailwind-scrollbar`&GreaterEqual;4.1. If you're using v3, you can achieve a similar effect by applying colour utilities to a high-level element (e.g. `:root`, `html`, `body`).
+:::
+
+<div className="scrollbar-thin h-32 overflow-y-scroll">
+    <div className="h-64 w-screen bg-slate-400"></div>
 </div>
 
-```html
-<html className="scrollbar-thumb-sky-700 scrollbar-track-sky-300">
-    <!-- ... -->
-    <div className="scrollbar-thin h-32 overflow-y-scroll">
-        <div className="h-64 bg-slate-400"></div>
-    </div>
-    <!-- ... -->
-</html>
+```css
+:root {
+    --scrollbar-thumb: var(--color-sky-700);
+    --scrollbar-thumb-hover: var(--color-sky-500);
+    --scrollbar-thumb-active: var(--color-sky-400);
+    --scrollbar-track: var(--color-sky-300);
+    --scrollbar-track-hover: var(--color-teal-200);
+    --scrollbar-track-active: var(--color-teal-100);
+    --scrollbar-corner: var(--color-pink-300);
+}
 ```
+
+```html
+<div className="scrollbar-thin h-32 overflow-scroll">
+    <div className="h-64 w-screen bg-slate-400"></div>
+</div>
+```
+
+:::note
+If you define _any_ colour utilities on an element, _all_ defaults set this way will be ignored on that element.
+:::
 
 ## Variants
 Use the `scrollbar-hover:` and `scrollbar-active:` variants to apply utilties when the scrollbar's thumb is hovered or active, respectively. Note that only scrollbars that are being [styled using pseudoelements](/getting-started#preferred-strategy) will pay attention to these variants; standards-track scrollbars (like those used in FireFox exclusively and in Chrome/Edge by default) deal with hover and active states on their own.

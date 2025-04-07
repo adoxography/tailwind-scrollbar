@@ -6,19 +6,37 @@ test('it generates .scrollbar utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
       &::-webkit-scrollbar-track {
-        background-color: var(--scrollbar-track);
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
         border-radius: var(--scrollbar-track-radius);
       }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
       &::-webkit-scrollbar-thumb {
-        background-color: var(--scrollbar-thumb);
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
         border-radius: var(--scrollbar-thumb-radius);
       }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
       &::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-corner);
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
         border-radius: var(--scrollbar-corner-radius);
       }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+      }
       scrollbar-width: auto;
-      scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
         display: block;
         width: var(--scrollbar-width, 16px);
@@ -26,6 +44,18 @@ test('it generates .scrollbar utilities', async () => {
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -40,19 +70,37 @@ test('it generates .scrollbar-thin utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thin {
       &::-webkit-scrollbar-track {
-        background-color: var(--scrollbar-track);
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
         border-radius: var(--scrollbar-track-radius);
       }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
       &::-webkit-scrollbar-thumb {
-        background-color: var(--scrollbar-thumb);
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
         border-radius: var(--scrollbar-thumb-radius);
       }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
       &::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-corner);
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
         border-radius: var(--scrollbar-corner-radius);
       }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
+      }
       scrollbar-width: thin;
-      scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+      scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       &::-webkit-scrollbar {
         display: block;
         width: 8px;
@@ -60,6 +108,18 @@ test('it generates .scrollbar-thin utilities', async () => {
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -79,6 +139,18 @@ test('it generates .scrollbar-none utilities', async () => {
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -96,20 +168,38 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
     expect(css).toMatchInlineSnapshot(`
     ".scrollbar {
       &::-webkit-scrollbar-track {
-        background-color: var(--scrollbar-track);
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
         border-radius: var(--scrollbar-track-radius);
       }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
       &::-webkit-scrollbar-thumb {
-        background-color: var(--scrollbar-thumb);
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
         border-radius: var(--scrollbar-thumb-radius);
       }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
       &::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-corner);
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
         border-radius: var(--scrollbar-corner-radius);
+      }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
       }
       @supports (-moz-appearance:none) {
         scrollbar-width: auto;
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+        scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       }
       &::-webkit-scrollbar {
         display: block;
@@ -118,6 +208,18 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -136,20 +238,38 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
     expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thin {
       &::-webkit-scrollbar-track {
-        background-color: var(--scrollbar-track);
+        --_scrollbar-track: inherit;
+        background-color: var(--_scrollbar-track, var(--scrollbar-track));
         border-radius: var(--scrollbar-track-radius);
       }
+      &::-webkit-scrollbar-track:hover {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-hover, var(--scrollbar-track)));
+      }
+      &::-webkit-scrollbar-track:active {
+        background-color: var(--_scrollbar-track, var(--scrollbar-track-active, var(--scrollbar-track-hover, var(--scrollbar-track))));
+      }
       &::-webkit-scrollbar-thumb {
-        background-color: var(--scrollbar-thumb);
+        --_scrollbar-thumb: inherit;
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb));
         border-radius: var(--scrollbar-thumb-radius);
       }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-hover, var(--scrollbar-thumb)));
+      }
+      &::-webkit-scrollbar-thumb:active {
+        background-color: var(--_scrollbar-thumb, var(--scrollbar-thumb-active, var(--scrollbar-thumb-hover, var(--scrollbar-thumb))));
+      }
       &::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-corner);
+        --_scrollbar-corner: inherit;
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner));
         border-radius: var(--scrollbar-corner-radius);
+      }
+      &::-webkit-scrollbar-corner:hover {
+        background-color: var(--_scrollbar-corner, var(--scrollbar-corner-hover, var(--scrollbar-corner)));
       }
       @supports (-moz-appearance:none) {
         scrollbar-width: thin;
-        scrollbar-color: var(--scrollbar-thumb, initial) var(--scrollbar-track, initial);
+        scrollbar-color: var(--_scrollbar-thumb, var(--scrollbar-thumb, initial)) var(--_scrollbar-track, var(--scrollbar-track, initial));
       }
       &::-webkit-scrollbar {
         display: block;
@@ -158,6 +278,18 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -183,6 +315,18 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -208,6 +352,18 @@ describe('it limits scrollbar properties to Firefox when pseudoelements are pref
       }
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         @supports (-moz-appearance:none) {
           scrollbar-color: initial;
@@ -231,16 +387,16 @@ test('it generates scrollbar track utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-black {
-      --scrollbar-track: #000000;
+      --_scrollbar-track: #000000;
     }
     .scrollbar-track-indigo {
-      --scrollbar-track: #5c6ac4;
+      --_scrollbar-track: #5c6ac4;
     }
     .scrollbar-track-indigo-100 {
-      --scrollbar-track: #808080;
+      --_scrollbar-track: #808080;
     }
     .scrollbar-track-indigo-dark {
-      --scrollbar-track: #202e78;
+      --_scrollbar-track: #202e78;
     }
     :root, :host {
       --color-black: #000000;
@@ -249,6 +405,18 @@ test('it generates scrollbar track utilities', async () => {
       --color-indigo-100: #808080;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -269,16 +437,16 @@ test('it generates scrollbar thumb utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-black {
-      --scrollbar-thumb: #000000;
+      --_scrollbar-thumb: #000000;
     }
     .scrollbar-thumb-indigo {
-      --scrollbar-thumb: #5c6ac4;
+      --_scrollbar-thumb: #5c6ac4;
     }
     .scrollbar-thumb-indigo-100 {
-      --scrollbar-thumb: #808080;
+      --_scrollbar-thumb: #808080;
     }
     .scrollbar-thumb-indigo-dark {
-      --scrollbar-thumb: #202e78;
+      --_scrollbar-thumb: #202e78;
     }
     :root, :host {
       --color-black: #000000;
@@ -287,6 +455,18 @@ test('it generates scrollbar thumb utilities', async () => {
       --color-indigo-100: #808080;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -307,16 +487,16 @@ test('it generates scrollbar corner utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-black {
-      --scrollbar-corner: #000000;
+      --_scrollbar-corner: #000000;
     }
     .scrollbar-corner-indigo {
-      --scrollbar-corner: #5c6ac4;
+      --_scrollbar-corner: #5c6ac4;
     }
     .scrollbar-corner-indigo-100 {
-      --scrollbar-corner: #808080;
+      --_scrollbar-corner: #808080;
     }
     .scrollbar-corner-indigo-dark {
-      --scrollbar-corner: #202e78;
+      --_scrollbar-corner: #202e78;
     }
     :root, :host {
       --color-black: #000000;
@@ -325,6 +505,18 @@ test('it generates scrollbar corner utilities', async () => {
       --color-indigo-100: #808080;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -338,9 +530,21 @@ test('it uses arbitrary color values', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-\\[\\#ff0000\\] {
-      --scrollbar-track: #ff0000;
+      --_scrollbar-track: #ff0000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -356,12 +560,24 @@ test('it can use opacity modifiers', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-red-100\\/50 {
-      --scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent);
+      --_scrollbar-track: color-mix(in oklab, rgb(254 226 226) 50%, transparent);
     }
     :root, :host {
       --color-red-100: rgb(254 226 226);
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -401,11 +617,11 @@ test('it generates thumb hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-      --scrollbar-thumb: #fff;
+      --_scrollbar-thumb: #fff;
     }
     .scrollbar-hover\\:scrollbar-thumb-black {
       &::-webkit-scrollbar-thumb:hover {
-        --scrollbar-thumb: #000;
+        --_scrollbar-thumb: #000;
       }
     }
     :root, :host {
@@ -413,6 +629,18 @@ test('it generates thumb hover utilities', async () => {
       --color-black: #000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -431,11 +659,11 @@ test('it generates track hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-      --scrollbar-track: #fff;
+      --_scrollbar-track: #fff;
     }
     .scrollbar-track-hover\\:scrollbar-track-black {
       &::-webkit-scrollbar-track:hover {
-        --scrollbar-track: #000;
+        --_scrollbar-track: #000;
       }
     }
     :root, :host {
@@ -443,6 +671,18 @@ test('it generates track hover utilities', async () => {
       --color-black: #000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -461,11 +701,11 @@ test('it generates corner hover utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-corner-white {
-      --scrollbar-corner: #fff;
+      --_scrollbar-corner: #fff;
     }
     .scrollbar-corner-hover\\:scrollbar-corner-black {
       &::-webkit-scrollbar-corner:hover {
-        --scrollbar-corner: #000;
+        --_scrollbar-corner: #000;
       }
     }
     :root, :host {
@@ -473,6 +713,18 @@ test('it generates corner hover utilities', async () => {
       --color-black: #000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -491,11 +743,11 @@ test('it generates thumb active utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-thumb-white {
-      --scrollbar-thumb: #fff;
+      --_scrollbar-thumb: #fff;
     }
     .scrollbar-active\\:scrollbar-thumb-black {
       &::-webkit-scrollbar-thumb:active {
-        --scrollbar-thumb: #000;
+        --_scrollbar-thumb: #000;
       }
     }
     :root, :host {
@@ -503,6 +755,18 @@ test('it generates thumb active utilities', async () => {
       --color-black: #000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -521,11 +785,11 @@ test('it generates track active utilities', async () => {
 
   expect(css).toMatchInlineSnapshot(`
     ".scrollbar-track-white {
-      --scrollbar-track: #fff;
+      --_scrollbar-track: #fff;
     }
     .scrollbar-track-active\\:scrollbar-track-black {
       &::-webkit-scrollbar-track:active {
-        --scrollbar-track: #000;
+        --_scrollbar-track: #000;
       }
     }
     :root, :host {
@@ -533,6 +797,18 @@ test('it generates track active utilities', async () => {
       --color-black: #000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -549,13 +825,25 @@ test('it generates dark utilities', async () => {
   expect(css).toMatchInlineSnapshot(`
     ".dark\\:scrollbar-thumb-black {
       @media (prefers-color-scheme: dark) {
-        --scrollbar-thumb: #000000;
+        --_scrollbar-thumb: #000000;
       }
     }
     :root, :host {
       --color-black: #000000;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -588,6 +876,18 @@ test('it generates width utilties in nocompatible mode', async () => {
       --width-full: 100%;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -620,6 +920,18 @@ test('it generates height utilties in nocompatible mode', async () => {
       --height-full: 100%;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -661,6 +973,18 @@ test('it generates rounded states in nocompatible mode', async () => {
       --rounded-md: 0.375rem;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -683,6 +1007,18 @@ test('it does not generate width utilties in compatible mode', async () => {
       --width-full: 100%;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -705,6 +1041,18 @@ test('it does not generate height utilties in compatible mode', async () => {
       --height-full: 100%;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
@@ -723,6 +1071,18 @@ test('it does not generate rounded states when not in compatible mode', async ()
       --rounded: 0.25rem;
     }
     @layer base {
+      @property --_scrollbar-track {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-thumb {
+        syntax: "*";
+        inherits: false;
+      }
+      @property --_scrollbar-corner {
+        syntax: "*";
+        inherits: false;
+      }
       * {
         scrollbar-color: initial;
         scrollbar-width: initial;
