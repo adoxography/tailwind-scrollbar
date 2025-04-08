@@ -144,20 +144,20 @@ This only works in `tailwind-scrollbar`&GreaterEqual;4.1. If you're using v3, yo
 
 ```css
 :root {
-    --scrollbar-thumb: var(--color-sky-700);
-    --scrollbar-thumb-hover: var(--color-sky-500);
-    --scrollbar-thumb-active: var(--color-sky-400);
-    --scrollbar-track: var(--color-sky-300);
-    --scrollbar-track-hover: var(--color-teal-200);
-    --scrollbar-track-active: var(--color-teal-100);
-    --scrollbar-corner: var(--color-pink-300);
+    --scrollbar-thumb-color: var(--color-sky-700);
+    --scrollbar-thumb-hover-color: var(--color-sky-500);
+    --scrollbar-thumb-active-color: var(--color-sky-400);
+    --scrollbar-track-color: var(--color-sky-300);
+    --scrollbar-track-hover-color: var(--color-teal-200);
+    --scrollbar-track-active-color: var(--color-teal-100);
+    --scrollbar-corner-color: var(--color-pink-300);
 
     --scrollbar-width: calc(var(--spacing) * 4);
     --scrollbar-height: calc(var(--spacing) * 4);
 
-    --scrollbar-thumb-radius: var(--radius-none);
-    --scrollbar-track-radius: var(--radius-none);
-    --scrollbar-corner-radius: var(--radius-none);
+    --scrollbar-thumb-radius: 0px;
+    --scrollbar-track-radius: 0px;
+    --scrollbar-corner-radius: 0px;
 }
 ```
 
