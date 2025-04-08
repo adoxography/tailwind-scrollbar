@@ -29,19 +29,20 @@ const COMPONENTS = ['track', 'thumb', 'corner'];
 const buildPropertyFallbackChain = (properties, fallback) => {
   const [first, ...rest] = properties;
 
+  // If there are no properties provided, just use the fallback value directly.
   if (!first) {
-    return '';
+    return fallback ?? '';
   }
 
-  if (!rest.length) {
-    if (fallback) {
-      return `var(${first}, ${fallback})`;
-    }
-
-    return `var(${first})`;
+  // Recurse to see if there is a usable fallback value.
+  // If there is, fall back to it.
+  const inner = buildPropertyFallbackChain(rest, fallback);
+  if (inner) {
+    return `var(${first}, ${inner})`;
   }
 
-  return `var(${first}, ${buildPropertyFallbackChain(rest, fallback)})`;
+  // Otherwise, use the property with no fallback.
+  return `var(${first})`;
 };
 
 /**
